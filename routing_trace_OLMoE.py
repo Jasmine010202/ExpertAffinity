@@ -16,15 +16,15 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 tokenizer = AutoTokenizer.from_pretrained("./models/OLMoE-1B-7B-0924")
 model = OlmoeForCausalLM.from_pretrained("./models/OLMoE-1B-7B-0924", torch_dtype=torch.float16).to(DEVICE) #, num_experts_per_tok=1
 
-with open("./dataset/gigaword_test.txt", "r") as file:
+with open("./dataset/sonnet.txt", "r") as file:
     prompts = [line.strip() for line in file.readlines() if line.strip()]
 
 prompt_sizes = [8, 16, 32, 64, 128, 256, 512, 1024] 
 
-output_dir = "./output/OLMoE/gigaword/top8"
+output_dir = "./output/OLMoE/sonnet/top8"
 os.makedirs(output_dir, exist_ok=True)
 
-routing_data_dir = "./expert_trace/OLMoE/gigaword/top8"
+routing_data_dir = "./expert_trace/OLMoE/sonnet/top8"
 os.makedirs(routing_data_dir, exist_ok=True)
 
 for size in prompt_sizes:
