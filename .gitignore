@@ -1,0 +1,10 @@
+__pycache__/
+*.log
+models/
+placement_results/
+output/
+dataset/
+affinity_figs/
+communication_figs/
+expert_trace/
+expert_placement/
