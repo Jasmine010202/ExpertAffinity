@@ -44,13 +44,13 @@ def plot_experts_affinity(experts_selection_stats, fig_dir, num_of_prompts):
 if __name__ == "__main__":
 
     model_name = "OLMoE"#Switch_Transformer OLMoE
-    input_name = "gigaword"
+    input_name = "sonnet"
     phrase_mode = "decode" #decode
-    prompt_nums = [8, 16, 32, 64, 128, 256, 512, 1024] # 8, 16, 32, 64, 128, 256, 512, 1024
+    prompt_nums = [8] # 8, 16, 32, 64, 128, 256, 512, 1024
     top_k = 8 # ST:1,OL:8
     num_of_experts_pre_layer = 64
 
-    fig_dir = f"affinity_figs/intra_layer/{model_name}/{input_name}/top{top_k}/{phrase_mode}"
+    fig_dir = f"affinity_figs/intra_layer/{model_name}/{input_name}/top{top_k}/{phrase_mode}/test"
     os.makedirs(fig_dir, exist_ok=True)
 
     for num in prompt_nums:
