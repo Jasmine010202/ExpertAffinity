@@ -1,6 +1,8 @@
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 # os.environ["CUDA_VISIBLE_DEVICES"] = "9"
 from transformers import AutoTokenizer
+#from src.modeling_olmoe_parallel import OlmoeForCausalLM
 from src.modeling_olmoe import OlmoeForCausalLM
 import time
 import torch
@@ -9,22 +11,24 @@ import random
 import json
 
 # 启用 4 张 GPU
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 tokenizer = AutoTokenizer.from_pretrained("./models/OLMoE-1B-7B-0924")
+tokenizer.padding_side = "left"
+
 model = OlmoeForCausalLM.from_pretrained("./models/OLMoE-1B-7B-0924", torch_dtype=torch.float16).to(DEVICE) #, num_experts_per_tok=1
 
 # 多卡包装
-model = torch.nn.DataParallel(model)
+# model = torch.nn.DataParallel(model)
 
 with open("./dataset/sonnet.txt", "r") as file:
     prompts = [line.strip() for line in file.readlines() if line.strip()]
 
 prompt_sizes = [8, 16, 32, 64, 128, 256, 512, 1024] 
 
-output_dir = "./parallel_output/OLMoE/sonnet"
+output_dir = "./test_1_gpu/OLMoE/sonnet"
 os.makedirs(output_dir, exist_ok=True)
 
 batch_size = 8
@@ -41,7 +45,7 @@ for size in prompt_sizes:
     for i in range(0, size, batch_size):
         batch_prompts = sampled_prompts[i:i + batch_size]
 
-        inputs = tokenizer(batch_prompts, return_tensors="pt", padding=True, truncation=True)
+        inputs = tokenizer(batch_prompts, return_tensors="pt", padding=True, truncation=True, max_length=2048)
         inputs = {k: v.to(DEVICE) for k, v in inputs.items()}
 
         with torch.no_grad():

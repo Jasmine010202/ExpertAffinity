@@ -9,4 +9,6 @@ communication_figs/
 expert_trace/
 expert_placement/
 graph/
-cluster_result/spectral/figs
+cluster_result/spectral/figs/
+test_acc_output_affinity_balance/
+logs/
