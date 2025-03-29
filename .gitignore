@@ -10,5 +10,7 @@ expert_trace/
 expert_placement/
 graph/
 cluster_result/spectral/figs/
-test_acc_output_affinity_balance/
+test_placement/
 logs/
+inference_time_figs/
+*.png
