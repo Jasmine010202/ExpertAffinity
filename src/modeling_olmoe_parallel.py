@@ -44,7 +44,7 @@ from .configuration_olmoe import OlmoeConfig
 ################
 import numpy as np
 import logging as lg
-lg.basicConfig(filename='./logs/olmoe_4_gpus.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
+lg.basicConfig(filename='./logs/olmoe_average.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
 ################
 
 if is_flash_attn_2_available():

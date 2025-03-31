@@ -44,12 +44,12 @@ from .configuration_olmoe import OlmoeConfig
 ################
 import numpy as np
 import logging as lg
-lg.basicConfig(filename='./logs/olmoe_affinity.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
+lg.basicConfig(filename='./logs/olmoe_affinity_without_prepare.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
 
 import json
 import os
 base_dir = os.path.dirname(os.path.dirname(__file__)) # 当前文件所在目录的上级路径
-file_path = os.path.join(base_dir,"cluster_result", "spectral", "balance", "clusters_result_all_layers.json")
+file_path = os.path.join(base_dir,"cluster_result", "spectral", "kmeans", "clusters_result_all_layers.json")
 with open(file_path, "r") as f:
     EXPERTS_PLACEMENT_ALL_LAYERS = json.load(f)
 ################

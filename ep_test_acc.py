@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "4,5,6,7"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3,4"
 import time
 import torch
 import random
@@ -7,7 +7,7 @@ import json
 from transformers import AutoTokenizer
 # from src.modeling_olmoe_parallel import OlmoeForCausalLM # 平均放置
 from src.modeling_olmoe_placement import OlmoeForCausalLM # 按层内亲和性放置
-# from src.modeling_olmoe import OlmoeForCausalLM
+# from src.modeling_olmoe import OlmoeForCausalLM # 原本，1张卡
 from accelerate import Accelerator
 
 accelerator = Accelerator()
@@ -27,11 +27,12 @@ tokenizer.padding_side = "left"
 #model = OlmoeForCausalLM.from_pretrained("./models/OLMoE-1B-7B-0924", torch_dtype=torch.float16).to(device)
 
 # affinity
-model = OlmoeForCausalLM.from_pretrained("./models/OLMoE-1B-7B-0924", torch_dtype=torch.float16)
-#model = accelerator.prepare(model)
+#model = OlmoeForCausalLM.from_pretrained("./models/OLMoE-1B-7B-0924", torch_dtype=torch.float16)
+##model = accelerator.prepare(model)
 
-# accelerate 包装模型（分发到多卡）
-#model = accelerator.prepare(model)
+# 1gpu
+model = OlmoeForCausalLM.from_pretrained("./models/OLMoE-1B-7B-0924", torch_dtype=torch.float16).to(device)
+
 model.eval()
 
 # 加载 prompts
@@ -42,7 +43,7 @@ prompt_sizes = [8, 16, 32, 64, 128, 256, 512] # 8, 16, 32, 64, 128, 256, 512, 10
  
 batch_size = 8
 
-output_dir = "./test_acc_output_affinity_balance/OLMoE/sonnet"
+output_dir = "./test_affinity_without_prepare/OLMoE/sonnet"
 os.makedirs(output_dir, exist_ok=True)
 
 all_inference_time = {}
@@ -60,9 +61,13 @@ for size in prompt_sizes:
         # average
         # inputs = tokenizer(batch_prompts, return_tensors="pt", padding=True, truncation=True, max_length=2048).to(device)
 
-        #affinity
+        # #affinity
         inputs = tokenizer(batch_prompts, return_tensors="pt", padding=True, truncation=True, max_length=2048)
         inputs = accelerator.prepare(inputs) 
+
+        # 1 gpu
+        # inputs = tokenizer(batch_prompts, return_tensors="pt", padding=True, truncation=True, max_length=2048).to(device)
+
 
         with torch.no_grad():
             outputs = model.generate(**inputs, max_new_tokens=50)
