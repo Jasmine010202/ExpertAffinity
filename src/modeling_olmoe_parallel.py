@@ -44,7 +44,7 @@ from .configuration_olmoe import OlmoeConfig
 ################
 import numpy as np
 import logging as lg
-lg.basicConfig(filename='./logs/olmoe_average.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
+lg.basicConfig(filename='./logs/average_acc_1_process.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
 ################
 
 if is_flash_attn_2_available():
@@ -684,6 +684,156 @@ class OlmoeSparseMoeBlock(nn.Module):
         # final_hidden_states = torch.zeros((batch_size * sequence_length, hidden_dim), dtype=hidden_states.dtype, device=hidden_states.device)
         final_hidden_states = torch.zeros_like(hidden_states)  # [B*T, D]
 
+        # 展平 token 分发信息
+        expanded_token_indices = torch.arange(num_tokens, device=hidden_states.device).unsqueeze(1).expand(-1, self.top_k).reshape(-1)
+        flat_selected_experts = selected_experts.reshape(-1)
+        flat_routing_weights = routing_weights.reshape(-1)
+
+        # 建立专家 → token 映射
+        expert_to_token = {i: [] for i in range(self.num_experts)}
+        for i in range(flat_selected_experts.size(0)):
+            expert_id = flat_selected_experts[i].item()
+            token_id = expanded_token_indices[i].item()
+            expert_to_token[expert_id].append((i, token_id))
+
+
+        # One hot encode the selected experts to create an expert mask
+        # this will be used to easily index which expert is going to be selected
+        #expert_mask = torch.nn.functional.one_hot(selected_experts, num_classes=self.num_experts).permute(2, 1, 0)
+
+        # Loop over all available experts in the model and perform the computation on each expert
+        
+        futures = []
+        # 执行每个专家的前向计算（专家在各自 GPU 上）
+        for expert_id, token_pairs in expert_to_token.items():
+            if not token_pairs:
+                continue
+
+            expert = self.experts[expert_id]
+            expert_device = next(expert.parameters()).device
+
+            flat_indices, token_indices = zip(*token_pairs)
+            flat_indices = torch.tensor(flat_indices, device=hidden_states.device)
+            token_indices = torch.tensor(token_indices, device=hidden_states.device)
+
+            input_tensor = hidden_states[token_indices].to(expert_device)
+            weights = flat_routing_weights[flat_indices].unsqueeze(-1).to(expert_device)
+
+            # lg.info(f"[Check] Sending {len(token_indices)} tokens to Expert {expert_id} on {expert_device}")
+            # lg.info(f"[Check] input_tensor device: {input_tensor.device}")
+            # lg.info(f"[Check] expert_device: {expert_device}")
+            lg.info(f"[Forward] Expert {expert_id} on {expert_device} received {len(token_indices)} tokens.")
+
+            #output_tensor = expert_layer(input_tensor) * weight
+            def _forward(layer, inp, w):
+                return layer(inp) * w
+            futures.append((expert_id, token_indices, torch.jit.fork(_forward, expert, input_tensor, weights)))
+
+            # gather 回主卡
+            #final_hidden_states.index_add_(0,token_indices,output_tensor.to(final_hidden_states.device))
+        
+        for expert_id, token_indices, future in futures:
+            output = torch.jit.wait(future)
+            final_hidden_states.index_add_(0, token_indices.to(final_hidden_states.device), output.to(final_hidden_states.device))
+
+
+        #final_hidden_states = final_hidden_states.reshape(batch_size, sequence_length, hidden_dim)
+        final_hidden_states = final_hidden_states.view(batch_size, sequence_length, hidden_dim)
+        # print("***",selected_experts)
+        #print(f"MoE 层输入的 token 数量: {hidden_states.shape[0]}")
+        # return final_hidden_states, router_logits
+        ######################################
+        return final_hidden_states, router_logits, selected_experts
+        ######################################
+
+'''    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
+        batch_size, sequence_length, hidden_dim = hidden_states.shape
+        hidden_states = hidden_states.view(-1, hidden_dim)
+        # router_logits: (batch * sequence_length, n_experts)
+        num_tokens = hidden_states.size(0)
+
+        # gating
+        router_logits = self.gate(hidden_states)
+        # routing_weights = F.softmax(router_logits, dim=1, dtype=torch.float)
+        routing_weights = F.softmax(router_logits, dim=-1, dtype=torch.float)
+        routing_weights, selected_experts = torch.topk(routing_weights, self.top_k, dim=-1)
+        if self.norm_topk_prob:
+            routing_weights /= routing_weights.sum(dim=-1, keepdim=True)
+        # we cast back to the input dtype
+        routing_weights = routing_weights.to(hidden_states.dtype)
+
+        # prepare result buffer (on current device)
+        # final_hidden_states = torch.zeros((batch_size * sequence_length, hidden_dim), dtype=hidden_states.dtype, device=hidden_states.device)
+        final_hidden_states = torch.zeros_like(hidden_states)  # [B*T, D]
+
+        # 展平 token 分发信息
+        expanded_token_indices = torch.arange(num_tokens, device=hidden_states.device).unsqueeze(1).expand(-1, self.top_k).reshape(-1)
+        flat_selected_experts = selected_experts.reshape(-1)
+        flat_routing_weights = routing_weights.reshape(-1)
+
+        # 建立专家 → token 映射
+        expert_to_token = {i: [] for i in range(self.num_experts)}
+        for i in range(flat_selected_experts.size(0)):
+            expert_id = flat_selected_experts[i].item()
+            token_id = expanded_token_indices[i].item()
+            expert_to_token[expert_id].append((i, token_id))
+
+        # One hot encode the selected experts to create an expert mask
+        # this will be used to easily index which expert is going to be selected
+        #expert_mask = torch.nn.functional.one_hot(selected_experts, num_classes=self.num_experts).permute(2, 1, 0)
+
+        # Loop over all available experts in the model and perform the computation on each expert
+        
+        # 执行每个专家的前向计算（专家在各自 GPU 上）
+        for expert_id, token_pairs in expert_to_token.items():
+            if not token_pairs:
+                continue
+
+            expert_layer = self.experts[expert_id]
+            expert_device = next(expert_layer.parameters()).device
+
+            flat_indices, token_indices = zip(*token_pairs)
+            flat_indices = torch.tensor(flat_indices, device=hidden_states.device)
+            token_indices = torch.tensor(token_indices, device=hidden_states.device)
+
+            input_tensor = hidden_states[token_indices].to(expert_device)
+            weight = flat_routing_weights[flat_indices].unsqueeze(-1).to(expert_device)
+
+            output_tensor = expert_layer(input_tensor) * weight
+
+            # gather 回主卡
+            final_hidden_states.index_add_(0,token_indices,output_tensor.to(final_hidden_states.device))
+
+        #final_hidden_states = final_hidden_states.reshape(batch_size, sequence_length, hidden_dim)
+        final_hidden_states = final_hidden_states.view(batch_size, sequence_length, hidden_dim)
+        # print("***",selected_experts)
+        #print(f"MoE 层输入的 token 数量: {hidden_states.shape[0]}")
+        # return final_hidden_states, router_logits
+        ######################################
+        return final_hidden_states, router_logits, selected_experts
+        ######################################'''
+'''    
+    # CPU 占用太高
+    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
+        batch_size, sequence_length, hidden_dim = hidden_states.shape
+        hidden_states = hidden_states.view(-1, hidden_dim)
+        # router_logits: (batch * sequence_length, n_experts)
+        num_tokens = hidden_states.size(0)
+
+        # gating
+        router_logits = self.gate(hidden_states)
+        # routing_weights = F.softmax(router_logits, dim=1, dtype=torch.float)
+        routing_weights = F.softmax(router_logits, dim=-1, dtype=torch.float)
+        routing_weights, selected_experts = torch.topk(routing_weights, self.top_k, dim=-1)
+        if self.norm_topk_prob:
+            routing_weights /= routing_weights.sum(dim=-1, keepdim=True)
+        # we cast back to the input dtype
+        routing_weights = routing_weights.to(hidden_states.dtype)
+
+        # prepare result buffer (on current device)
+        # final_hidden_states = torch.zeros((batch_size * sequence_length, hidden_dim), dtype=hidden_states.dtype, device=hidden_states.device)
+        final_hidden_states = torch.zeros_like(hidden_states)  # [B*T, D]
+
         # expert -> token map
         expert_token_map = {i: [] for i in range(self.num_experts)}
         for token_idx in range(num_tokens):
@@ -725,7 +875,7 @@ class OlmoeSparseMoeBlock(nn.Module):
             input_tensor = hidden_states[token_indices].to(expert_device)  # 分发到专家所在设备
             output_tensor = expert_layer(input_tensor) * routing_weights[token_indices, topk_indices].unsqueeze(-1).to(expert_device)
 
-            lg.info(f"[Forward] Expert {expert_id} activated on {expert_device} for {len(token_indices)} tokens")
+            # lg.info(f"[Forward] Expert {expert_id} activated on {expert_device} for {len(token_indices)} tokens")
 
             # gather 回主卡
             final_hidden_states.index_add_(0, torch.tensor(token_indices, device=final_hidden_states.device), output_tensor.to(final_hidden_states.device))
@@ -738,8 +888,10 @@ class OlmoeSparseMoeBlock(nn.Module):
         ######################################
         return final_hidden_states, router_logits, selected_experts
         ######################################
+'''
 
 '''
+    # 原版
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         batch_size, sequence_length, hidden_dim = hidden_states.shape
         hidden_states = hidden_states.view(-1, hidden_dim)

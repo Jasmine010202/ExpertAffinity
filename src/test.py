@@ -44,46 +44,38 @@ from .configuration_olmoe import OlmoeConfig
 ################
 import numpy as np
 import logging as lg
-lg.basicConfig(filename='./logs/balance_2_acc_1_process.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
-
-import json
-import os
-base_dir = os.path.dirname(os.path.dirname(__file__)) # 当前文件所在目录的上级路径
-file_path = os.path.join(base_dir,"cluster_result", "spectral", "balance", "2", "clusters_result_all_layers.json")
-with open(file_path, "r") as f:
-    EXPERTS_PLACEMENT_ALL_LAYERS = json.load(f)
+lg.basicConfig(filename='./logs/olmoe_average_new_forward.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
 ################
 
 if is_flash_attn_2_available():
     from transformers.modeling_flash_attention_utils import _flash_attention_forward
 
-'''
-from ...activations import ACT2FN
-from ...cache_utils import Cache, DynamicCache, StaticCache
-from ...generation import GenerationMixin
-from ...modeling_attn_mask_utils import AttentionMaskConverter
-from ...modeling_outputs import (
-    MoeCausalLMOutputWithPast,
-    MoeModelOutputWithPast,
-)
-from ...modeling_rope_utils import ROPE_INIT_FUNCTIONS
-from ...modeling_utils import PreTrainedModel
-from ...pytorch_utils import ALL_LAYERNORM_LAYERS
-from ...utils import (
-    add_start_docstrings,
-    add_start_docstrings_to_model_forward,
-    is_flash_attn_2_available,
-    is_flash_attn_greater_or_equal_2_10,
-    logging,
-    replace_return_docstrings,
-)
-from ...utils.deprecation import deprecate_kwarg
-from .configuration_olmoe import OlmoeConfig
+
+# from ...activations import ACT2FN
+# from ...cache_utils import Cache, DynamicCache, StaticCache
+# from ...generation import GenerationMixin
+# from ...modeling_attn_mask_utils import AttentionMaskConverter
+# from ...modeling_outputs import (
+#     MoeCausalLMOutputWithPast,
+#     MoeModelOutputWithPast,
+# )
+# from ...modeling_rope_utils import ROPE_INIT_FUNCTIONS
+# from ...modeling_utils import PreTrainedModel
+# from ...pytorch_utils import ALL_LAYERNORM_LAYERS
+# from ...utils import (
+#     add_start_docstrings,
+#     add_start_docstrings_to_model_forward,
+#     is_flash_attn_2_available,
+#     is_flash_attn_greater_or_equal_2_10,
+#     logging,
+#     replace_return_docstrings,
+# )
+# from ...utils.deprecation import deprecate_kwarg
+# from .configuration_olmoe import OlmoeConfig
 
 
-if is_flash_attn_2_available():
-    from ...modeling_flash_attention_utils import _flash_attention_forward
-'''
+# if is_flash_attn_2_available():
+#     from ...modeling_flash_attention_utils import _flash_attention_forward
 
 
 logger = logging.get_logger(__name__)
@@ -642,7 +634,7 @@ OLMOE_ATTENTION_CLASSES = {
 
 
 class OlmoeSparseMoeBlock(nn.Module):
-    def __init__(self, config, layer_idx):
+    def __init__(self, config):
         super().__init__()
         self.num_experts = config.num_experts
         self.top_k = config.num_experts_per_tok
@@ -652,40 +644,27 @@ class OlmoeSparseMoeBlock(nn.Module):
         self.norm_topk_prob = config.norm_topk_prob
         self.gate = nn.Linear(config.hidden_size, self.num_experts, bias=False)
         
-        # self.experts = nn.ModuleList([OlmoeMLP(config) for _ in range(self.num_experts)]) # 专家放置
+        #self.experts = nn.ModuleList([OlmoeMLP(config) for _ in range(self.num_experts)]) # 专家放置
 
         ###########################################
-        self.layer_idx = layer_idx
-        layer_key = f"layer_{layer_idx}"
-        assert layer_key in EXPERTS_PLACEMENT_ALL_LAYERS, f"Missing placement for {layer_key}"
-        cluster_to_experts = EXPERTS_PLACEMENT_ALL_LAYERS[layer_key]
+        self.experts = nn.ModuleList()
 
-        self.experts = nn.ModuleList([None] * self.num_experts)
-        for cluster_id, expert_ids in cluster_to_experts.items():
-            gpu_id = int(cluster_id) # cluster0 -> gpu0
-            device = torch.device(f"cuda:{gpu_id}")
-            for e_id in expert_ids:
-                expert = OlmoeMLP(config).to(device)
-                self.experts[e_id] = expert
-                lg.info(f"[Placement] Layer {layer_idx} - Expert {e_id} placed on cuda:{gpu_id}")
+        num_gpus = torch.cuda.device_count()
+        assert num_gpus >= 1, "至少需要 1 张 GPU"
 
-        # self.experts = nn.ModuleList()
-        # num_gpus = torch.cuda.device_count()
-        # assert num_gpus >= 1, "至少需要 1 张 GPU"
+        experts_per_gpu = 64 // num_gpus
 
-        # experts_per_gpu = 64 // num_gpus
-
-        # for expert_id in range(self.num_experts):
-        #     # device_id = expert_id % num_gpus  # 平均分配到 GPU: 0,1,2,3...
-        #     device_id = expert_id // experts_per_gpu  # 0~15 GPU0；15~31 GPU1；32~47 GPU2； 48~63 GPU3
-        #     device = torch.device(f"cuda:{device_id}")
-        #     expert = OlmoeMLP(config).to(device)
-        #     lg.info(f"[Init] Expert {expert_id} is placed on {device}")
-        #     self.experts.append(expert)
+        for expert_id in range(self.num_experts):
+            # device_id = expert_id % num_gpus  # 平均分配到 GPU: 0,1,2,3...
+            device_id = expert_id // experts_per_gpu  # 0~15 GPU0；15~31 GPU1；32~47 GPU2； 48~63 GPU3
+            device = torch.device(f"cuda:{device_id}")
+            expert = OlmoeMLP(config).to(device)
+            lg.info(f"[Init] Expert {expert_id} is placed on {device}")
+            self.experts.append(expert)
 
         ###########################################
 
-    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
+'''    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         batch_size, sequence_length, hidden_dim = hidden_states.shape
         hidden_states = hidden_states.view(-1, hidden_dim)
         # router_logits: (batch * sequence_length, n_experts)
@@ -739,10 +718,9 @@ class OlmoeSparseMoeBlock(nn.Module):
             input_tensor = hidden_states[token_indices].to(expert_device)
             weights = flat_routing_weights[flat_indices].unsqueeze(-1).to(expert_device)
 
-            # lg.info(f"[Check] Sending {len(token_indices)} tokens to Expert {expert_id} on {expert_device}")
-            # lg.info(f"[Check] input_tensor device: {input_tensor.device}")
-            # lg.info(f"[Check] expert_device: {expert_device}")
-            lg.info(f"[Layer {self.layer_idx}] Expert {expert_id} on {expert_device} received {len(token_indices)} tokens.")
+            lg.info(f"[Check] Sending {len(token_indices)} tokens to Expert {expert_id} on {expert_device}")
+            lg.info(f"[Check] input_tensor device: {input_tensor.device}")
+            lg.info(f"[Check] expert_device: {expert_device}")
 
             #output_tensor = expert_layer(input_tensor) * weight
             def _forward(layer, inp, w):
@@ -764,9 +742,10 @@ class OlmoeSparseMoeBlock(nn.Module):
         # return final_hidden_states, router_logits
         ######################################
         return final_hidden_states, router_logits, selected_experts
-        ######################################
-
-'''    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
+        ######################################'''
+'''''    
+    # CPU 占用太高
+    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         batch_size, sequence_length, hidden_dim = hidden_states.shape
         hidden_states = hidden_states.view(-1, hidden_dim)
         # router_logits: (batch * sequence_length, n_experts)
@@ -824,12 +803,10 @@ class OlmoeSparseMoeBlock(nn.Module):
             token_indices = [t[0] for t in token_info]
             topk_indices = [t[1] for t in token_info]
 
-            
             input_tensor = hidden_states[token_indices].to(expert_device)  # 分发到专家所在设备
-            weights = routing_weights[token_indices, topk_indices].unsqueeze(-1).to(expert_device)
-            output_tensor = expert_layer(input_tensor) * weights
+            output_tensor = expert_layer(input_tensor) * routing_weights[token_indices, topk_indices].unsqueeze(-1).to(expert_device)
 
-            lg.info(f"[Forward] Expert {expert_id} activated on {expert_device} for {len(token_indices)} tokens")
+            # lg.info(f"[Forward] Expert {expert_id} activated on {expert_device} for {len(token_indices)} tokens")
 
             # gather 回主卡
             final_hidden_states.index_add_(0, torch.tensor(token_indices, device=final_hidden_states.device), output_tensor.to(final_hidden_states.device))
@@ -841,10 +818,11 @@ class OlmoeSparseMoeBlock(nn.Module):
         # return final_hidden_states, router_logits
         ######################################
         return final_hidden_states, router_logits, selected_experts
-        ######################################'''
-
+        ######################################
+'''''
 
 '''
+    # 原版
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         batch_size, sequence_length, hidden_dim = hidden_states.shape
         hidden_states = hidden_states.view(-1, hidden_dim)
@@ -896,7 +874,7 @@ class OlmoeDecoderLayer(nn.Module):
 
         self.self_attn = OLMOE_ATTENTION_CLASSES[config._attn_implementation](config=config, layer_idx=layer_idx)
 
-        self.mlp = OlmoeSparseMoeBlock(config, layer_idx)
+        self.mlp = OlmoeSparseMoeBlock(config)
         self.input_layernorm = OlmoeRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.post_attention_layernorm = OlmoeRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
 

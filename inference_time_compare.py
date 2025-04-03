@@ -4,29 +4,29 @@ import numpy as np
 import os
 
 # 1个GPU
-with open('test_placement/test_1_gpu/OLMoE/sonnet/all_inference_time.json', 'r') as f1:
+with open('test_affinity_debug/acc_1process_4gpus/1_gpu/all_inference_time.json', 'r') as f1:
     centralized_data = json.load(f1)
 
 # 平均放置 0~15在GPU0
-with open('test_placement/test_acc_output_average/OLMoE/sonnet/all_inference_time.json', 'r') as f2:
+with open('test_affinity_debug/acc_1process_4gpus/average/all_inference_time.json', 'r') as f2:
     vanilla_data = json.load(f2)
 
 # 完全按照亲和性聚类结果放
-with open('test_placement/test_acc_output_affinity_no_balance/OLMoE/sonnet/all_inference_time.json', 'r') as f3:
+with open('test_affinity_debug/acc_1process_4gpus/affinity/all_inference_time.json', 'r') as f3:
     affinity_data = json.load(f3)
 
 # 聚类结果调整到一层每个GPU16个
-with open('test_placement/test_acc_output_affinity_balance/OLMoE/sonnet/all_inference_time.json', 'r') as f4:
+with open('test_affinity_debug/acc_1process_4gpus/balance/all_inference_time.json', 'r') as f4:
     balance_affinity_data = json.load(f4)
 
 # 聚类结果调整到一层每个GPU32个
-with open('test_placement/test_acc_output_affinity_balance_2/OLMoE/sonnet/all_inference_time.json', 'r') as f5:
+with open('test_affinity_debug/acc_1process_4gpus/balance_2/all_inference_time.json', 'r') as f5:
     balance_affinity_data_2 = json.load(f5)
 
-fig_dir = f"inference_time_figs/5"
+fig_dir = f"inference_time_figs/1process_4gpus"
 os.makedirs(fig_dir, exist_ok=True)
 
-prompt_sizes = [8, 16, 32, 64, 128, 256, 512] # 1024
+prompt_sizes = [8, 16, 32, 64, 128, 256, 512, 1024] # 1024
 
 centralized_times = [centralized_data[str(prompt_num)] for prompt_num in prompt_sizes]
 vanilla_times = [vanilla_data[str(prompt_num)] for prompt_num in prompt_sizes]
