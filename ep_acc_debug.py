@@ -1,16 +1,18 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "6"
+os.environ["CUDA_VISIBLE_DEVICES"] = "5,6,7,8"
 import time
 import torch
 import random
 import json
 from transformers import AutoTokenizer
-# from src.modeling_olmoe_parallel import OlmoeForCausalLM # 平均放置
-from src.modeling_olmoe_placement import OlmoeForCausalLM # 按层内亲和性放置
+from src.modeling_olmoe_parallel import OlmoeForCausalLM # 平均放置
+# from src.modeling_olmoe_placement import OlmoeForCausalLM # 按层内亲和性放置
 # from src.modeling_olmoe import OlmoeForCausalLM # 原本，1张卡
 # from src.test import OlmoeForCausalLM # 平均放置
 import torch.distributed as dist
 from accelerate import Accelerator
+import nvtx
+
 
 
 def main():
@@ -45,7 +47,7 @@ def main():
         layer.mlp.gate.to(device_main)  
 
 
-    print("💡 非专家部分所在设备：")
+    print("非专家部分所在设备：")
     print("Embedding:", model.model.embed_tokens.weight.device)
     print("Attention layer 0:", next(model.model.layers[0].self_attn.parameters()).device)
     print("LM Head:", model.lm_head.weight.device)
@@ -64,16 +66,17 @@ def main():
     #     break  # 只看一个
 
 
-    prompt_sizes = [8, 16, 32, 64, 128, 256, 512, 1024] # 8, 16, 32, 64, 128, 256, 512, 1024
+    prompt_sizes = [8] # 8, 16, 32, 64, 128, 256, 512, 1024
     
     batch_size = 32
 
-    output_dir = "./test_affinity_debug/acc_1process_4gpus/balance_2_new"
+    output_dir = "./nsys_test/acc_1process_4gpus/average"
     os.makedirs(output_dir, exist_ok=True)
 
     all_inference_time = {}
 
     for size in prompt_sizes:
+        
         print(f"\nPrompt size: {size}")
         # 加载 prompts
         with open(f"./dataset/sonnet/sonnet_{size}.txt", "r") as file:
@@ -103,9 +106,10 @@ def main():
             # 1 gpu
             # inputs = tokenizer(batch_prompts, return_tensors="pt", padding=True, truncation=True, max_length=2048).to(device)
 
-
-            with torch.no_grad():
-                outputs = model.generate(**inputs, max_new_tokens=50)
+            with nvtx.annotate("Generate", color="blue"):
+                with torch.no_grad():
+                    outputs = model.generate(**inputs, max_new_tokens=50)
+            
 
             decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
             decoded_outputs.extend(decoded)

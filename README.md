@@ -1,3 +1,7 @@
+```
+accelerate launch ep_acc_debug.py
+```
+
 # ExFlow
 Explore Inter-layer Expert Affinity in MoE Model Inference
 

@@ -9,9 +9,9 @@ communication_figs/
 expert_trace/
 expert_placement/
 graph/
-cluster_result/spectral/figs/
 test_placement/
 logs/
 inference_time_figs/
 *.png
 test_affinity_debug/
+nsys/

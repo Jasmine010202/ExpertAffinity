@@ -44,12 +44,12 @@ from .configuration_olmoe import OlmoeConfig
 ################
 import numpy as np
 import logging as lg
-lg.basicConfig(filename='./logs/balance_2_acc_1_process.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
+#lg.basicConfig(filename='./logs/balance_2_acc_1_process.log', level=lg.DEBUG, format='%(asctime)s - %(message)s')
 
 import json
 import os
 base_dir = os.path.dirname(os.path.dirname(__file__)) # 当前文件所在目录的上级路径
-file_path = os.path.join(base_dir,"cluster_result", "spectral", "balance", "2", "clusters_result_all_layers.json")
+file_path = os.path.join(base_dir,"cluster_result", "spectral", "balance", "clusters_result_all_layers.json")
 with open(file_path, "r") as f:
     EXPERTS_PLACEMENT_ALL_LAYERS = json.load(f)
 ################
@@ -667,7 +667,7 @@ class OlmoeSparseMoeBlock(nn.Module):
             for e_id in expert_ids:
                 expert = OlmoeMLP(config).to(device)
                 self.experts[e_id] = expert
-                lg.info(f"[Placement] Layer {layer_idx} - Expert {e_id} placed on cuda:{gpu_id}")
+                #lg.info(f"[Placement] Layer {layer_idx} - Expert {e_id} placed on cuda:{gpu_id}")
 
         # self.experts = nn.ModuleList()
         # num_gpus = torch.cuda.device_count()
@@ -742,7 +742,7 @@ class OlmoeSparseMoeBlock(nn.Module):
             # lg.info(f"[Check] Sending {len(token_indices)} tokens to Expert {expert_id} on {expert_device}")
             # lg.info(f"[Check] input_tensor device: {input_tensor.device}")
             # lg.info(f"[Check] expert_device: {expert_device}")
-            lg.info(f"[Layer {self.layer_idx}] Expert {expert_id} on {expert_device} received {len(token_indices)} tokens.")
+            #lg.info(f"[Layer {self.layer_idx}] Expert {expert_id} on {expert_device} received {len(token_indices)} tokens.")
 
             #output_tensor = expert_layer(input_tensor) * weight
             def _forward(layer, inp, w):
