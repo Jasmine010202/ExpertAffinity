@@ -3,12 +3,11 @@ __pycache__/
 models/
 placement_results/
 output/
-dataset/
+dataset/gigaword
 affinity_figs/
 communication_figs/
 expert_trace/
 expert_placement/
-graph/
 test_placement/
 logs/
 inference_time_figs/
