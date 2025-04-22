@@ -14,3 +14,6 @@ inference_time_figs/
 *.png
 test_affinity_debug/
 nsys/
+DCtest/
+inference_time/
+figs/
