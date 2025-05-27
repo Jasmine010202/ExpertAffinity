@@ -1,0 +1,58 @@
+{
+  "batch_0": {
+    "encoder_total_ms": 1100.1856,
+    "decoder_total_ms": 581.6675144508669,
+    "total_latency_ms": 1681.853114450867,
+    "total_inter_gpu_latency_ms": 45.54373179190749,
+    "total_inter_node_latency_ms": 1678.131200000001
+  },
+  "batch_1": {
+    "encoder_total_ms": 1159.9872,
+    "decoder_total_ms": 594.5095398843931,
+    "total_latency_ms": 1754.4967398843933,
+    "total_inter_gpu_latency_ms": 47.163190751445065,
+    "total_inter_node_latency_ms": 1752.6784
+  },
+  "batch_2": {
+    "encoder_total_ms": 948.2239999999999,
+    "decoder_total_ms": 417.19772485549146,
+    "total_latency_ms": 1365.4217248554914,
+    "total_inter_gpu_latency_ms": 60.99962080924853,
+    "total_inter_node_latency_ms": 1358.2335999999998
+  },
+  "batch_3": {
+    "encoder_total_ms": 1010.0736,
+    "decoder_total_ms": 419.83763236994236,
+    "total_latency_ms": 1429.9112323699424,
+    "total_inter_gpu_latency_ms": 63.98283468208092,
+    "total_inter_node_latency_ms": 1428.2752
+  },
+  "batch_4": {
+    "encoder_total_ms": 1175.1424000000002,
+    "decoder_total_ms": 571.7518797687859,
+    "total_latency_ms": 1746.894279768786,
+    "total_inter_gpu_latency_ms": 46.96430982658958,
+    "total_inter_node_latency_ms": 1743.257600000001
+  },
+  "batch_5": {
+    "encoder_total_ms": 1170.2271999999998,
+    "decoder_total_ms": 581.4307514450866,
+    "total_latency_ms": 1751.6579514450864,
+    "total_inter_gpu_latency_ms": 42.95827976878609,
+    "total_inter_node_latency_ms": 1749.8112000000006
+  },
+  "batch_6": {
+    "encoder_total_ms": 945.7664,
+    "decoder_total_ms": 415.79845549132955,
+    "total_latency_ms": 1361.5648554913296,
+    "total_inter_gpu_latency_ms": 65.80117456647396,
+    "total_inter_node_latency_ms": 1354.5472000000002
+  },
+  "batch_7": {
+    "encoder_total_ms": 961.3312000000001,
+    "decoder_total_ms": 410.8027560693642,
+    "total_latency_ms": 1372.1339560693643,
+    "total_inter_gpu_latency_ms": 60.800739884393,
+    "total_inter_node_latency_ms": 1369.7023999999997
+  }
+}

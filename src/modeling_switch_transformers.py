@@ -1141,6 +1141,12 @@ class SwitchTransformersStack(SwitchTransformersPreTrainedModel):
                 ]
                 if v is not None
             )
+        
+        
+        print(f"#####################Total input batch size (input_ids)= {input_ids.shape},dtype={input_ids.dtype}")
+        print(f"#####################hidden_states= {hidden_states.shape},dtype={hidden_states.dtype}")
+        #print(f"#####################output_hidden_states= {output_hidden_states.shape},dtype={output_hidden_states.dtype}")
+
         return MoEModelOutputWithPastAndCrossAttentions(
             last_hidden_state=hidden_states,
             past_key_values=next_cache,
@@ -1672,6 +1678,7 @@ class SwitchTransformersForConditionalGeneration(SwitchTransformersPreTrainedMod
         # routing_trace
         self.encode_routing_trace = []
         self.decode_routing_trace = []
+        # self.routing_trace = [] # 完整推理过程，不区分encode和decode阶段
         ######################################
 
     def get_input_embeddings(self):
@@ -1879,16 +1886,18 @@ class SwitchTransformersForConditionalGeneration(SwitchTransformersPreTrainedMod
             encoder_router_logits=encoder_outputs.router_probs,
         )
 
-    
-    # def _unpack_router_logits(self, router_outputs):
-    #     total_router_logits = []
-    #     total_expert_indexes = []
-    #     for router_output in router_outputs:
-    #         if len(router_output[0].shape) > 1:
-    #             router_logits, expert_indexes = router_output
-    #             total_router_logits.append(router_logits)
-    #             total_expert_indexes.append(expert_indexes)
-    #     return torch.cat(total_router_logits, dim=1), torch.cat(total_expert_indexes, dim=1)
+    '''
+    def _unpack_router_logits(self, router_outputs):
+        total_router_logits = []
+        total_expert_indexes = []
+        for router_output in router_outputs:
+            if len(router_output[0].shape) > 1:
+                router_logits, expert_indexes = router_output
+                total_router_logits.append(router_logits)
+                total_expert_indexes.append(expert_indexes)
+        return torch.cat(total_router_logits, dim=1), torch.cat(total_expert_indexes, dim=1)
+    '''
+
 
     def _unpack_router_logits(self, router_outputs, mode="encode"):
         total_router_logits = []
@@ -1904,7 +1913,9 @@ class SwitchTransformersForConditionalGeneration(SwitchTransformersPreTrainedMod
                 total_router_logits.append(router_logits)
                 total_expert_indexes.append(expert_indexes)
                 
+                # print(f"expert_indexes:{expert_indexes}")
                 token_layer_array.append(expert_indexes.T) #转置 [num_tokens, num_layers]
+                # print(f"token_layer_array:{token_layer_array}")
         
             #logging.info(f"router_output : {router_output}\n")
         
@@ -1913,11 +1924,13 @@ class SwitchTransformersForConditionalGeneration(SwitchTransformersPreTrainedMod
         # 将PyTorch 张量转换为 NumPy 数组
         # 在每一层中，每个token对于专家的选择
         experts_routing_trace = torch.cat(token_layer_array, dim=1).cpu().numpy()  # [num_layers, num_tokens]
+        # print(f"experts_routing_trace:{experts_routing_trace}")
         #experts_routing_trace = experts_routing_trace.T #转置 [num_tokens, num_layers]
 
-        # 区分Encode和Decode阶段
+        # 区分Encode和Decode阶段记录
         if mode == "encode":
-            self.encode_routing_trace.append(experts_routing_trace)
+            if not self.encode_routing_trace:  # 只记录一次
+                self.encode_routing_trace.append(experts_routing_trace)
             #logging.info(f"Encode: {self.encode_routing_trace}")
         elif mode == "decode":
             self.decode_routing_trace.append(experts_routing_trace)
@@ -1925,112 +1938,116 @@ class SwitchTransformersForConditionalGeneration(SwitchTransformersPreTrainedMod
         else:
             raise ValueError("Invalid mode. Choose either 'encode' or 'decode'.")
         
+        
         return torch.cat(total_router_logits, dim=1), torch.cat(total_expert_indexes, dim=1)
 
+    '''
     # 测专家选择关联性
-    # def _unpack_router_logits(self, router_outputs, mode="encode"):
-    #     """
-    #     解析并处理路由器输出的logits和专家索引,同时统计每一层的专家选择分布和跨层专家选择分布。
+        # def _unpack_router_logits(self, router_outputs, mode="encode"):
+        #     """
+        #     解析并处理路由器输出的logits和专家索引,同时统计每一层的专家选择分布和跨层专家选择分布。
 
-    #     参数:
-    #         router_outputs: 一个列表，其中每个元素包含 (router_logits, expert_indexes) 的元组。
-    #                     - router_logits: 每个token路由到不同专家的概率(或分数)。
-    #                     - expert_indexes: 每个token被分配到的专家索引。
-    #         mode: 区分是encode阶段和decode阶段的专家选择
+        #     参数:
+        #         router_outputs: 一个列表，其中每个元素包含 (router_logits, expert_indexes) 的元组。
+        #                     - router_logits: 每个token路由到不同专家的概率(或分数)。
+        #                     - expert_indexes: 每个token被分配到的专家索引。
+        #         mode: 区分是encode阶段和decode阶段的专家选择
 
-    #     返回:
-    #         total_router_logits: 将所有层的 router_logits 拼接后的结果。
-    #         total_expert_indexes: 将所有层的 expert_indexes 拼接后的结果。
-    #     """
+        #     返回:
+        #         total_router_logits: 将所有层的 router_logits 拼接后的结果。
+        #         total_expert_indexes: 将所有层的 expert_indexes 拼接后的结果。
+        #     """
 
-    #     total_router_logits = []    # 存储所有层的 router_logits
-    #     total_expert_indexes = []   # 存储所有层的 expert_indexes
-    #     #######################################
-    #     effective_layer_map = {}  # 映射：层级编号 -> total_expert_indexes 的索引
-        
-    #     # 根据模式选择对应的统计字典
-    #     if mode == "encode":
-    #         layer_to_layer_stats = self.encode_layer_to_layer_expert_selection_stats
-    #     elif mode == "decode":
-    #         layer_to_layer_stats = self.decode_layer_to_layer_expert_selection_stats
-    #     else:
-    #         raise ValueError("Invalid mode. Choose either 'encode' or 'decode'.")
-    #     #######################################
-        
-    #     # 遍历每层路由器的输出
-    #     for i, router_output in enumerate(router_outputs):
-    #         # 检查 router_output 是否包含有效的 logits 和专家索引 (shape > 1 表示非标量)
-    #         if len(router_output[0].shape) > 1:
-    #             # 记录当前层的 router_logits 和 expert_indexes
-    #             router_logits, expert_indexes = router_output
-    #             total_router_logits.append(router_logits)
-    #             total_expert_indexes.append(expert_indexes)
+        #     total_router_logits = []    # 存储所有层的 router_logits
+        #     total_expert_indexes = []   # 存储所有层的 expert_indexes
+        #     #######################################
+        #     effective_layer_map = {}  # 映射：层级编号 -> total_expert_indexes 的索引
+            
+        #     # 根据模式选择对应的统计字典
+        #     if mode == "encode":
+        #         layer_to_layer_stats = self.encode_layer_to_layer_expert_selection_stats
+        #     elif mode == "decode":
+        #         layer_to_layer_stats = self.decode_layer_to_layer_expert_selection_stats
+        #     else:
+        #         raise ValueError("Invalid mode. Choose either 'encode' or 'decode'.")
+        #     #######################################
+            
+        #     # 遍历每层路由器的输出
+        #     for i, router_output in enumerate(router_outputs):
+        #         # 检查 router_output 是否包含有效的 logits 和专家索引 (shape > 1 表示非标量)
+        #         if len(router_output[0].shape) > 1:
+        #             # 记录当前层的 router_logits 和 expert_indexes
+        #             router_logits, expert_indexes = router_output
+        #             total_router_logits.append(router_logits)
+        #             total_expert_indexes.append(expert_indexes)
 
-    #             ########################################  
-    #             # 记录映射关系(层号是1357911,total_expert_indexes下标是012345)
-    #             effective_layer_map[i] = len(total_expert_indexes) - 1
-    #             # expert_indexes 当前层专家索引，转成一维非负整数索引
-    #             current_expert_indexes = expert_indexes.view(-1).long()
+        #             ########################################  
+        #             # 记录映射关系(层号是1357911,total_expert_indexes下标是012345)
+        #             effective_layer_map[i] = len(total_expert_indexes) - 1
+        #             # expert_indexes 当前层专家索引，转成一维非负整数索引
+        #             current_expert_indexes = expert_indexes.view(-1).long()
 
-    #             logging.info(f"Layer {i}: router_output : {router_output}")
-                
-    #             # 记录跨层专家选择的分布
-    #             # >1 : 确保存在上一层的数据
-    #             if len(effective_layer_map) > 1:
-    #                 # 获取上一层的层号及对应total_expert_indexes的索引 -2:前一层,当前层是-1
-    #                 previous_layer_num = list(effective_layer_map.keys())[-2] 
-    #                 previous_layer_index = list(effective_layer_map.values())[-2]  
-    #                 # 取出上一层的专家索引,转成一维数组
-    #                 previous_expert_indexes = total_expert_indexes[previous_layer_index].view(-1).long()
+        #             logging.info(f"Layer {i}: router_output : {router_output}")
+                    
+        #             # 记录跨层专家选择的分布
+        #             # >1 : 确保存在上一层的数据
+        #             if len(effective_layer_map) > 1:
+        #                 # 获取上一层的层号及对应total_expert_indexes的索引 -2:前一层,当前层是-1
+        #                 previous_layer_num = list(effective_layer_map.keys())[-2] 
+        #                 previous_layer_index = list(effective_layer_map.values())[-2]  
+        #                 # 取出上一层的专家索引,转成一维数组
+        #                 previous_expert_indexes = total_expert_indexes[previous_layer_index].view(-1).long()
 
-    #                 logging.info(f"前一层 {previous_layer_num}")
-    #                 logging.info(f"当前层 {i}")
+        #                 logging.info(f"前一层 {previous_layer_num}")
+        #                 logging.info(f"当前层 {i}")
 
-    #                 # # 初始化当前层和上一层之间的选择关系
-    #                 # if (previous_layer_index, i) not in self.layer_to_layer_expert_selection_stats:
-    #                 #     self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)] = {}
+        #                 # # 初始化当前层和上一层之间的选择关系
+        #                 # if (previous_layer_index, i) not in self.layer_to_layer_expert_selection_stats:
+        #                 #     self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)] = {}
 
-    #                 # # 遍历上一层的每个专家索引
-    #                 # for prev_expert in previous_expert_indexes:
-    #                 #     # 获取上一层专家索引的数值
-    #                 #     prev_expert_item = prev_expert.item()
-    #                 #     if prev_expert_item not in self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)]:
-    #                 #         self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item] = {}
-                        
-    #                 #     # 遍历当前层的每个专家索引
-    #                 #     for curr_expert in current_expert_indexes:
-    #                 #         # 获取当前层专家索引的数值
-    #                 #         curr_expert_item = curr_expert.item()
-    #                 #         if curr_expert_item not in self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item]:
-    #                 #             self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item][curr_expert_item] = 0
+        #                 # # 遍历上一层的每个专家索引
+        #                 # for prev_expert in previous_expert_indexes:
+        #                 #     # 获取上一层专家索引的数值
+        #                 #     prev_expert_item = prev_expert.item()
+        #                 #     if prev_expert_item not in self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)]:
+        #                 #         self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item] = {}
                             
-    #                 #         # 统计上一层专家对当前层专家的选择次数
-    #                 #         self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item][curr_expert_item] += 1
+        #                 #     # 遍历当前层的每个专家索引
+        #                 #     for curr_expert in current_expert_indexes:
+        #                 #         # 获取当前层专家索引的数值
+        #                 #         curr_expert_item = curr_expert.item()
+        #                 #         if curr_expert_item not in self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item]:
+        #                 #             self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item][curr_expert_item] = 0
+                                
+        #                 #         # 统计上一层专家对当前层专家的选择次数
+        #                 #         self.layer_to_layer_expert_selection_stats[(previous_layer_index, i)][prev_expert_item][curr_expert_item] += 1
 
-    #                 # 区分 encode 和 decode
-    #                 # 初始化当前层和上一层之间的选择关系
-    #                 if (previous_layer_num, i) not in layer_to_layer_stats:
-    #                     layer_to_layer_stats[(previous_layer_num, i)] = {}
+        #                 # 区分 encode 和 decode
+        #                 # 初始化当前层和上一层之间的选择关系
+        #                 if (previous_layer_num, i) not in layer_to_layer_stats:
+        #                     layer_to_layer_stats[(previous_layer_num, i)] = {}
 
-    #                 # 遍历上一层的每个专家索引
-    #                 for prev_expert in previous_expert_indexes:
-    #                     # 获取上一层专家索引的数值,tensor转int
-    #                     prev_expert_item = prev_expert.item()
-    #                     if prev_expert_item not in layer_to_layer_stats[(previous_layer_num, i)]:
-    #                         layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item] = {}
-                        
-    #                     # 遍历当前层的每个专家索引
-    #                     for curr_expert in current_expert_indexes:
-    #                         # 获取当前层专家索引的数值
-    #                         curr_expert_item = curr_expert.item()
-    #                         if curr_expert_item not in layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item]:
-    #                             layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item][curr_expert_item] = 0
+        #                 # 遍历上一层的每个专家索引
+        #                 for prev_expert in previous_expert_indexes:
+        #                     # 获取上一层专家索引的数值,tensor转int
+        #                     prev_expert_item = prev_expert.item()
+        #                     if prev_expert_item not in layer_to_layer_stats[(previous_layer_num, i)]:
+        #                         layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item] = {}
                             
-    #                         # 统计上一层专家对当前层专家的选择次数
-    #                         layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item][curr_expert_item] += 1
-    #             ########################################
-    #     logging.info(f"映射关系 {effective_layer_map}")
-    #     return torch.cat(total_router_logits, dim=1), torch.cat(total_expert_indexes, dim=1)
+        #                     # 遍历当前层的每个专家索引
+        #                     for curr_expert in current_expert_indexes:
+        #                         # 获取当前层专家索引的数值
+        #                         curr_expert_item = curr_expert.item()
+        #                         if curr_expert_item not in layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item]:
+        #                             layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item][curr_expert_item] = 0
+                                
+        #                         # 统计上一层专家对当前层专家的选择次数
+        #                         layer_to_layer_stats[(previous_layer_num, i)][prev_expert_item][curr_expert_item] += 1
+        #             ########################################
+        #     logging.info(f"映射关系 {effective_layer_map}")
+        #     return torch.cat(total_router_logits, dim=1), torch.cat(total_expert_indexes, dim=1)
+    '''
+    
 
     def prepare_decoder_input_ids_from_labels(self, labels: torch.Tensor):
         return self._shift_right(labels)

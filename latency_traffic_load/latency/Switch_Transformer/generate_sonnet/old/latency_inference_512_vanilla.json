@@ -1,0 +1,5 @@
+{
+  "max_latency_batch_0_3": 1754.4967398843933,
+  "max_latency_batch_4_7": 1751.6579514450864,
+  "inference_latency_ms": 3506.1546913294796
+}

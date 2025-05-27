@@ -1,0 +1,58 @@
+{
+  "batch_0": {
+    "encoder_total_ms": 1486.4384,
+    "decoder_total_ms": 68.16406936416183,
+    "total_latency_ms": 1554.6024693641618,
+    "total_inter_gpu_latency_ms": 18.80845317919075,
+    "total_inter_node_latency_ms": 1554.4320000000002
+  },
+  "batch_1": {
+    "encoder_total_ms": 1626.5216,
+    "decoder_total_ms": 62.09346589595375,
+    "total_latency_ms": 1688.6150658959539,
+    "total_inter_gpu_latency_ms": 28.66726473988438,
+    "total_inter_node_latency_ms": 1687.9615999999999
+  },
+  "batch_2": {
+    "encoder_total_ms": 511.5904,
+    "decoder_total_ms": 67.37328092485548,
+    "total_latency_ms": 578.9636809248555,
+    "total_inter_gpu_latency_ms": 72.44947976878608,
+    "total_inter_node_latency_ms": 578.7647999999998
+  },
+  "batch_3": {
+    "encoder_total_ms": 528.384,
+    "decoder_total_ms": 89.3780346820809,
+    "total_latency_ms": 617.7620346820809,
+    "total_inter_gpu_latency_ms": 58.357345664739846,
+    "total_inter_node_latency_ms": 617.6768000000002
+  },
+  "batch_4": {
+    "encoder_total_ms": 1610.5472,
+    "decoder_total_ms": 71.38404624277455,
+    "total_latency_ms": 1681.9312462427745,
+    "total_inter_gpu_latency_ms": 18.808453179190746,
+    "total_inter_node_latency_ms": 1681.8175999999994
+  },
+  "batch_5": {
+    "encoder_total_ms": 1591.7055999999998,
+    "decoder_total_ms": 56.04653872832369,
+    "total_latency_ms": 1647.7521387283234,
+    "total_inter_gpu_latency_ms": 25.37152369942195,
+    "total_inter_node_latency_ms": 1647.4111999999996
+  },
+  "batch_6": {
+    "encoder_total_ms": 436.224,
+    "decoder_total_ms": 86.97725780346819,
+    "total_latency_ms": 523.2012578034681,
+    "total_inter_gpu_latency_ms": 77.22262196531784,
+    "total_inter_node_latency_ms": 523.0592000000001
+  },
+  "batch_7": {
+    "encoder_total_ms": 548.864,
+    "decoder_total_ms": 70.5080231213873,
+    "total_latency_ms": 619.3720231213873,
+    "total_inter_gpu_latency_ms": 53.555791907514426,
+    "total_inter_node_latency_ms": 619.3151999999997
+  }
+}

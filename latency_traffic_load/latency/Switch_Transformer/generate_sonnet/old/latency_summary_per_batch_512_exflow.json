@@ -1,0 +1,44 @@
+{
+  "batch_0": {
+    "encoder_total_ms": 743.2192,
+    "decoder_total_ms": 34.082034682080916,
+    "total_latency_ms": 777.3012346820809
+  },
+  "batch_1": {
+    "encoder_total_ms": 813.2608,
+    "decoder_total_ms": 31.046732947976874,
+    "total_latency_ms": 844.3075329479769
+  },
+  "batch_2": {
+    "encoder_total_ms": 255.7952,
+    "decoder_total_ms": 33.68664046242774,
+    "total_latency_ms": 289.4818404624277
+  },
+  "batch_3": {
+    "encoder_total_ms": 264.192,
+    "decoder_total_ms": 44.68901734104045,
+    "total_latency_ms": 308.88101734104043
+  },
+  "batch_4": {
+    "encoder_total_ms": 805.2736,
+    "decoder_total_ms": 35.69202312138727,
+    "total_latency_ms": 840.9656231213872
+  },
+  "batch_5": {
+    "encoder_total_ms": 795.8527999999999,
+    "decoder_total_ms": 28.023269364161845,
+    "total_latency_ms": 823.8760693641617
+  },
+  "batch_6": {
+    "encoder_total_ms": 218.112,
+    "decoder_total_ms": 43.488628901734096,
+    "total_latency_ms": 261.60062890173407
+  },
+  "batch_7": {
+    "encoder_total_ms": 274.432,
+    "decoder_total_ms": 35.25401156069365,
+    "total_latency_ms": 309.68601156069366
+  },
+  "total_inter_gpu_latency_ms": 176.62046705202357,
+  "total_inter_node_latency_ms": 4455.2192
+}

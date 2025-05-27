@@ -8,11 +8,11 @@ import os
 
 ###################
 model_name = "Switch_Transformer"
-input_name = "gigaword"
+input_name = "mdpp"
 phrase_mode = "decode"
 ###################
 
-routing_array = np.load(f'expert_trace/{model_name}/{input_name}/{phrase_mode}_routing_trace.npy') # [num_tokens, num_MOE_layers], expert id for each token at each layer
+routing_array = np.load(f'expert_trace/{model_name}/code/{input_name}/{phrase_mode}_routing_trace_8.npy') # [num_tokens, num_MOE_layers], expert id for each token at each layer
 num_tokens, _ = routing_array.shape
 print(num_tokens)
 num_layer = routing_array.shape[1]
@@ -271,7 +271,7 @@ def read_parition(total_number_gpu, use_bipart=False):
     else:
         avg_inter = 0
 
-    file_dir = f"placement_results/{model_name}/{input_name}/{phrase_mode}"
+    file_dir = f"different_tasks/placement_results/{model_name}/{input_name}/{phrase_mode}"
     os.makedirs(file_dir, exist_ok=True)
     file_name = f'{file_dir}/solution_intra{intra_gpus}_inter{nodes}_cost{avg_cost}_cintra{avg_intra}_cinter{avg_inter}.csv'
 
@@ -295,7 +295,7 @@ def read_parition(total_number_gpu, use_bipart=False):
     print("Expert Placement (Layer x Expert):")
     print(expert_placement)
     
-    result_dir = f"expert_placement/{model_name}/{input_name}/{phrase_mode}"
+    result_dir = f"different_tasks/expert_placement/{model_name}/{input_name}/{phrase_mode}"
     os.makedirs(result_dir, exist_ok=True)
     np.save(f"{result_dir}/intra{intra_gpus}_inter{nodes}.npy", expert_placement)
 

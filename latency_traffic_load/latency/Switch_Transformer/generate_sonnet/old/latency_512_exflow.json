@@ -1,0 +1,3734 @@
+{
+  "batch_0": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 445440,
+        "inter_node_bytes": 1569792,
+        "latency_inter_gpu_ms": 1.18784,
+        "latency_inter_node_ms": 104.6528,
+        "latency_ms": 104.6528
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 380928,
+        "inter_node_bytes": 1566720,
+        "latency_inter_gpu_ms": 1.015808,
+        "latency_inter_node_ms": 104.448,
+        "latency_ms": 104.448
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 187392,
+        "inter_node_bytes": 1830912,
+        "latency_inter_gpu_ms": 0.49971200000000005,
+        "latency_inter_node_ms": 122.0608,
+        "latency_ms": 122.0608
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 125952,
+        "inter_node_bytes": 2027520,
+        "latency_inter_gpu_ms": 0.335872,
+        "latency_inter_node_ms": 135.168,
+        "latency_ms": 135.168
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 172032,
+        "inter_node_bytes": 2036736,
+        "latency_inter_gpu_ms": 0.458752,
+        "latency_inter_node_ms": 135.7824,
+        "latency_ms": 135.7824
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 132096,
+        "inter_node_bytes": 2116608,
+        "latency_inter_gpu_ms": 0.352256,
+        "latency_inter_node_ms": 141.10719999999998,
+        "latency_ms": 141.10719999999998
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 36864,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 2.4576,
+          "latency_ms": 2.4576
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 33792,
+          "inter_node_bytes": 33792,
+          "latency_inter_gpu_ms": 0.090112,
+          "latency_inter_node_ms": 2.2528,
+          "latency_ms": 2.2528
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 36864,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 2.4576,
+          "latency_ms": 2.4576
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 86016,
+          "inter_node_bytes": 33792,
+          "latency_inter_gpu_ms": 0.229376,
+          "latency_inter_node_ms": 2.2528,
+          "latency_ms": 2.2528
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 86016,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.229376,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 33792,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.090112,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 36864,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 2.4576,
+          "latency_ms": 2.4576
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 46080,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.12287999999999999,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.024576
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ]
+    ]
+  },
+  "batch_1": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 513024,
+        "inter_node_bytes": 1818624,
+        "latency_inter_gpu_ms": 1.368064,
+        "latency_inter_node_ms": 121.2416,
+        "latency_ms": 121.2416
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 525312,
+        "inter_node_bytes": 1818624,
+        "latency_inter_gpu_ms": 1.400832,
+        "latency_inter_node_ms": 121.2416,
+        "latency_ms": 121.2416
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 482304,
+        "inter_node_bytes": 2018304,
+        "latency_inter_gpu_ms": 1.286144,
+        "latency_inter_node_ms": 134.5536,
+        "latency_ms": 134.5536
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 368640,
+        "inter_node_bytes": 2135040,
+        "latency_inter_gpu_ms": 0.9830399999999999,
+        "latency_inter_node_ms": 142.33599999999998,
+        "latency_ms": 142.33599999999998
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 337920,
+        "inter_node_bytes": 2153472,
+        "latency_inter_gpu_ms": 0.90112,
+        "latency_inter_node_ms": 143.5648,
+        "latency_ms": 143.5648
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 258048,
+        "inter_node_bytes": 2254848,
+        "latency_inter_gpu_ms": 0.688128,
+        "latency_inter_node_ms": 150.32319999999999,
+        "latency_ms": 150.32319999999999
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.04096
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.049152
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 36864,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.098304,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.024576
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 39936,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.10649600000000001,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 70656,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.188416,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 39936,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.10649600000000001,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.016384000000000003
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.016384000000000003
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        }
+      ]
+    ]
+  },
+  "batch_2": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 943104,
+        "inter_node_bytes": 850944,
+        "latency_inter_gpu_ms": 2.514944,
+        "latency_inter_node_ms": 56.7296,
+        "latency_ms": 56.7296
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 1016832,
+        "inter_node_bytes": 995328,
+        "latency_inter_gpu_ms": 2.7115519999999997,
+        "latency_inter_node_ms": 66.3552,
+        "latency_ms": 66.3552
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 1250304,
+        "inter_node_bytes": 595968,
+        "latency_inter_gpu_ms": 3.3341439999999998,
+        "latency_inter_node_ms": 39.7312,
+        "latency_ms": 39.7312
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 1320960,
+        "inter_node_bytes": 479232,
+        "latency_inter_gpu_ms": 3.52256,
+        "latency_inter_node_ms": 31.9488,
+        "latency_ms": 31.9488
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 1268736,
+        "inter_node_bytes": 534528,
+        "latency_inter_gpu_ms": 3.383296,
+        "latency_inter_node_ms": 35.6352,
+        "latency_ms": 35.6352
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 1324032,
+        "inter_node_bytes": 380928,
+        "latency_inter_gpu_ms": 3.5307519999999997,
+        "latency_inter_node_ms": 25.3952,
+        "latency_ms": 25.3952
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.04096
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 64512,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.172032,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 36864,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.098304,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 73728,
+          "inter_node_bytes": 39936,
+          "latency_inter_gpu_ms": 0.196608,
+          "latency_inter_node_ms": 2.6624,
+          "latency_ms": 2.6624
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 43008,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.114688,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 52224,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.139264,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 61440,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.16384,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 39936,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.10649600000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ]
+    ]
+  },
+  "batch_3": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 989184,
+        "inter_node_bytes": 946176,
+        "latency_inter_gpu_ms": 2.637824,
+        "latency_inter_node_ms": 63.07840000000001,
+        "latency_ms": 63.07840000000001
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 777216,
+        "inter_node_bytes": 986112,
+        "latency_inter_gpu_ms": 2.072576,
+        "latency_inter_node_ms": 65.74080000000001,
+        "latency_ms": 65.74080000000001
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 795648,
+        "inter_node_bytes": 651264,
+        "latency_inter_gpu_ms": 2.1217279999999996,
+        "latency_inter_node_ms": 43.4176,
+        "latency_ms": 43.4176
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 943104,
+        "inter_node_bytes": 528384,
+        "latency_inter_gpu_ms": 2.514944,
+        "latency_inter_node_ms": 35.2256,
+        "latency_ms": 35.2256
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 1056768,
+        "inter_node_bytes": 503808,
+        "latency_inter_gpu_ms": 2.818048,
+        "latency_inter_node_ms": 33.587199999999996,
+        "latency_ms": 33.587199999999996
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 1047552,
+        "inter_node_bytes": 347136,
+        "latency_inter_gpu_ms": 2.793472,
+        "latency_inter_node_ms": 23.142400000000002,
+        "latency_ms": 23.142400000000002
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 33792,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 2.2528,
+          "latency_ms": 2.2528
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 36864,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.098304,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 36864,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 2.4576,
+          "latency_ms": 2.4576
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 79872,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.21299200000000001,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 33792,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 2.2528,
+          "latency_ms": 2.2528
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 43008,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.114688,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 73728,
+          "inter_node_bytes": 39936,
+          "latency_inter_gpu_ms": 0.196608,
+          "latency_inter_node_ms": 2.6624,
+          "latency_ms": 2.6624
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 43008,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 2.8672,
+          "latency_ms": 2.8672
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 61440,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.16384,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 33792,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.090112,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        }
+      ]
+    ]
+  },
+  "batch_4": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 460800,
+        "inter_node_bytes": 1655808,
+        "latency_inter_gpu_ms": 1.2288,
+        "latency_inter_node_ms": 110.3872,
+        "latency_ms": 110.3872
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 436224,
+        "inter_node_bytes": 1714176,
+        "latency_inter_gpu_ms": 1.163264,
+        "latency_inter_node_ms": 114.2784,
+        "latency_ms": 114.2784
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 168960,
+        "inter_node_bytes": 2021376,
+        "latency_inter_gpu_ms": 0.45056,
+        "latency_inter_node_ms": 134.7584,
+        "latency_ms": 134.7584
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 159744,
+        "inter_node_bytes": 2221056,
+        "latency_inter_gpu_ms": 0.42598400000000003,
+        "latency_inter_node_ms": 148.07039999999998,
+        "latency_ms": 148.07039999999998
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 147456,
+        "inter_node_bytes": 2193408,
+        "latency_inter_gpu_ms": 0.393216,
+        "latency_inter_node_ms": 146.2272,
+        "latency_ms": 146.2272
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 138240,
+        "inter_node_bytes": 2273280,
+        "latency_inter_gpu_ms": 0.36863999999999997,
+        "latency_inter_node_ms": 151.552,
+        "latency_ms": 151.552
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 33792,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 2.2528,
+          "latency_ms": 2.2528
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 92160,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.24575999999999998,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 33792,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.090112,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 52224,
+          "inter_node_bytes": 43008,
+          "latency_inter_gpu_ms": 0.139264,
+          "latency_inter_node_ms": 2.8672,
+          "latency_ms": 2.8672
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 36864,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 2.4576,
+          "latency_ms": 2.4576
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 43008,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.114688,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.016384000000000003
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        }
+      ]
+    ]
+  },
+  "batch_5": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 463872,
+        "inter_node_bytes": 1744896,
+        "latency_inter_gpu_ms": 1.2369919999999999,
+        "latency_inter_node_ms": 116.32639999999999,
+        "latency_ms": 116.32639999999999
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 488448,
+        "inter_node_bytes": 1738752,
+        "latency_inter_gpu_ms": 1.3025280000000001,
+        "latency_inter_node_ms": 115.9168,
+        "latency_ms": 115.9168
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 405504,
+        "inter_node_bytes": 2006016,
+        "latency_inter_gpu_ms": 1.0813439999999999,
+        "latency_inter_node_ms": 133.7344,
+        "latency_ms": 133.7344
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 285696,
+        "inter_node_bytes": 2141184,
+        "latency_inter_gpu_ms": 0.761856,
+        "latency_inter_node_ms": 142.7456,
+        "latency_ms": 142.7456
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 322560,
+        "inter_node_bytes": 2067456,
+        "latency_inter_gpu_ms": 0.86016,
+        "latency_inter_node_ms": 137.8304,
+        "latency_ms": 137.8304
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 172032,
+        "inter_node_bytes": 2239488,
+        "latency_inter_gpu_ms": 0.458752,
+        "latency_inter_node_ms": 149.29919999999998,
+        "latency_ms": 149.29919999999998
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.057344
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 67584,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.180224,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 61440,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.16384,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 36864,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.098304,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 52224,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.139264,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.024576
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ]
+    ]
+  },
+  "batch_6": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 940032,
+        "inter_node_bytes": 847872,
+        "latency_inter_gpu_ms": 2.506752,
+        "latency_inter_node_ms": 56.5248,
+        "latency_ms": 56.5248
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 1170432,
+        "inter_node_bytes": 789504,
+        "latency_inter_gpu_ms": 3.121152,
+        "latency_inter_node_ms": 52.6336,
+        "latency_ms": 52.6336
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 1284096,
+        "inter_node_bytes": 580608,
+        "latency_inter_gpu_ms": 3.424256,
+        "latency_inter_node_ms": 38.7072,
+        "latency_ms": 38.7072
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 1499136,
+        "inter_node_bytes": 414720,
+        "latency_inter_gpu_ms": 3.9976960000000004,
+        "latency_inter_node_ms": 27.648,
+        "latency_ms": 27.648
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 1419264,
+        "inter_node_bytes": 374784,
+        "latency_inter_gpu_ms": 3.7847039999999996,
+        "latency_inter_node_ms": 24.9856,
+        "latency_ms": 24.9856
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 1480704,
+        "inter_node_bytes": 264192,
+        "latency_inter_gpu_ms": 3.948544,
+        "latency_inter_node_ms": 17.6128,
+        "latency_ms": 17.6128
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 43008,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 2.8672,
+          "latency_ms": 2.8672
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.016384000000000003
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 64512,
+          "inter_node_bytes": 39936,
+          "latency_inter_gpu_ms": 0.172032,
+          "latency_inter_node_ms": 2.6624,
+          "latency_ms": 2.6624
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 36864,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.098304,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 61440,
+          "inter_node_bytes": 49152,
+          "latency_inter_gpu_ms": 0.16384,
+          "latency_inter_node_ms": 3.2767999999999997,
+          "latency_ms": 3.2767999999999997
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 27648,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.8432,
+          "latency_ms": 1.8432
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 39936,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 2.6624,
+          "latency_ms": 2.6624
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 36864,
+          "inter_node_bytes": 33792,
+          "latency_inter_gpu_ms": 0.098304,
+          "latency_inter_node_ms": 2.2528,
+          "latency_ms": 2.2528
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.016384000000000003
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ]
+    ]
+  },
+  "batch_7": {
+    "encode": [
+      {
+        "layer": 0,
+        "inter_gpu_bytes": 887808,
+        "inter_node_bytes": 1007616,
+        "latency_inter_gpu_ms": 2.3674880000000003,
+        "latency_inter_node_ms": 67.17439999999999,
+        "latency_ms": 67.17439999999999
+      },
+      {
+        "layer": 1,
+        "inter_gpu_bytes": 786432,
+        "inter_node_bytes": 1026048,
+        "latency_inter_gpu_ms": 2.0971520000000003,
+        "latency_inter_node_ms": 68.4032,
+        "latency_ms": 68.4032
+      },
+      {
+        "layer": 2,
+        "inter_gpu_bytes": 798720,
+        "inter_node_bytes": 712704,
+        "latency_inter_gpu_ms": 2.12992,
+        "latency_inter_node_ms": 47.513600000000004,
+        "latency_ms": 47.513600000000004
+      },
+      {
+        "layer": 3,
+        "inter_gpu_bytes": 847872,
+        "inter_node_bytes": 466944,
+        "latency_inter_gpu_ms": 2.260992,
+        "latency_inter_node_ms": 31.1296,
+        "latency_ms": 31.1296
+      },
+      {
+        "layer": 4,
+        "inter_gpu_bytes": 893952,
+        "inter_node_bytes": 546816,
+        "latency_inter_gpu_ms": 2.3838719999999998,
+        "latency_inter_node_ms": 36.4544,
+        "latency_ms": 36.4544
+      },
+      {
+        "layer": 5,
+        "inter_gpu_bytes": 970752,
+        "inter_node_bytes": 356352,
+        "latency_inter_gpu_ms": 2.5886720000000003,
+        "latency_inter_node_ms": 23.756800000000002,
+        "latency_ms": 23.756800000000002
+      }
+    ],
+    "decode": [
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 36864,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 2.4576,
+          "latency_ms": 2.4576
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 79872,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.21299200000000001,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 21504,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.4336,
+          "latency_ms": 1.4336
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 18432,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.049152,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 30720,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.08192,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 76800,
+          "inter_node_bytes": 39936,
+          "latency_inter_gpu_ms": 0.20479999999999998,
+          "latency_inter_node_ms": 2.6624,
+          "latency_ms": 2.6624
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 30720,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 2.048,
+          "latency_ms": 2.048
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 24576,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.6383999999999999,
+          "latency_ms": 1.6383999999999999
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 33792,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.090112,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 52224,
+          "inter_node_bytes": 33792,
+          "latency_inter_gpu_ms": 0.139264,
+          "latency_inter_node_ms": 2.2528,
+          "latency_ms": 2.2528
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 27648,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.073728,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 15360,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.04096,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 12288,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.8191999999999999,
+          "latency_ms": 0.8191999999999999
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 12288,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.032768000000000005,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 24576,
+          "inter_node_bytes": 18432,
+          "latency_inter_gpu_ms": 0.06553600000000001,
+          "latency_inter_node_ms": 1.2288,
+          "latency_ms": 1.2288
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 21504,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.057344,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 9216,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.6144,
+          "latency_ms": 0.6144
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 15360,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 1.024,
+          "latency_ms": 1.024
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 3072,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.008192000000000001,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.008192000000000001
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 9216,
+          "inter_node_bytes": 6144,
+          "latency_inter_gpu_ms": 0.024576,
+          "latency_inter_node_ms": 0.40959999999999996,
+          "latency_ms": 0.40959999999999996
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 6144,
+          "inter_node_bytes": 3072,
+          "latency_inter_gpu_ms": 0.016384000000000003,
+          "latency_inter_node_ms": 0.20479999999999998,
+          "latency_ms": 0.20479999999999998
+        }
+      ],
+      [
+        {
+          "layer": 6,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 7,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 8,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 9,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 10,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        },
+        {
+          "layer": 11,
+          "inter_gpu_bytes": 0,
+          "inter_node_bytes": 0,
+          "latency_inter_gpu_ms": 0.0,
+          "latency_inter_node_ms": 0.0,
+          "latency_ms": 0.0
+        }
+      ]
+    ]
+  }
+}

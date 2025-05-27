@@ -4,7 +4,7 @@ import os
 import seaborn as sns
 
     
-def plot_experts_affinity(experts_selection_stats, fig_dir, num_of_prompts):
+def plot_experts_affinity_intra_layer(experts_selection_stats, fig_dir, num_of_prompts):
     save_dir = os.path.join(fig_dir, num_of_prompts)
     os.makedirs(save_dir, exist_ok=True)
 
@@ -46,18 +46,21 @@ if __name__ == "__main__":
     model_name = "OLMoE"#Switch_Transformer OLMoE
     input_name = "sonnet"
     phrase_mode = "decode" #decode
-    prompt_nums = [8] # 8, 16, 32, 64, 128, 256, 512, 1024
+    prompt_nums = [512] # 8, 16, 32, 64, 128, 256, 512, 1024
     top_k = 8 # ST:1,OL:8
-    num_of_experts_pre_layer = 64
+    num_of_experts_per_layer = 64
 
-    fig_dir = f"affinity_figs/intra_layer/{model_name}/{input_name}/top{top_k}/{phrase_mode}/test"
+    result_dir = f"latency_traffic_load/intra_layer_affinity/{model_name}/{input_name}/top{top_k}/{phrase_mode}/data"
+    os.makedirs(result_dir, exist_ok=True)
+
+    fig_dir = f"latency_traffic_load/intra_layer_affinity/{model_name}/{input_name}/top{top_k}/{phrase_mode}/figs"
     os.makedirs(fig_dir, exist_ok=True)
 
     for num in prompt_nums:
         routing_data = np.load(f'expert_trace/{model_name}/{input_name}/top{top_k}/{phrase_mode}_routing_trace_{num}.npy')
         
         num_tokens, num_layers, _ = routing_data.shape
-        experts_selection_stats = np.zeros((num_layers, num_of_experts_pre_layer, num_of_experts_pre_layer))
+        experts_selection_stats = np.zeros((num_layers, num_of_experts_per_layer, num_of_experts_per_layer))
 
         for layer in range(num_layers):
             for token in range(num_tokens):
@@ -68,4 +71,5 @@ if __name__ == "__main__":
                         experts_selection_stats[layer, expert_i, expert_j] += 1
                         experts_selection_stats[layer, expert_j, expert_i] += 1 # 对称矩阵
         
-        plot_experts_affinity(experts_selection_stats, fig_dir, str(num))
+        plot_experts_affinity_intra_layer(experts_selection_stats, fig_dir, str(num))
+        np.save(f"{result_dir}/{model_name}_Intra_Layer_Affinity_{input_name}_{num}.npy", experts_selection_stats)

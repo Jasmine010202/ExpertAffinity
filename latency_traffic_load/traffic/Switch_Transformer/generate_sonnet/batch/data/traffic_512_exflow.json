@@ -1,0 +1,574 @@
+{
+  "batch_0": {
+    "per_layer": [
+      {
+        "intra_gpu": 157,
+        "inter_gpu": 145,
+        "inter_node": 511
+      },
+      {
+        "intra_gpu": 533,
+        "inter_gpu": 73,
+        "inter_node": 207
+      },
+      {
+        "intra_gpu": 486,
+        "inter_gpu": 71,
+        "inter_node": 256
+      },
+      {
+        "intra_gpu": 546,
+        "inter_gpu": 69,
+        "inter_node": 198
+      },
+      {
+        "intra_gpu": 551,
+        "inter_gpu": 83,
+        "inter_node": 179
+      },
+      {
+        "intra_gpu": 524,
+        "inter_gpu": 125,
+        "inter_node": 164
+      },
+      {
+        "intra_gpu": 4,
+        "inter_gpu": 16,
+        "inter_node": 368
+      },
+      {
+        "intra_gpu": 348,
+        "inter_gpu": 17,
+        "inter_node": 23
+      },
+      {
+        "intra_gpu": 343,
+        "inter_gpu": 24,
+        "inter_node": 21
+      },
+      {
+        "intra_gpu": 356,
+        "inter_gpu": 13,
+        "inter_node": 19
+      },
+      {
+        "intra_gpu": 346,
+        "inter_gpu": 19,
+        "inter_node": 23
+      },
+      {
+        "intra_gpu": 325,
+        "inter_gpu": 33,
+        "inter_node": 30
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 4519,
+      "inter_gpu": 688,
+      "inter_node": 1999
+    }
+  },
+  "batch_1": {
+    "per_layer": [
+      {
+        "intra_gpu": 106,
+        "inter_gpu": 167,
+        "inter_node": 592
+      },
+      {
+        "intra_gpu": 620,
+        "inter_gpu": 93,
+        "inter_node": 152
+      },
+      {
+        "intra_gpu": 538,
+        "inter_gpu": 92,
+        "inter_node": 235
+      },
+      {
+        "intra_gpu": 579,
+        "inter_gpu": 82,
+        "inter_node": 204
+      },
+      {
+        "intra_gpu": 581,
+        "inter_gpu": 90,
+        "inter_node": 194
+      },
+      {
+        "intra_gpu": 594,
+        "inter_gpu": 90,
+        "inter_node": 181
+      },
+      {
+        "intra_gpu": 20,
+        "inter_gpu": 1,
+        "inter_node": 383
+      },
+      {
+        "intra_gpu": 359,
+        "inter_gpu": 22,
+        "inter_node": 23
+      },
+      {
+        "intra_gpu": 351,
+        "inter_gpu": 32,
+        "inter_node": 21
+      },
+      {
+        "intra_gpu": 363,
+        "inter_gpu": 22,
+        "inter_node": 19
+      },
+      {
+        "intra_gpu": 369,
+        "inter_gpu": 14,
+        "inter_node": 21
+      },
+      {
+        "intra_gpu": 337,
+        "inter_gpu": 39,
+        "inter_node": 28
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 4817,
+      "inter_gpu": 744,
+      "inter_node": 2053
+    }
+  },
+  "batch_2": {
+    "per_layer": [
+      {
+        "intra_gpu": 277,
+        "inter_gpu": 307,
+        "inter_node": 277
+      },
+      {
+        "intra_gpu": 572,
+        "inter_gpu": 88,
+        "inter_node": 201
+      },
+      {
+        "intra_gpu": 472,
+        "inter_gpu": 111,
+        "inter_node": 278
+      },
+      {
+        "intra_gpu": 578,
+        "inter_gpu": 87,
+        "inter_node": 196
+      },
+      {
+        "intra_gpu": 577,
+        "inter_gpu": 82,
+        "inter_node": 202
+      },
+      {
+        "intra_gpu": 603,
+        "inter_gpu": 92,
+        "inter_node": 166
+      },
+      {
+        "intra_gpu": 114,
+        "inter_gpu": 266,
+        "inter_node": 18
+      },
+      {
+        "intra_gpu": 345,
+        "inter_gpu": 27,
+        "inter_node": 26
+      },
+      {
+        "intra_gpu": 352,
+        "inter_gpu": 24,
+        "inter_node": 22
+      },
+      {
+        "intra_gpu": 352,
+        "inter_gpu": 26,
+        "inter_node": 20
+      },
+      {
+        "intra_gpu": 351,
+        "inter_gpu": 26,
+        "inter_node": 21
+      },
+      {
+        "intra_gpu": 320,
+        "inter_gpu": 49,
+        "inter_node": 29
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 4913,
+      "inter_gpu": 1185,
+      "inter_node": 1456
+    }
+  },
+  "batch_3": {
+    "per_layer": [
+      {
+        "intra_gpu": 300,
+        "inter_gpu": 322,
+        "inter_node": 308
+      },
+      {
+        "intra_gpu": 626,
+        "inter_gpu": 75,
+        "inter_node": 229
+      },
+      {
+        "intra_gpu": 542,
+        "inter_gpu": 107,
+        "inter_node": 281
+      },
+      {
+        "intra_gpu": 612,
+        "inter_gpu": 86,
+        "inter_node": 232
+      },
+      {
+        "intra_gpu": 628,
+        "inter_gpu": 98,
+        "inter_node": 204
+      },
+      {
+        "intra_gpu": 639,
+        "inter_gpu": 130,
+        "inter_node": 161
+      },
+      {
+        "intra_gpu": 269,
+        "inter_gpu": 121,
+        "inter_node": 29
+      },
+      {
+        "intra_gpu": 356,
+        "inter_gpu": 26,
+        "inter_node": 37
+      },
+      {
+        "intra_gpu": 358,
+        "inter_gpu": 27,
+        "inter_node": 34
+      },
+      {
+        "intra_gpu": 359,
+        "inter_gpu": 24,
+        "inter_node": 36
+      },
+      {
+        "intra_gpu": 368,
+        "inter_gpu": 23,
+        "inter_node": 28
+      },
+      {
+        "intra_gpu": 354,
+        "inter_gpu": 40,
+        "inter_node": 25
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 5411,
+      "inter_gpu": 1079,
+      "inter_node": 1604
+    }
+  },
+  "batch_4": {
+    "per_layer": [
+      {
+        "intra_gpu": 169,
+        "inter_gpu": 150,
+        "inter_node": 539
+      },
+      {
+        "intra_gpu": 573,
+        "inter_gpu": 80,
+        "inter_node": 205
+      },
+      {
+        "intra_gpu": 476,
+        "inter_gpu": 116,
+        "inter_node": 266
+      },
+      {
+        "intra_gpu": 590,
+        "inter_gpu": 71,
+        "inter_node": 197
+      },
+      {
+        "intra_gpu": 576,
+        "inter_gpu": 101,
+        "inter_node": 181
+      },
+      {
+        "intra_gpu": 587,
+        "inter_gpu": 127,
+        "inter_node": 144
+      },
+      {
+        "intra_gpu": 3,
+        "inter_gpu": 17,
+        "inter_node": 372
+      },
+      {
+        "intra_gpu": 344,
+        "inter_gpu": 21,
+        "inter_node": 27
+      },
+      {
+        "intra_gpu": 347,
+        "inter_gpu": 27,
+        "inter_node": 18
+      },
+      {
+        "intra_gpu": 358,
+        "inter_gpu": 8,
+        "inter_node": 26
+      },
+      {
+        "intra_gpu": 353,
+        "inter_gpu": 12,
+        "inter_node": 27
+      },
+      {
+        "intra_gpu": 333,
+        "inter_gpu": 30,
+        "inter_node": 29
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 4709,
+      "inter_gpu": 760,
+      "inter_node": 2031
+    }
+  },
+  "batch_5": {
+    "per_layer": [
+      {
+        "intra_gpu": 126,
+        "inter_gpu": 151,
+        "inter_node": 568
+      },
+      {
+        "intra_gpu": 579,
+        "inter_gpu": 90,
+        "inter_node": 176
+      },
+      {
+        "intra_gpu": 466,
+        "inter_gpu": 106,
+        "inter_node": 273
+      },
+      {
+        "intra_gpu": 568,
+        "inter_gpu": 85,
+        "inter_node": 192
+      },
+      {
+        "intra_gpu": 572,
+        "inter_gpu": 83,
+        "inter_node": 190
+      },
+      {
+        "intra_gpu": 582,
+        "inter_gpu": 121,
+        "inter_node": 142
+      },
+      {
+        "intra_gpu": 12,
+        "inter_gpu": 4,
+        "inter_node": 382
+      },
+      {
+        "intra_gpu": 340,
+        "inter_gpu": 28,
+        "inter_node": 30
+      },
+      {
+        "intra_gpu": 356,
+        "inter_gpu": 29,
+        "inter_node": 13
+      },
+      {
+        "intra_gpu": 364,
+        "inter_gpu": 19,
+        "inter_node": 15
+      },
+      {
+        "intra_gpu": 357,
+        "inter_gpu": 20,
+        "inter_node": 21
+      },
+      {
+        "intra_gpu": 345,
+        "inter_gpu": 34,
+        "inter_node": 19
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 4667,
+      "inter_gpu": 770,
+      "inter_node": 2021
+    }
+  },
+  "batch_6": {
+    "per_layer": [
+      {
+        "intra_gpu": 303,
+        "inter_gpu": 306,
+        "inter_node": 276
+      },
+      {
+        "intra_gpu": 593,
+        "inter_gpu": 91,
+        "inter_node": 201
+      },
+      {
+        "intra_gpu": 535,
+        "inter_gpu": 104,
+        "inter_node": 246
+      },
+      {
+        "intra_gpu": 613,
+        "inter_gpu": 84,
+        "inter_node": 188
+      },
+      {
+        "intra_gpu": 606,
+        "inter_gpu": 116,
+        "inter_node": 163
+      },
+      {
+        "intra_gpu": 649,
+        "inter_gpu": 108,
+        "inter_node": 128
+      },
+      {
+        "intra_gpu": 111,
+        "inter_gpu": 267,
+        "inter_node": 23
+      },
+      {
+        "intra_gpu": 352,
+        "inter_gpu": 19,
+        "inter_node": 30
+      },
+      {
+        "intra_gpu": 340,
+        "inter_gpu": 31,
+        "inter_node": 30
+      },
+      {
+        "intra_gpu": 353,
+        "inter_gpu": 25,
+        "inter_node": 23
+      },
+      {
+        "intra_gpu": 356,
+        "inter_gpu": 14,
+        "inter_node": 31
+      },
+      {
+        "intra_gpu": 338,
+        "inter_gpu": 28,
+        "inter_node": 35
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 5149,
+      "inter_gpu": 1193,
+      "inter_node": 1374
+    }
+  },
+  "batch_7": {
+    "per_layer": [
+      {
+        "intra_gpu": 273,
+        "inter_gpu": 289,
+        "inter_node": 328
+      },
+      {
+        "intra_gpu": 607,
+        "inter_gpu": 87,
+        "inter_node": 196
+      },
+      {
+        "intra_gpu": 495,
+        "inter_gpu": 101,
+        "inter_node": 294
+      },
+      {
+        "intra_gpu": 595,
+        "inter_gpu": 91,
+        "inter_node": 204
+      },
+      {
+        "intra_gpu": 584,
+        "inter_gpu": 104,
+        "inter_node": 202
+      },
+      {
+        "intra_gpu": 613,
+        "inter_gpu": 101,
+        "inter_node": 176
+      },
+      {
+        "intra_gpu": 277,
+        "inter_gpu": 113,
+        "inter_node": 18
+      },
+      {
+        "intra_gpu": 356,
+        "inter_gpu": 23,
+        "inter_node": 29
+      },
+      {
+        "intra_gpu": 358,
+        "inter_gpu": 25,
+        "inter_node": 25
+      },
+      {
+        "intra_gpu": 368,
+        "inter_gpu": 22,
+        "inter_node": 18
+      },
+      {
+        "intra_gpu": 369,
+        "inter_gpu": 19,
+        "inter_node": 20
+      },
+      {
+        "intra_gpu": 349,
+        "inter_gpu": 28,
+        "inter_node": 31
+      }
+    ],
+    "batch_summary": {
+      "intra_gpu": 5244,
+      "inter_gpu": 1003,
+      "inter_node": 1541
+    }
+  },
+  "total_num": {
+    "intra_gpu": 39429,
+    "inter_gpu": 7422,
+    "inter_node": 14079
+  },
+  "total_traffic_Byte": {
+    "intra_gpu": 121125888,
+    "inter_gpu": 22800384,
+    "inter_node": 43250688
+  },
+  "total_traffic_KB": {
+    "intra_gpu": 118287.0,
+    "inter_gpu": 22266.0,
+    "inter_node": 42237.0
+  },
+  "total_traffic_MB": {
+    "intra_gpu": 115.5146484375,
+    "inter_gpu": 21.744140625,
+    "inter_node": 41.2470703125
+  }
+}

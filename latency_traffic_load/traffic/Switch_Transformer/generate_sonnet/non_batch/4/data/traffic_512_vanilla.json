@@ -1,0 +1,14 @@
+{
+  "num_intra_gpu": 30578,
+  "num_inter_gpu": 30566,
+  "num_inter_node": 60716,
+  "traffic_intra_gpu_Byte": 93935616,
+  "traffic_inter_gpu_Byte": 93898752,
+  "traffic_inter_node_Byte": 186519552,
+  "traffic_intra_gpu_KB": 91734.0,
+  "traffic_inter_gpu_KB": 91698.0,
+  "traffic_inter_node_KB": 182148.0,
+  "traffic_intra_gpu_MB": 89.583984375,
+  "traffic_inter_gpu_MB": 89.548828125,
+  "traffic_inter_node_MB": 177.87890625
+}

@@ -2,13 +2,13 @@ import random
 import os
 
 # 加载 prompts
-with open("./dataset/sonnet.txt", "r") as file:
+with open("./dataset/sonnet/sonnet.txt", "r") as file:
     prompts = [line.strip() for line in file.readlines() if line.strip()]
 
 output_dir = "./dataset/sonnet"
 os.makedirs(output_dir, exist_ok=True)
 
-prompt_sizes = [8, 16, 32, 64, 128, 256, 512, 1024] # 8, 16, 32, 64, 128, 256, 512, 1024
+prompt_sizes = [512] # 8, 16, 32, 64, 128, 256, 512, 1024
 
 for size in prompt_sizes:
     print(f"\nPrompt size: {size}")

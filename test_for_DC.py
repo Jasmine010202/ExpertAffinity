@@ -121,7 +121,7 @@ def experts_selection_inter_layer(routing_data):
     return experts_selection_stats, experts_selection_edge_sets
 
 
-def cosine_similarity_of_experts_selection(experts_selection_stats, epsilon=1e-8):
+def cosine_similarity_of_experts_selection(experts_selection_stats):
     num_layer_pairs = experts_selection_stats.shape[0]
     cosine_sim_list = []
 
@@ -422,12 +422,12 @@ if __name__ == "__main__":
         all_comm_data[str(num)] = comm_data
 
         # 层与层之间专家通信的关系
-        # experts_selection_stats, _ = experts_selection_inter_layer(routing_array)
-        # plot_experts_selection_inter_layer(experts_selection_stats, selection_fig_dir, str(num))
+        experts_selection_stats, _ = experts_selection_inter_layer(routing_array)
+        plot_experts_selection_inter_layer(experts_selection_stats, selection_fig_dir, str(num))
 
         # 每一层专家激活分布
-        # experts_activation_stats = experts_activations_count(routing_array)
-        # plot_expert_activations(experts_activation_stats,str(num),activation_fig_dir,True)
+        experts_activation_stats = experts_activations_count(routing_array)
+        plot_expert_activations(experts_activation_stats,str(num),activation_fig_dir,True)
     
     # with open(f"{data_dir}/all_communication_data.json", 'r') as f:
     #     all_comm_data = json.load(f)

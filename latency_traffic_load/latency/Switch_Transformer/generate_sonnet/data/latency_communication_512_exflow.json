@@ -1,0 +1,7 @@
+{
+  "max_latency_batch_0_3": 844.3075329479769,
+  "max_latency_batch_4_7": 840.9656231213872,
+  "communication_latency_ms": 1685.2731560693642,
+  "total_inter_gpu_latency_ms": 23.73785895953756,
+  "total_inter_node_latency_ms": 1684.8895999999995
+}

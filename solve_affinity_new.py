@@ -274,7 +274,7 @@ def read_parition(file_dir, result_dir, routing_array, num_tokens, num_layer, nu
     
     np.save(f"{result_dir}/intra{intra_gpus}_inter{nodes}.npy", expert_placement)
 
-    # 均匀放置的方案： 2节点每个4个GPU，一层8个专家
+    # # 均匀放置的方案： 2节点每个4个GPU，一层8个专家
     # average_placement = np.zeros((num_layer, num_expert_per_layer), dtype=int)
     # for expert, node in vanilla_p.items():
     #     layer = expert // num_expert_per_layer  # 计算层号
@@ -302,20 +302,20 @@ def placement_plan(routing_array, model_name, input_name, phrase_mode, prompt_nu
     num_tokens, _ = routing_array.shape
     print(num_tokens)
     num_layer = routing_array.shape[1]
-    num_expert_per_layer = 8 #st:8 OL:64
+    num_expert_per_layer = 64 #st:base8-8 base64-64 OL:64
     total_experts = num_expert_per_layer * num_layer
     assert total_experts % 2 == 0
-    intra_gpus = 2 #8 4
-    nodes = 2 #1
+    intra_gpus = 2 #2 8 4
+    nodes = 2 #2 1
     use_bipart = False #True
     incremental_amount = 5000  #5000
     run_times = (num_tokens + incremental_amount - 1) // incremental_amount
     time_limits = 60 # By default, we use bipart solver. If not, you can increase the search time accordingly.
 
-    file_dir = f"placement_results/{model_name}/{input_name}/{'use_bipart' if use_bipart else 'not_use_bipart'}/{phrase_mode}/{prompt_num}"
+    file_dir = f"different_tasks/placement_results/{model_name}/{input_name}/{'use_bipart' if use_bipart else 'not_use_bipart'}/{phrase_mode}/{prompt_num}_front"
     os.makedirs(file_dir, exist_ok=True)
 
-    result_dir = f"expert_placement/{model_name}/{input_name}/{'use_bipart' if use_bipart else 'not_use_bipart'}/{phrase_mode}/{prompt_num}"
+    result_dir = f"different_tasks/expert_placement/{model_name}/{input_name}/{'use_bipart' if use_bipart else 'not_use_bipart'}/{phrase_mode}/{prompt_num}_front"
     os.makedirs(result_dir, exist_ok=True)
 
     for i in range(num_layer):
