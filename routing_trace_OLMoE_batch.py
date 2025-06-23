@@ -1,3 +1,5 @@
+# batch>1，有问题
+
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 

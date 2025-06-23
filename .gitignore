@@ -17,3 +17,6 @@ nsys/
 DCtest/
 inference_time/
 figs/
+Occult_test/
+different_tasks/
+dataset/

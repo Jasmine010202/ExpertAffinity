@@ -25,12 +25,13 @@ prompt_sizes = [8, 16, 32, 64, 128, 256, 512, 1024]
 
 
 
-trace_data_st = np.load(f"./latency_traffic_load/inter_layer_selection/OLMoE/sonnet/top8/decode/data/OLMoE_Inter_Layer_Selection_sonnet_512.npy")
+trace_data_st = np.load(f"/data/workspace/hanyu2/ExpertAffinity/Occult_test/expert_trace/traffic_test/OLMoE_GSM8K_top8/decode_routing_trace_512.npy")
 print(trace_data_st.shape)
-print(trace_data_st[0][0][0])
+print(trace_data_st[0][0])
 
-# trace_data_st = np.load(f"./different_tasks/trace_by_prompt/expert_trace/Switch_Transformer/generate/sonnet/decode_routing_trace_512.npy")
-# print(trace_data_st.shape)
+trace_data = np.load(f"/data/workspace/hanyu2/ExpertAffinity/Occult_test/expert_trace/traffic_test/by_prompt/OLMoE_GSM8K_top8/decode_routing_trace_512.npy")
+print(trace_data.shape)
+print(trace_data[0][0])
 # print(trace_data_st[:5])
 
 # def load_prompt_trace_from_jsonl(prompt_id, path):
