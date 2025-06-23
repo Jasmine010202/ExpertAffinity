@@ -1,0 +1,512 @@
+{"intent": "How to convert a list of multiple integers into a single integer?"}
+{"intent": "how to convert a datetime string back to datetime object?"}
+{"intent": "Averaging the values in a dictionary based on the key"}
+{"intent": "zip lists in python"}
+{"intent": "Prepend the same string to all items in a list"}
+{"intent": "regex for repeating words in a string in Python"}
+{"intent": "Normalizing a pandas DataFrame by row"}
+{"intent": "swap values in a tuple/list inside a list in python?"}
+{"intent": "Find next sibling element in Python Selenium?"}
+{"intent": "Python splitting string by parentheses"}
+{"intent": "What's the most memory efficient way to generate the combinations of a set in python?"}
+{"intent": "Add Multiple Columns to Pandas Dataframe from Function"}
+{"intent": "BeautifulSoup - search by text inside a tag"}
+{"intent": "How do I turn a python datetime into a string, with readable format date?"}
+{"intent": "Parse string to int when string contains a number + extra characters"}
+{"intent": "adding new key inside a new key and assigning value in python dictionary"}
+{"intent": "Transforming the string representation of a dictionary into a real dictionary"}
+{"intent": "How to select element with Selenium Python xpath"}
+{"intent": "Find matching rows in 2 dimensional numpy array"}
+{"intent": "How to delete a record in Django models?"}
+{"intent": "python convert list to dictionary"}
+{"intent": "how to set global const variables in python"}
+{"intent": "How to use regular expression to separate numbers and characters in strings like \"30M1000N20M\""}
+{"intent": "Extracting words from a string, removing punctuation and returning a list with separated words in Python"}
+{"intent": "Convert string into datetime.time object"}
+{"intent": "Python Requests getting SSLerror"}
+{"intent": "removing data from a numpy.array"}
+{"intent": "Map two lists into a dictionary in Python"}
+{"intent": "Get the string within brackets in Python"}
+{"intent": "Python server \"Only one usage of each socket address is normally permitted\""}
+{"intent": "How do i add two lists' elements into one list?"}
+{"intent": "Python - Converting Hex to INT/CHAR"}
+{"intent": "How to sort in decreasing value first then increasing in second value"}
+{"intent": "Repeating elements in list comprehension"}
+{"intent": "Doc, rtf and txt reader in python"}
+{"intent": "How do you divide each element in a list by an int?"}
+{"intent": "python: dots in the name of variable in a format string"}
+{"intent": "How to replace the white space in a string in a pandas dataframe?"}
+{"intent": "Python: most efficient way to convert date to datetime"}
+{"intent": "Tuple to string"}
+{"intent": "get file creation & modification date/times in"}
+{"intent": "How to Close a program using python?"}
+{"intent": "Is there a generator version of `string.split()` in Python?"}
+{"intent": "Using Python String Formatting with Lists"}
+{"intent": "How to use regex with optional characters in python?"}
+{"intent": "How to remove parentheses and all data within using Pandas/Python?"}
+{"intent": "Python: filter list of list with another list"}
+{"intent": "Generate all possible strings from a list of token"}
+{"intent": "python how to search an item in a nested list"}
+{"intent": "Python - How to sort a list of lists by the fourth element in each list?"}
+{"intent": "Python logging typeerror"}
+{"intent": "How to make several plots on a single page using matplotlib?"}
+{"intent": "Sort a Python dictionary by value"}
+{"intent": "Numpy elementwise product of 3d array"}
+{"intent": "print variable and a string in python"}
+{"intent": "How can I add a comment to a YAML file in Python"}
+{"intent": "How do I move the last item in a list to the front in python?"}
+{"intent": "python - convert datetime to varchar/string"}
+{"intent": "What's the most pythonic way of normalizing lineends in a string?"}
+{"intent": "How to find the real user home directory using python?"}
+{"intent": "In Python, how do I index a list with another list?"}
+{"intent": "Iterate through words of a file in Python"}
+{"intent": "Summing 2nd list items in a list of lists of lists"}
+{"intent": "Django order by highest number of likes"}
+{"intent": "How to convert datetime.date.today() to UTC time?"}
+{"intent": "How to perform element-wise multiplication of two lists in Python?"}
+{"intent": "Capturing emoticons using regular expression in python"}
+{"intent": "List of objects to JSON with Python"}
+{"intent": "List of zeros in python"}
+{"intent": "python: how to convert a string to utf-8"}
+{"intent": "Python regex - Ignore parenthesis as indexing?"}
+{"intent": "Python dict how to create key or append an element to key?"}
+{"intent": "Finding the minimum value in a numpy array and the corresponding values for the rest of that array's row"}
+{"intent": "Python \"extend\" for a dictionary"}
+{"intent": "Removing key values pairs from a list of dictionaries"}
+{"intent": "Simple way to create matrix of random numbers"}
+{"intent": "Make new column in Panda dataframe by adding values from other columns"}
+{"intent": "Find dictionary items whose key matches a substring"}
+{"intent": "Import module in another directory from a \"parallel\" sub-directory"}
+{"intent": "Regex for getting all digits in a string after a character"}
+{"intent": "Python pickle/unpickle a list to/from a file"}
+{"intent": "Clicking a link using selenium using python"}
+{"intent": "Counting unique index values in Pandas groupby"}
+{"intent": "Dict of dicts of dicts to DataFrame"}
+{"intent": "In Python, find out number of differences between two ordered lists"}
+{"intent": "When the key is a tuple in dictionary in Python"}
+{"intent": "Sorting a list of tuples with multiple conditions"}
+{"intent": "trim whitespace"}
+{"intent": "trim whitespace (including tabs)"}
+{"intent": "In Django, how do I filter based on all entities in a many-to-many relation instead of any?"}
+{"intent": "Background color for Tk in Python"}
+{"intent": "python dict to numpy structured array"}
+{"intent": "Pandas - Sorting By Column"}
+{"intent": "rreplace - How to replace the last occurence of an expression in a string?"}
+{"intent": "How do I compare values in a dictionary?"}
+{"intent": "How to do many-to-many Django query to find book with 2 given authors?"}
+{"intent": "Python regex split case insensitive in 2.6"}
+{"intent": "List comprehension - converting strings in one list, to integers in another"}
+{"intent": "How to find duplicate elements in array using for loop in Python?"}
+{"intent": "Converting byte string in unicode string"}
+{"intent": "How can I \"unpivot\" specific columns from a pandas DataFrame?"}
+{"intent": "add new item to dictionary"}
+{"intent": "Index the first and the last n elements of a list"}
+{"intent": "How to reset index in a pandas data frame?"}
+{"intent": "Merging a list with a list of lists"}
+{"intent": "how to find the target file's full(absolute path) of the symbolic link or soft link in python"}
+{"intent": "How to check if a dictionary is in another dictionary in python"}
+{"intent": "How to find the index of a value in 2d array in Python?"}
+{"intent": "Python Pandas - How to flatten a hierarchical index in columns"}
+{"intent": "Creating a list from a Scipy matrix"}
+{"intent": "Regex Python adding characters after a certain word"}
+{"intent": "Element-wise minimum of multiple vectors in numpy"}
+{"intent": "Pandas (python): How to add column to dataframe for index?"}
+{"intent": "How to set environment variables in Python"}
+{"intent": "Python: updating a large dictionary using another large dictionary"}
+{"intent": "How to get column by number in Pandas?"}
+{"intent": "How can I get the color of the last figure in matplotlib?"}
+{"intent": "Python: How can I find all files with a particular extension?"}
+{"intent": "Concatenating Unicode with string: print '\u00a3' + '1' works, but print '\u00a3' + u'1' throws UnicodeDecodeError"}
+{"intent": "How to convert the following string in python?"}
+{"intent": "Setting stacksize in a python script"}
+{"intent": "Python Decimals format"}
+{"intent": "Add single element to array in numpy"}
+{"intent": "Return the column name(s) for a specific value in a pandas dataframe"}
+{"intent": "Merge 2 dataframes with same values in a column"}
+{"intent": "How To Format a JSON Text In Python?"}
+{"intent": "Python: converting radians to degrees"}
+{"intent": "count how many of an object type there are in a list Python"}
+{"intent": "Python: Getting rid of \\u200b from a string using regular expressions"}
+{"intent": "How to run two functions simultaneously"}
+{"intent": "sum of squares in a list in one line?"}
+{"intent": "Create a dictionary with list comprehension"}
+{"intent": "Rounding entries in a Pandas DafaFrame"}
+{"intent": "Pycurl keeps printing in terminal"}
+{"intent": "Return a random word from a word list in python"}
+{"intent": "Find Max in Nested Dictionary"}
+{"intent": "How to replace empty string with zero in comma-separated string?"}
+{"intent": "Regular expression syntax for \"match nothing\"?"}
+{"intent": "Python Pandas drop columns based on max value of column"}
+{"intent": "How can I check if a date is the same day as datetime.today()?"}
+{"intent": "How do I print bold text in Python?"}
+{"intent": "Renaming multiple files in python"}
+{"intent": "Can I get a list of the variables that reference an other in Python 2.7?"}
+{"intent": "Substitute multiple whitespace with single whitespace in Python"}
+{"intent": "How to print floating point numbers as it is without any truncation in python?"}
+{"intent": "Check if a given key already exists in a dictionary"}
+{"intent": "django filter with list of values"}
+{"intent": "read a binary file (python)"}
+{"intent": "Format string - spaces between every three digit"}
+{"intent": "Joining pandas dataframes by column names"}
+{"intent": "How to calculate percentage of sparsity for a numpy array/matrix?"}
+{"intent": "Sorting a defaultdict by value in python"}
+{"intent": "How to reliably open a file in the same directory as a Python script"}
+{"intent": "How do I convert LF to CRLF?"}
+{"intent": "Divide the values of two dictionaries in python"}
+{"intent": "How to specify date format when using pandas.to_csv?"}
+{"intent": "How to remove a key from a python dictionary?"}
+{"intent": "replace values in an array"}
+{"intent": "Python, running command line tools in parallel"}
+{"intent": "Passing the '+' character in a POST request in Python"}
+{"intent": "How do I remove whitespace from the end of a string in Python?"}
+{"intent": "URL encoding in python"}
+{"intent": "Convert string to numpy array"}
+{"intent": "How can I convert an RGB image into grayscale in Python?"}
+{"intent": "sorting a graph by its edge weight. python"}
+{"intent": "How to find all occurrences of an element in a list?"}
+{"intent": "How can I execute shell command with a | pipe in it"}
+{"intent": "How to count the number of a specific character at the end of a string ignoring duplicates?"}
+{"intent": "converting currency with $ to numbers in Python pandas"}
+{"intent": "Conditionally fill a column of a pandas df with values of a different df"}
+{"intent": "Switch every pair of characters in a string"}
+{"intent": "How to make a window jump to the front?"}
+{"intent": "Elegant way to convert list to hex string"}
+{"intent": "Print multiple arguments in python"}
+{"intent": "Is it possible to serve a static html page at the root of a django project?"}
+{"intent": "use a list of values to select rows from a pandas dataframe"}
+{"intent": "How to get the concrete class name as a string?"}
+{"intent": "How can I execute Python code in a virtualenv from Matlab"}
+{"intent": "django models selecting single field"}
+{"intent": "Python regex findall alternation behavior"}
+{"intent": "How do I make python to wait for a pressed key"}
+{"intent": "Print string as hex literal python"}
+{"intent": "python + pymongo: how to insert a new field on an existing document in mongo from a for loop"}
+{"intent": "Regex to match 'lol' to 'lolllll' and 'omg' to 'omggg', etc"}
+{"intent": "Getting the nth element using BeautifulSoup"}
+{"intent": "Reverse Y-Axis in PyPlot"}
+{"intent": "How do I stack two DataFrames next to each other in Pandas?"}
+{"intent": "Creating a JSON response using Django and Python"}
+{"intent": "Process escape sequences in a string"}
+{"intent": "How do I calculate the md5 checksum of a file in Python?"}
+{"intent": "Finding key from value in Python dictionary:"}
+{"intent": "Extract all keys from a list of dictionaries"}
+{"intent": "Is there a more elegant way for unpacking keys and values of a dictionary into two lists, without losing consistence?"}
+{"intent": "Convert a string to integer with decimal in Python"}
+{"intent": "Numpy: How to check if array contains certain numbers?"}
+{"intent": "Node labels using networkx"}
+{"intent": "How to make a copy of a 2D array in Python?"}
+{"intent": "Pythonic way to populate numpy array"}
+{"intent": "Check if a Python list item contains a string inside another string"}
+{"intent": "How to write/read a Pandas DataFrame with MultiIndex from/to an ASCII file?"}
+{"intent": "How do I create a LIST of unique random numbers?"}
+{"intent": "Splitting on last delimiter in Python string?"}
+{"intent": "Python check if all elements of a list are the same type"}
+{"intent": "Python . How to get rid of '\\r' in string?"}
+{"intent": "How can I scroll a web page using selenium webdriver in python?"}
+{"intent": "How do I convert a datetime.date object into datetime.datetime in python?"}
+{"intent": "How to check if one of the following items is in a list?"}
+{"intent": "Saving a Numpy array as an image"}
+{"intent": "Regex for removing data in parenthesis"}
+{"intent": "Checking if any elements in one list are in another"}
+{"intent": "convert hex to decimal"}
+{"intent": "Take screenshot in Python on Mac OS X"}
+{"intent": "How to set window size using phantomjs and selenium webdriver in python"}
+{"intent": "Replace non-ascii chars from a unicode string in Python"}
+{"intent": "Pandas/Python: How to concatenate two dataframes without duplicates?"}
+{"intent": "numpy: efficiently reading a large array"}
+{"intent": "How to use the mv command in Python with subprocess"}
+{"intent": "How to use Unicode characters in a python string"}
+{"intent": "Comparing two .txt files using difflib in Python"}
+{"intent": "Creating a dictionary from a string"}
+{"intent": "How to check if all elements in a tuple or list are in another?"}
+{"intent": "python pandas extract unique dates from time series"}
+{"intent": "Formatting text to be justified in Python 3.3 with .format() method"}
+{"intent": "How do I read an Excel file into Python using xlrd? Can it read newer Office formats?"}
+{"intent": "How to sort a dataFrame in python pandas by two or more columns?"}
+{"intent": "Django redirect to root from a view"}
+{"intent": "Remove all values within one list from another list in python"}
+{"intent": "How to remove all the punctuation in a string? (Python)"}
+{"intent": "Python: BeautifulSoup - get an attribute value based on the name attribute"}
+{"intent": "How to unquote a urlencoded unicode string in python?"}
+{"intent": "empty a list"}
+{"intent": "Pandas reset index on series to remove multiindex"}
+{"intent": "How to convert unicode text to normal text"}
+{"intent": "Subtracting the current and previous item in a list"}
+{"intent": "Cleanest way to get a value from a list element"}
+{"intent": "Importing everything ( * ) dynamically from a module"}
+{"intent": "Convert a list of characters into a string"}
+{"intent": "Slicing URL with Python"}
+{"intent": "sort a dictionary by key"}
+{"intent": "PUT Request to REST API using Python"}
+{"intent": "Python remove anything that is not a letter or number"}
+{"intent": "Python Nested List Comprehension with two Lists"}
+{"intent": "convert string to dict using list comprehension in python"}
+{"intent": "Remove object from a list of objects in python"}
+{"intent": "How to delete a character from a string using python?"}
+{"intent": "How can I sum the product of two list items using for loop in python?"}
+{"intent": "Can I read and write file in one line with Python?"}
+{"intent": "How to add an integer to each element in a list?"}
+{"intent": "Return list of items in list greater than some value"}
+{"intent": "matplotlib: Set markers for individual points on a line"}
+{"intent": "split elements of a list in python"}
+{"intent": "Summing elements in a list"}
+{"intent": "How to attach debugger to a python subproccess?"}
+{"intent": "Python: comprehension to compose two dictionaries"}
+{"intent": "datetime.datetime.now() + 1"}
+{"intent": "Convert binary string to list of integers using Python"}
+{"intent": "switching keys and values in a dictionary in python"}
+{"intent": "Specific sort a list of numbers separated by dots"}
+{"intent": "How to find a value in a list of python dictionaries?"}
+{"intent": "How can I remove all instances of an element from a list in Python?"}
+{"intent": "Convert a list to a dictionary in Python"}
+{"intent": "How to check whether elements appears in the list only once in python?"}
+{"intent": "Generating an MD5 checksum of a file"}
+{"intent": "How to sort a dictionary in python by value when the value is a list and I want to sort it by the first index of that list"}
+{"intent": "Pythons fastest way of randomising case of a string"}
+{"intent": "How to force os.system() to use bash instead of shell"}
+{"intent": "how to access the class variable by string in Python?"}
+{"intent": "How to display a jpg file in Python?"}
+{"intent": "Replace the single quote (') character from a string"}
+{"intent": "Sorting files in a list"}
+{"intent": "remove all whitespace in a string"}
+{"intent": "Sum all values of a counter in Python"}
+{"intent": "Numpy: find the euclidean distance between two 3-D arrays"}
+{"intent": "Python: define multiple variables of same type?"}
+{"intent": "Find the sum of subsets of a list in python"}
+{"intent": "Delete an element from a dictionary"}
+{"intent": "Efficient computation of the least-squares algorithm in NumPy"}
+{"intent": "Splitting dictionary/list inside a Pandas Column into Separate Columns"}
+{"intent": "loop through a Python list by twos"}
+{"intent": "How to use map to lowercase strings in a dictionary?"}
+{"intent": "convert list into string with spaces in python"}
+{"intent": "Regex. Match words that contain special characters or 'http://'"}
+{"intent": "How to check for palindrome using Python logic"}
+{"intent": "How to upload binary file with ftplib in Python?"}
+{"intent": "How to remove all characters before a specific character in Python?"}
+{"intent": "Python parse comma-separated number into int"}
+{"intent": "Combine two Pandas dataframes with the same index"}
+{"intent": "What's the best way to aggregate the boolean values of a Python dictionary?"}
+{"intent": "How to extract first two characters from string using regex"}
+{"intent": "reverse a list"}
+{"intent": "How to index nested lists in Python?"}
+{"intent": "Replacing characters in a file"}
+{"intent": "How to serialize SqlAlchemy result to JSON?"}
+{"intent": "Cross-platform addressing of the config file"}
+{"intent": "How to get multiple parameters with same name from a URL in Pylons?"}
+{"intent": "how to create similarity matrix in numpy python?"}
+{"intent": "Python - Find the greatest number in a set of numbers"}
+{"intent": "Google App Engine - Request class query_string"}
+{"intent": "python pandas: apply a function with arguments to a series. Update"}
+{"intent": "Get models ordered by an attribute that belongs to its OneToOne model"}
+{"intent": "make a time delay"}
+{"intent": "Remove strings from a list that contains numbers in python"}
+{"intent": "how to do a left,right and mid of a string in a pandas dataframe"}
+{"intent": "How do I draw a grid onto a plot in Python?"}
+{"intent": "python How do you sort list by occurrence with out removing elements from the list?"}
+{"intent": "Find max length of each column in a list of lists"}
+{"intent": "Count the number of Occurrence of Values based on another column"}
+{"intent": "Calculating difference between two rows in Python / Pandas"}
+{"intent": "python: append values to a set"}
+{"intent": "How can I get an array of alternating values in python?"}
+{"intent": "Faster way to rank rows in subgroups in pandas dataframe"}
+{"intent": "Js Date object to python datetime"}
+{"intent": "Python: Converting from binary to String"}
+{"intent": "Inserting a string into a list without getting split into characters"}
+{"intent": "Case insensitive dictionary search with Python"}
+{"intent": "How to pad with n characters in Python"}
+{"intent": "How to check if type of a variable is string?"}
+{"intent": "How do I merge a list of dicts into a single dict?"}
+{"intent": "How to sort a Pandas DataFrame according to multiple criteria?"}
+{"intent": "Running Python code contained in a string"}
+{"intent": "Creating a list of dictionaries in python"}
+{"intent": "how to get all possible combination of items from 2-dimensional list in python?"}
+{"intent": "Pandas sum by groupby, but exclude certain columns"}
+{"intent": "Python turning a list into a list of tuples"}
+{"intent": "Removing nan values from an array"}
+{"intent": "Removing the first folder in a path"}
+{"intent": "Replacing instances of a character in a string"}
+{"intent": "Python - How to call bash commands with pipe?"}
+{"intent": "hex string to character in python"}
+{"intent": "Get required fields from Document in mongoengine?"}
+{"intent": "Pandas remove column by index"}
+{"intent": "Change a string of integers separated by spaces to a list of int"}
+{"intent": "Find and click an item from 'onclick' partial value"}
+{"intent": "Python / Remove special character from string"}
+{"intent": "How to display a pdf that has been downloaded in python"}
+{"intent": "Removing backslashes from a string in Python"}
+{"intent": "Replace value in any column in pandas dataframe"}
+{"intent": "How do I convert datetime to date (in Python)?"}
+{"intent": "How to get all sub-elements of an element tree with Python ElementTree?"}
+{"intent": "How can I split and parse a string in Python?"}
+{"intent": "Python - Move elements in a list of dictionaries to the end of the list"}
+{"intent": "How to check if all values of a dictionary are 0, in Python?"}
+{"intent": "Python Pandas Pivot Table"}
+{"intent": "do a try-except without handling the exception"}
+{"intent": "Python - Sum 4D Array"}
+{"intent": "Python datetime to microtime"}
+{"intent": "How to check if any value of a column is in a range in Pandas?"}
+{"intent": "sort a list of lists by a specific index of the inner list"}
+{"intent": "sort a list of lists by a specific index"}
+{"intent": "How to find row of 2d array in 3d numpy array"}
+{"intent": "How to select only specific columns from a DataFrame with MultiIndex columns?"}
+{"intent": "How to account for accent characters for regex in Python?"}
+{"intent": "Rename Files"}
+{"intent": "How to get text for a root element using lxml?"}
+{"intent": "Saving dictionary whose keys are tuples with json, python"}
+{"intent": "How to correctly parse UTF-8 encoded HTML to Unicode strings with BeautifulSoup?"}
+{"intent": "How to delete a file without an extension?"}
+{"intent": "Get the immediate minimum among a list of numbers in python"}
+{"intent": "pandas: replace string with another string"}
+{"intent": "How do I sort a list with positives coming before negatives with values sorted respectively?"}
+{"intent": "How do I calculate the date six months from the current date"}
+{"intent": "calculate the date six months from the current date"}
+{"intent": "Finding The Biggest Key In A Python Dictionary"}
+{"intent": "how to get all the values from a numpy array excluding a certain index?"}
+{"intent": "what is a quick way to delete all elements from a list that do not satisfy a constraint?"}
+{"intent": "Python Pandas - Date Column to Column index"}
+{"intent": "How to read lines from a file into a multidimensional array (or an array of lists) in python"}
+{"intent": "python list comprehension with multiple 'if's"}
+{"intent": "Removing letters from a list of both numbers and letters"}
+{"intent": "splitting a string based on tab in the file"}
+{"intent": "numpy matrix multiplication"}
+{"intent": "remove (chomp) a newline"}
+{"intent": "Python - split sentence after words but with maximum of n characters in result"}
+{"intent": "NumPy List Comprehension Syntax"}
+{"intent": "Convert unicode string to byte string"}
+{"intent": "Best way to split a DataFrame given an edge"}
+{"intent": "Save JSON outputed from a URL to a file"}
+{"intent": "Find indices of elements equal to zero from numpy array"}
+{"intent": "python, subprocess: reading output from subprocess"}
+{"intent": "Converting integer to string"}
+{"intent": "Method to sort a list of lists?"}
+{"intent": "How do I add space between two variables after a print in Python"}
+{"intent": "Pandas changing cell values based on another cell"}
+{"intent": "Is there a way to make the Tkinter text widget read only?"}
+{"intent": "Python sum of ASCII values of all characters in a string"}
+{"intent": "How to apply itertools.product to elements of a list of lists?"}
+{"intent": "print number with commas as thousands separators"}
+{"intent": "How to pass through a list of queries to a pandas dataframe, and output the list of results?"}
+{"intent": "Accessing a value in a tuple that is in a list"}
+{"intent": "splitting unicode string into words"}
+{"intent": "Django - How to sort queryset by number of character in a field"}
+{"intent": "Python - Choose a dictionary in list which key is closer to a global value"}
+{"intent": "Finding missing values in a numpy array"}
+{"intent": "Use of findall and parenthesis in Python"}
+{"intent": "How to define two-dimensional array in python"}
+{"intent": "Creating a numpy array of 3D coordinates from three 1D arrays"}
+{"intent": "How to find the minimum value in a numpy matrix?"}
+{"intent": "Python Selenium: Find object attributes using xpath"}
+{"intent": "parse a YAML file"}
+{"intent": "How to swap a group of column headings with their values in Pandas"}
+{"intent": "Getting today's date in YYYY-MM-DD in Python?"}
+{"intent": "How to urlencode a querystring in Python?"}
+{"intent": "python sorting dictionary by length of values"}
+{"intent": "convert list of tuples to multiple lists in Python"}
+{"intent": "Create a list of tuples with adjacent list elements if a condition is true"}
+{"intent": "How can i set proxy with authentication in selenium chrome web driver using python"}
+{"intent": "Python reversing an UTF-8 string"}
+{"intent": "Extracting date from a string in Python"}
+{"intent": "Efficient way to convert a list to dictionary"}
+{"intent": "How can I check if a string contains ANY letters from the alphabet?"}
+{"intent": "Converting a Pandas GroupBy object to DataFrame"}
+{"intent": "Removing all non-numeric characters from string in Python"}
+{"intent": "List comprehension with if statement"}
+{"intent": "How to subset a dataset in pandas dataframe?"}
+{"intent": "How to unzip a list of tuples into individual lists?"}
+{"intent": "How do I combine two lists into a dictionary in Python?"}
+{"intent": "How do I get the different parts of a Flask request's url?"}
+{"intent": "How to remove ^M from a text file and replace it with the next line"}
+{"intent": "Best way to encode tuples with json"}
+{"intent": "Converting string into datetime"}
+{"intent": "Python - Extract folder path from file path"}
+{"intent": "Post JSON using Python Requests"}
+{"intent": "Python - Remove dictionary from list if key is equal to value"}
+{"intent": "Getting a request parameter in Jinja2"}
+{"intent": "Python - Create list with numbers between 2 values?"}
+{"intent": "type conversion in python from int to float"}
+{"intent": "Sorting or Finding Max Value by the second element in a nested list. Python"}
+{"intent": "How to remove leading and trailing zeros in a string? Python"}
+{"intent": "Generating all unique pair permutations"}
+{"intent": "Python regular expression matching a multiline block of text"}
+{"intent": "How do you call a python file that requires a command line argument from within another python file?"}
+{"intent": "Sort a multidimensional list by a variable number of keys"}
+{"intent": "Add another tuple to a tuple"}
+{"intent": "Find current directory and file's directory"}
+{"intent": "Find current directory"}
+{"intent": "Sort numpy matrix row values in ascending order"}
+{"intent": "split string on a number of different characters"}
+{"intent": "copying one file's contents to another in python"}
+{"intent": "What's the best way to generate random strings of a specific length in Python?"}
+{"intent": "How to merge the elements in a list sequentially in python"}
+{"intent": "python: rename single column header in pandas dataframe"}
+{"intent": "Converting html to text with Python"}
+{"intent": "python: sort a list of lists by an item in the sublist"}
+{"intent": "Pandas - replacing column values"}
+{"intent": "Regex punctuation split [Python]"}
+{"intent": "Limit the number of sentences in a string"}
+{"intent": "Split string into strings of repeating elements"}
+{"intent": "How does this function to remove duplicate characters from a string in python work?"}
+{"intent": "How can i list only the folders in zip archive in Python?"}
+{"intent": "How to find the count of a word in a string?"}
+{"intent": "Python: reduce (list of strings) -> string"}
+{"intent": "Dumping subprcess output in a file in append mode"}
+{"intent": "list of ints into a list of tuples python"}
+{"intent": "How to fix: \"UnicodeDecodeError: 'ascii' codec can't decode byte\""}
+{"intent": "Python datetime to string without microsecond component"}
+{"intent": "How to retrieve only arabic texts from a string using regular expression?"}
+{"intent": "How to group DataFrame by a period of time?"}
+{"intent": "Accessing elements of python dictionary"}
+{"intent": "How to remove rows with null values from kth column onward in python"}
+{"intent": "How do I insert a list at the front of another list?"}
+{"intent": "Pyhon - Best way to find the 1d center of mass in a binary numpy array"}
+{"intent": "Keep only date part when using pandas.to_datetime"}
+{"intent": "Removing one list from another"}
+{"intent": "How do I transform a multi-level list into a list of strings in Python?"}
+{"intent": "Matching blank lines with regular expressions"}
+{"intent": "Merging items in a list - Python"}
+{"intent": "Convert float to comma-separated string"}
+{"intent": "How to pass dictionary items as function arguments in python?"}
+{"intent": "get line count"}
+{"intent": "How to round integers in python"}
+{"intent": "Sorting list based on values from another list?"}
+{"intent": "How to get week number in Python?"}
+{"intent": "Select multiple ranges of columns in Pandas DataFrame"}
+{"intent": "Python Pandas: Multiple aggregations of the same column"}
+{"intent": "convert string to lowercase"}
+{"intent": "How to download a file via FTP with Python ftplib"}
+{"intent": "How do I increase the timeout for imaplib requests?"}
+{"intent": "Output first 100 characters in a string"}
+{"intent": "matplotlib Legend Markers Only Once"}
+{"intent": "Python - How to calculate equal parts of two dictionaries?"}
+{"intent": "load csv into 2D matrix with numpy for plotting"}
+{"intent": "Django database query: How to filter objects by date range?"}
+{"intent": "syntax for creating a dictionary into another dictionary in python"}
+{"intent": "How to apply numpy.linalg.norm to each row of a matrix?"}
+{"intent": "How to merge two Python dictionaries in a single expression?"}
+{"intent": "Python. Convert escaped utf string to utf-string"}
+{"intent": "Counting the number of True Booleans in a Python List"}
+{"intent": "Matplotlib.animation: how to remove white margin"}
+{"intent": "python string format() with dict with integer keys"}
+{"intent": "Python - converting a string of numbers into a list of int"}
+{"intent": "Python list of tuples to list of int"}
+{"intent": "How do I extract all the values of a specific key from a list of dictionaries?"}
+{"intent": "ISO Time (ISO 8601) in Python"}
+{"intent": "Merging data frame columns of strings into one single column in Pandas"}
+{"intent": "pandas Subtract Dataframe with a row from another dataframe"}
+{"intent": "How can I detect DOS line breaks in a file?"}
+{"intent": "Python - read text file with weird utf-16 format"}
+{"intent": "Finding common rows (intersection) in two Pandas dataframes"}
+{"intent": "How can I check a Python unicode string to see that it *actually* is proper Unicode?"}
+{"intent": "Numpy array dimensions"}
+{"intent": "How to search a list of tuples in Python"}
+{"intent": "convert a string of bytes into an int (python)"}
+{"intent": "How to get the values from a NumPy array using multiple indices"}
+{"intent": "what's a good way to combinate through a set?"}
+{"intent": "Converting from a string to boolean in Python?"}
+{"intent": "How do I url encode in Python?"}
+{"intent": "How can I get the output of a matplotlib plot as an SVG?"}
+{"intent": "Counting array elements in Python"}
+{"intent": "Python Embedding in C++ : ImportError: No module named pyfunction"}
+{"intent": "How to plot with x-axis at the top of the figure?"}
+{"intent": "Python - Bulk Select then Insert from one DB to another"}
+{"intent": "How do I use a regular expression to match a name?"}
