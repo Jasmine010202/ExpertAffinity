@@ -27,7 +27,7 @@ placement_dir = f"Occult_test/expert_placement"
 os.makedirs(placement_dir, exist_ok=True)
 
 
-def generat_collaboration_matrix(routing_data):
+def generate_collaboration_matrix(routing_data):
     num_tokens, num_layers, _ = routing_data.shape
     experts_collaboration_matrix = np.zeros((num_layers, num_of_experts_per_layer, num_of_experts_per_layer))
 
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     #routing_data = np.load(f"expert_trace/OLMoE/gigaword/top8/decode_routing_trace_512.npy")
         
-    experts_collaboration_matrix = generat_collaboration_matrix(routing_data)
+    experts_collaboration_matrix = generate_collaboration_matrix(routing_data)
 
     # print(experts_collaboration_matrix.shape)
     # print(experts_collaboration_matrix)

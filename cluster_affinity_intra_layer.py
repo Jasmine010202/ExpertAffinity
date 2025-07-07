@@ -98,6 +98,7 @@ def balanced_clusters_for_all_layers(affinity_matrix_all_layers, num_clusters, r
             assert len(experts) == max_per_cluster, f"Cluster {cluster_id} has {len(experts)} experts!"
 
         all_layers_clusters[f"layer_{layer_id}"] = final_clusters
+        # all_layers_clusters[f"{layer_id}"] = list(final_clusters.values())
 
     if result_path:
         with open(result_path, 'w') as result_file:
@@ -123,6 +124,11 @@ def clusters_for_all_layers(affinity_matrix_all_layers, num_clusters, result_pat
             layer_clusters[int(cluster_id)].append(int(expert_id))  #cluster_id -> list of experts_id
 
         all_layers_clusters[f"layer_{layer_id}"] = layer_clusters
+
+        # layer_clusters = [[] for _ in range(num_clusters)]
+        # for expert_id, cluster_id in enumerate(labels):
+        #     layer_clusters[cluster_id].append(int(expert_id))
+        # all_layers_clusters[f"{layer_id}"] = layer_clusters
 
     if result_path:
         with open(result_path, 'w') as result_file:
@@ -195,6 +201,7 @@ if __name__ == "__main__":
     
     # 路由数据，1024
     routing_data = np.load(f'expert_trace/{model_name}/{input_name}/top{top_k}/{phrase_mode}_routing_trace_1024.npy')
+    #routing_data = np.load(f'Occult_test/expert_trace/used_for_occult/OLMoE/sonnet/top8/decode_routing_trace_512.npy')
   
     affinity_matrix_all_layers = affinity_intra_layer(routing_data, num_of_experts_pre_layer)
     
