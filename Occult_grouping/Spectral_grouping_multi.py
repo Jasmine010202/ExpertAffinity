@@ -16,10 +16,10 @@ num_of_experts_per_layer = 64
 num_of_nodes = 2
 num_of_gpus_per_node = 2
 
-collaboration_dir = f"../Occult_test/expert_collaboration"
+collaboration_dir = f"./Occult_test/expert_collaboration"
 os.makedirs(collaboration_dir, exist_ok=True)
 
-placement_dir = f"../Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs"
+placement_dir = f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs"
 os.makedirs(placement_dir, exist_ok=True)
 
 
@@ -97,10 +97,10 @@ def spectral_cluster_on_collaboration_even(experts_collaboration_matrix, num_clu
 if __name__ == "__main__":
 
     # 路由数据，1024
-    routing_data = np.load(f'../Occult_test/expert_trace/used_for_occult/{model_name}/{input_name}/top{top_k}/decode_routing_trace_{num_of_prompts}.npy')
+    routing_data = np.load(f'./Occult_test/expert_trace/used_for_occult/{model_name}/{input_name}/top{top_k}/decode_routing_trace_{num_of_prompts}.npy')
   
     #experts_collaboration_matrix = generate_collaboration_matrix(routing_data)
-    experts_collaboration_matrix = np.load(f"../Occult_test/expert_collaboration/{model_name}_Expert_Collaboration_{input_name}_{num_of_prompts}.npy")
+    experts_collaboration_matrix = np.load(f"./Occult_test/expert_collaboration/{model_name}_Expert_Collaboration_{input_name}_{num_of_prompts}.npy")
     
     num_layers = experts_collaboration_matrix.shape[0]
     all_layers_placement = {}   #存所有层的专家放置结果

@@ -100,8 +100,8 @@ def plot_average_NMI_ARI(avg_NMI, avg_ARI, result_dir, suffix):
 
 if __name__ == "__main__":
 
-    base_dir = f"Occult_test/expert_placement"
-    result_dir = f"Occult_test/placement_compare/sonnet_GSM8K_conala"
+    base_dir = f"expert_placement"
+    result_dir = f"placement_compare/sonnet_GSM8K_conala"
     os.makedirs(result_dir,exist_ok=True)
 
     enable_heterogeneous = True

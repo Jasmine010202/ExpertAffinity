@@ -277,33 +277,33 @@ if __name__ == "__main__":
 
 
     for num in prompt_nums:
-        sonnet_routing_trace = extract_routing_trace(f"../Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
+        sonnet_routing_trace = extract_routing_trace(f"./Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
         # GSM8K_routing_trace = extract_routing_trace(f"Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_GSM8K_top{top_k}/routing_trace_{num}.jsonl")
         # conala_routing_trace = extract_routing_trace(f"Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_conala_top{top_k}/routing_trace_{num}.jsonl")
 
 
         ###############################################Placement##################################################
-        vanilla_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/OLMoE_vanilla_placement.json")
+        vanilla_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
 
-        sonnet_occult_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/occult/OLMoE_sonnet_placement_512.json")
+        sonnet_occult_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/occult/OLMoE_sonnet_placement_512.json")
         ## GSM8K_placement = extract_expert_placement("Occult_test/expert_placement/OLMoE_GSM8K_placement_512.json")
         ## conala_placement = extract_expert_placement("Occult_test/expert_placement/OLMoE_conala_placement_512.json")
-        sonnet_occult_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/OLMoE_sonnet_512_nodes2_gpus4.json")
-        sonnet_spectral_even_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/OLMoE_sonnet_spectral_even_placement_512.json")
-        sonnet_spectral_uneven_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/OLMoE_sonnet_spectral_uneven_placement_512.json")
-        sonnet_spectral_even_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
-        sonnet_spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
+        sonnet_occult_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/OLMoE_sonnet_512_nodes2_gpus4.json")
+        sonnet_spectral_even_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/OLMoE_sonnet_spectral_even_placement_512.json")
+        sonnet_spectral_uneven_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/OLMoE_sonnet_spectral_uneven_placement_512.json")
+        sonnet_spectral_even_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
+        sonnet_spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
 
         ####duplicate
-        act_replicated_experts_list = extract_replicated_experts(num_layers, "../Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
-        sonnet_occult_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
-        sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
-        sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
+        act_replicated_experts_list = extract_replicated_experts(num_layers, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
+        sonnet_occult_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
+        sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
+        sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
 
-        collab_replicated_experts_list = extract_replicated_experts(num_layers, "../Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
-        sonnet_occult_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
-        sonnet_spectral_even_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
-        sonnet_spectral_uneven_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "../Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
+        collab_replicated_experts_list = extract_replicated_experts(num_layers, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
+        sonnet_occult_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
+        sonnet_spectral_even_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
+        sonnet_spectral_uneven_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
        
         
         ###############################################Calculate_Num_of_Token_Copies##################################################

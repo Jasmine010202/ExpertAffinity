@@ -28,12 +28,12 @@ enable_replicated = True
 num_replicated_experts = 4 
 replicated_type = "Activation"      # Collaboration Activation
 
-collaboration_dir = f"../Occult_test/expert_collaboration"
+collaboration_dir = f"./Occult_test/expert_collaboration"
 os.makedirs(collaboration_dir, exist_ok=True)
 
 
 re_dir = f"/Duplicate/{replicated_type}" if enable_replicated else ""
-placement_dir = f"../Occult_test/expert_placement/{method}/MultiNodes_MultiGPUs{re_dir}"
+placement_dir = f"./Occult_test/expert_placement/{method}/MultiNodes_MultiGPUs{re_dir}"
 os.makedirs(placement_dir, exist_ok=True)
 
 def generate_collaboration_matrix(routing_data):
@@ -125,11 +125,11 @@ if __name__ == "__main__":
     # 路由
     # 生成放置方案，用used_for_occult
     # 
-    routing_trace = np.load(f"../Occult_test/expert_trace/used_for_occult/by_prompt/{model_name}_sonnet_top{top_k}/decode_routing_trace_{num_of_prompts}.npy")
+    routing_trace = np.load(f"./Occult_test/expert_trace/used_for_occult/by_prompt/{model_name}_sonnet_top{top_k}/decode_routing_trace_{num_of_prompts}.npy")
     
     # 各层协作矩阵
     # experts_collaboration_matrix = generate_collaboration_matrix(routing_data)
-    experts_collaboration_matrix = np.load(f"../Occult_test/expert_collaboration/{model_name}_Expert_Collaboration_{input_name}_{num_of_prompts}.npy")
+    experts_collaboration_matrix = np.load(f"./Occult_test/expert_collaboration/{model_name}_Expert_Collaboration_{input_name}_{num_of_prompts}.npy")
     
     experts_collaboration_matrix = torch.from_numpy(experts_collaboration_matrix)
     # print(experts_collaboration_matrix.shape)

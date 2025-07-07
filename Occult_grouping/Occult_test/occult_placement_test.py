@@ -20,10 +20,10 @@ top_k = 8 # ST:1,OL:8
 num_of_prompts = 512#
 num_of_experts_per_layer = 64
 
-collaboration_dir = f"Occult_test/expert_collaboration"
+collaboration_dir = f"expert_collaboration"
 os.makedirs(collaboration_dir, exist_ok=True)
 
-placement_dir = f"Occult_test/expert_placement"
+placement_dir = f"expert_placement"
 os.makedirs(placement_dir, exist_ok=True)
 
 
@@ -48,7 +48,7 @@ def generate_collaboration_matrix(routing_data):
 if __name__ == "__main__":
     
     
-    routing_data = np.load(f"Occult_test/expert_trace/{model_name}/{input_name}/top{top_k}/decode_routing_trace_{num_of_prompts}.npy")
+    routing_data = np.load(f"expert_trace/{model_name}/{input_name}/top{top_k}/decode_routing_trace_{num_of_prompts}.npy")
 
     #routing_data = np.load(f"expert_trace/OLMoE/gigaword/top8/decode_routing_trace_512.npy")
         

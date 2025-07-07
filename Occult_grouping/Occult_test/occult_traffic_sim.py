@@ -25,10 +25,10 @@ suffix = 'occult' if enable_occult else 'original'
 
 # Byte_per_token = 4096 #1个token占的字节 
 
-fig_dir = f"Occult_test/traffic_sim/traffic_test/{model_name}_top{top_k}/figs"
+fig_dir = f"traffic_sim/traffic_test/{model_name}_top{top_k}/figs"
 os.makedirs(fig_dir, exist_ok=True)
 
-result_dir = f"Occult_test/traffic_sim/traffic_test/{model_name}_top{top_k}/data"
+result_dir = f"traffic_sim/traffic_test/{model_name}_top{top_k}/data"
 os.makedirs(result_dir, exist_ok=True)
 
 
@@ -189,14 +189,14 @@ if __name__ == "__main__":
 
     for num in prompt_nums:
 
-        sonnet_routing_trace = extract_routing_trace(f"Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
-        GSM8K_routing_trace = extract_routing_trace(f"Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_GSM8K_top{top_k}/routing_trace_{num}.jsonl")
-        conala_routing_trace = extract_routing_trace(f"Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_conala_top{top_k}/routing_trace_{num}.jsonl")
+        sonnet_routing_trace = extract_routing_trace(f"expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
+        GSM8K_routing_trace = extract_routing_trace(f"expert_trace/traffic_test/by_prompt/{model_name}_GSM8K_top{top_k}/routing_trace_{num}.jsonl")
+        conala_routing_trace = extract_routing_trace(f"expert_trace/traffic_test/by_prompt/{model_name}_conala_top{top_k}/routing_trace_{num}.jsonl")
 
-        vanilla_placement = extract_expert_placement("Occult_test/expert_placement/OLMoE_vanilla_placement.json")
-        sonnet_placement = extract_expert_placement("Occult_test/expert_placement/OLMoE_sonnet_placement_512.json")
-        GSM8K_placement = extract_expert_placement("Occult_test/expert_placement/OLMoE_GSM8K_placement_512.json")
-        conala_placement = extract_expert_placement("Occult_test/expert_placement/OLMoE_conala_placement_512.json")
+        vanilla_placement = extract_expert_placement("expert_placement/OLMoE_vanilla_placement.json")
+        sonnet_placement = extract_expert_placement("expert_placement/OLMoE_sonnet_placement_512.json")
+        GSM8K_placement = extract_expert_placement("expert_placement/OLMoE_GSM8K_placement_512.json")
+        conala_placement = extract_expert_placement("expert_placement/OLMoE_conala_placement_512.json")
         
         sonnet_vanilla_copies = calculate_num_of_token_copies(sonnet_routing_trace, vanilla_placement)
         sonnet_s_occult_copies = calculate_num_of_token_copies(sonnet_routing_trace, sonnet_placement)
