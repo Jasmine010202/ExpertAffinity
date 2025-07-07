@@ -1,0 +1,56 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 1344028
+    },
+    "sonnet_occult_placement": {
+      "num_intra_gpu": 327605,
+      "num_inter_gpu": 982866
+    },
+    "GSM8K_occult_placement": {
+      "num_intra_gpu": 383364,
+      "num_inter_gpu": 1155631
+    },
+    "conala_occult_placement": {
+      "num_intra_gpu": 399683,
+      "num_inter_gpu": 1204576
+    }
+  },
+  "GSM8K": {
+    "vanilla_placement": {
+      "num_intra_gpu": 817325,
+      "num_inter_gpu": 2451219
+    },
+    "sonnet_occult_placement": {
+      "num_intra_gpu": 704775,
+      "num_inter_gpu": 2110772
+    },
+    "GSM8K_occult_placement": {
+      "num_intra_gpu": 593719,
+      "num_inter_gpu": 1781759
+    },
+    "conala_occult_placement": {
+      "num_intra_gpu": 694895,
+      "num_inter_gpu": 2087811
+    }
+  },
+  "conala": {
+    "vanilla_placement": {
+      "num_intra_gpu": 447771,
+      "num_inter_gpu": 1343716
+    },
+    "sonnet_occult_placement": {
+      "num_intra_gpu": 375631,
+      "num_inter_gpu": 1126454
+    },
+    "GSM8K_occult_placement": {
+      "num_intra_gpu": 371845,
+      "num_inter_gpu": 1111385
+    },
+    "conala_occult_placement": {
+      "num_intra_gpu": 308125,
+      "num_inter_gpu": 924487
+    }
+  }
+}

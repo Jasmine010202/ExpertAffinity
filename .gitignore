@@ -5,23 +5,24 @@ __pycache__/
 *.svg
 logs/
 models/
-ExFlow/placement_results/
-ExFlow/figs/
 output/
-
-expert_placement/
 dataset/gigaword
 affinity_figs/
 expert_trace/
+expert_placement/
 
-test_placement/
 
-inference_time_figs/
 
-test_affinity_debug/
-nsys/
-DCtest/
-inference_time/
+Accelerator_test/expert_trace/
+Accelerator_test/test_placement/
+Accelerator_test/inference_time_figs/
+Accelerator_test/inference_time/
+Accelerator_test/test_affinity_debug/
+Accelerator_test/nsys/
+DCtest_sim/OLMoE/
+ExFlow/placement_results/
+ExFlow/different_tasks/
+ExFlow/figs/
 
-Occult_test/
-different_tasks/
+
+
