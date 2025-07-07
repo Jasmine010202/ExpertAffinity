@@ -18,7 +18,7 @@ num_of_nodes = 2
 num_of_gpus_per_node = 2
 num_of_gpus = num_of_nodes * num_of_gpus_per_node
 
-enable_copy = True
+#enable_copy = True
 num_replicated_experts = 4 
 
 collaboration_dir = f"./Occult_test/expert_collaboration"

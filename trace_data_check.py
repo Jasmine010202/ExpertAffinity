@@ -25,7 +25,7 @@ prompt_sizes = [8, 16, 32, 64, 128, 256, 512, 1024]
 
 
 
-trace_data_st = np.load(f"/data/workspace/hanyu2/ExpertAffinity/Occult_test/expert_trace/used_for_occult/by_prompt/OLMoE_sonnet_top8/decode_routing_trace_512.npy")
+trace_data_st = np.load(f"./Occult_grouping/Occult_test/expert_trace/traffic_test/by_prompt/OLMoE_sonnet_top8/decode_routing_trace_512.npy")
 print(trace_data_st.shape)
 print(trace_data_st[0][0])
 

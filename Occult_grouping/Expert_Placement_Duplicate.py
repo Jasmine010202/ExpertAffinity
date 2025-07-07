@@ -164,7 +164,7 @@ if __name__ == "__main__":
                 experts_activation_count = experts_activation_matrix[layer_id]
                 #print(experts_activation_count)
                 replicated_experts = torch.topk(experts_activation_count, num_replicated_experts).indices.tolist()
-                print(replicated_experts)
+                #print(replicated_experts)
             else:
                 # 方案二：挑协作范围最广的前4个
                 experts_collab_entropy = compute_entropy(collaboration_per_layer)  # (num_experts,)
