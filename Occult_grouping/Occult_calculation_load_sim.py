@@ -26,13 +26,10 @@ def experts_activations_count(routing_trace):
         token_traces = np.array(prompt["trace"])
         num_tokens = token_traces.shape[0]
 
-        # print(token_traces)
-        # print(token_traces.shape)
-
         for token_id in range(num_tokens):
             for layer_id in range(num_layers):
                 for expert_id in token_traces[token_id, layer_id]:
-                    experts_activation_stats[layer_id,expert_id] += 1
+                    experts_activation_stats[layer_id, expert_id] += 1
 
     #np.save(f"./Occult_test/expert_activation/traffic_test_by_prompt/OLMoE_top8_sonnet_512.npy", experts_activation_stats)
     return experts_activation_stats
@@ -40,7 +37,7 @@ def experts_activations_count(routing_trace):
 
 def compute_claculation_load(routing_trace, expert_placement, enable_replicated = False, replicated_experts = None):
     # num_layers, num_experts = experts_activation_stats.shape
-    #num_gpus = num_of_nodes * num_of_gpus_per_node
+    # num_gpus = num_of_nodes * num_of_gpus_per_node
     
     gpus_token_load = {gpu_id:0 for gpu_id in range(num_gpus)}
     nodes_token_load = {node_id:0 for node_id in range(num_nodes)}
@@ -60,7 +57,6 @@ def compute_claculation_load(routing_trace, expert_placement, enable_replicated 
                 # 如果有专家复制
                 if enable_replicated and replicated_experts is not None:
                     replicated_experts_this_layer = set(replicated_experts[layer_id])
-
 
                     # 区分被复制和不被复制的专家
                     replicated_expert_ids = [expert_id for expert_id in expert_ids if expert_id in replicated_experts_this_layer]
@@ -172,6 +168,9 @@ def plot_load_std_line(num_of_token_loads, placement_schemes, labels, fig_path):
     
     gpu_load_std = []
     node_load_std = []
+
+    # intra_node0_gpu_std = []
+    # intra_node1_gpu_std = []
     
     for scheme in placement_schemes:
         gpu_loads_dict = num_of_token_loads[dataset[0]][scheme]["gpus"]
@@ -180,12 +179,37 @@ def plot_load_std_line(num_of_token_loads, placement_schemes, labels, fig_path):
         gpu_loads = [gpu_loads_dict[str(i)] for i in range(len(gpu_loads_dict))]
         node_loads = [node_loads_dict[str(i)] for i in range(len(node_loads_dict))]
 
-        gpu_var = np.std(gpu_loads)
-        node_var = np.std(node_loads)
+        # print(f"Scheme: {scheme} -> GPU loads: {gpu_loads}")
+        # print(f"Scheme: {scheme} -> node_loads: {node_loads}")
 
-        gpu_load_std.append(gpu_var)
-        node_load_std.append(node_var)
+
+        gpu_std = np.std(gpu_loads)
+        node_std = np.std(node_loads)
+
+        gpu_load_std.append(gpu_std)
+        node_load_std.append(node_std)
+
+        # # 构建每个节点内 GPU 的负载
+        # node_gpu_loads = {0: [], 1: []}
+        # for gpu_id_str, load in gpu_loads_dict.items():
+        #     gpu_id = int(gpu_id_str)
+        #     node_id = gpu_node_mapping[gpu_id]
+        #     node_gpu_loads[node_id].append(load)
+
+        # # 分别记录两个节点内的 GPU 标准差
+        # for nid in [0, 1]:
+        #     if len(node_gpu_loads[nid]) > 1:
+        #         std_val = np.std(node_gpu_loads[nid])
+        #     else:
+        #         std_val = 0.0
+        #     if nid == 0:
+        #         intra_node0_gpu_std.append(std_val)
+        #     else:
+        #         intra_node1_gpu_std.append(std_val)
     
+    # print(gpu_load_std)
+    # print(node_load_std)
+
     x = np.arange(len(placement_schemes))
     
     plt.figure(figsize=(12, 6))
@@ -195,12 +219,23 @@ def plot_load_std_line(num_of_token_loads, placement_schemes, labels, fig_path):
     
     # Node方差折线
     plt.plot(x, node_load_std, marker='s', linestyle='-', color="#1d91c0", linewidth=2, label="Node Loads")
+
+    # # 节点内曲线（两条线）
+    # plt.plot(x, intra_node0_gpu_std, marker='^', linestyle='--', color="#7fcdbb", linewidth=2, label="Intra-Node0 GPU Std")
+    # plt.plot(x, intra_node1_gpu_std, marker='v', linestyle='--', color="#45b8c9", linewidth=2, label="Intra-Node1 GPU Std")
+
     
     # 在每个点上标注
     for i, v in enumerate(gpu_load_std):
         plt.text(i, v * 1.02, f"{v:,.0f}", ha='center', fontsize=8)
     for i, v in enumerate(node_load_std):
         plt.text(i, v * 1.02, f"{v:,.0f}", ha='center', fontsize=8)
+
+    # for i, v in enumerate(intra_node0_gpu_std):
+    #     plt.text(i, v * 1.02, f"{v:,.0f}", ha='center', fontsize=8)
+
+    # for i, v in enumerate(intra_node1_gpu_std):
+    #     plt.text(i, v * 1.02, f"{v:,.0f}", ha='center', fontsize=8)
     
     plt.xticks(x, labels, rotation=45, ha='right')
     plt.ylabel("Standard Deviation of Token Loads")
@@ -353,8 +388,37 @@ if __name__ == "__main__":
         
         plot_num_of_loads_compare(num_of_token_loads, "Spectral_Uneven", placement_schemes = [placement_schemes[0]]+placement_schemes[9:13], 
                                   labels = [labels[0]]+labels[9:13], fig_path_prefix=f"{fig_dir}/Spectral_Uneven_Multi_Repli")
+
+        # plot_num_of_loads_compare(num_of_token_loads, "Original", placement_schemes = placement_schemes[0:2]+[placement_schemes[5]]+[placement_schemes[9]], 
+        #                           labels = labels[0:2]+[labels[5]]+[labels[9]], fig_path_prefix=f"{fig_dir}/Original")
+        
+        # plot_num_of_loads_compare(num_of_token_loads, "Multi", placement_schemes = [placement_schemes[0]]+[placement_schemes[2]]+[placement_schemes[6]]+[placement_schemes[10]], 
+        #                           labels = [labels[0]]+[labels[2]]+[labels[6]]+[labels[10]], fig_path_prefix=f"{fig_dir}/Multi")
+        
+        # plot_num_of_loads_compare(num_of_token_loads, "Repli_Act", placement_schemes = [placement_schemes[0]]+[placement_schemes[3]]+[placement_schemes[7]]+[placement_schemes[11]], 
+        #                           labels = [labels[0]]+[labels[3]]+[labels[7]]+[labels[11]], fig_path_prefix=f"{fig_dir}/Repli_Act")
+        
+        # plot_num_of_loads_compare(num_of_token_loads, "Repli_Collab", placement_schemes = [placement_schemes[0]]+[placement_schemes[4]]+[placement_schemes[8]]+[placement_schemes[12]], 
+        #                           labels = [labels[0]]+[labels[4]]+[labels[8]]+[labels[12]], fig_path_prefix=f"{fig_dir}/Repli_Collab")
         
         
-        fig_path = os.path.join(fig_dir,f"Load_Standard Deviation_original_multi_duplicate.svg")
+        fig_path = os.path.join(fig_dir,f"Load_Standard_Deviation_original_multi_duplicate.svg")
         plot_load_std_line(num_of_token_loads, placement_schemes, labels, fig_path)
+
+        # fig_path = os.path.join(fig_dir,f"Load_Standard_Deviation_original.svg")
+        # plot_load_std_line(num_of_token_loads, placement_schemes[0:2]+[placement_schemes[5]]+[placement_schemes[9]], labels[0:2]+[labels[5]]+[labels[9]], fig_path)
+
+        # fig_path = os.path.join(fig_dir,f"Load_Standard_Deviation_multi.svg")
+        # plot_load_std_line(num_of_token_loads, [placement_schemes[0]]+[placement_schemes[2]]+[placement_schemes[6]]+[placement_schemes[10]], [labels[0]]+[labels[2]]+[labels[6]]+[labels[10]], fig_path)
+
+        # fig_path = os.path.join(fig_dir,f"Load_Standar_Deviation_duplicate.svg")
+        # plot_load_std_line(num_of_token_loads, [placement_schemes[0]]+placement_schemes[3:5]+placement_schemes[7:9]+placement_schemes[11:13], [labels[0]]+labels[3:5]+labels[7:9]+labels[11:13], fig_path)
         
+        # fig_path = os.path.join(fig_dir,f"Load_Standard_Deviation_Occult.svg")
+        # plot_load_std_line(num_of_token_loads, [placement_schemes[0]]+placement_schemes[1:5], [labels[0]]+labels[1:5], fig_path)
+
+        # fig_path = os.path.join(fig_dir,f"Load_Standard_Deviation_Spectral_even.svg")
+        # plot_load_std_line(num_of_token_loads, [placement_schemes[0]]+placement_schemes[5:9], [labels[0]]+labels[5:9], fig_path)
+
+        # fig_path = os.path.join(fig_dir,f"Load_Standar_Deviation_Spectral_uneven.svg")
+        # plot_load_std_line(num_of_token_loads, [placement_schemes[0]]+placement_schemes[9:13], [labels[0]]+labels[9:13], fig_path)

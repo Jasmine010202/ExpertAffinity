@@ -9,7 +9,6 @@ output/
 dataset/gigaword
 affinity_figs/
 expert_trace/
-expert_placement/
 Accelerator_test/expert_trace/
 Accelerator_test/test_placement/
 Accelerator_test/inference_time_figs/
