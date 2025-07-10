@@ -1,13 +1,10 @@
 __pycache__/
 *.log
 *.npy
-*.png
-*.svg
 logs/
 models/
 output/
 dataset/gigaword
-affinity_figs/
 expert_trace/
 Accelerator_test/expert_trace/
 Accelerator_test/test_placement/
