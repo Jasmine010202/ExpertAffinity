@@ -5,7 +5,6 @@ logs/
 models/
 output/
 dataset/gigaword
-expert_trace/
 Accelerator_test/expert_trace/
 Accelerator_test/test_placement/
 Accelerator_test/inference_time_figs/
@@ -16,6 +15,7 @@ DCtest_sim/OLMoE/
 ExFlow/placement_results/
 ExFlow/different_tasks/
 ExFlow/figs/
+ExFlow/expert_trace/
 
 
 
