@@ -1,0 +1,93 @@
+{
+  "vanilla_placement": {
+    "mean": 61184.0,
+    "var": 184778142.125,
+    "std": 12675.39526263043,
+    "max": 79570.4375,
+    "min": 46660.0625
+  },
+  "sonnet_occult_placement": {
+    "mean": 61184.0,
+    "var": 1498733082.25,
+    "std": 37826.1569536232,
+    "max": 119820.0,
+    "min": 23922.375
+  },
+  "sonnet_occult_multi_placement": {
+    "mean": 61184.0,
+    "var": 1570330047.59375,
+    "std": 38669.392066933215,
+    "max": 120136.4375,
+    "min": 20016.0
+  },
+  "sonnet_occult_multi_repli_act_placement": {
+    "mean": 61184.0,
+    "var": 461405393.65625,
+    "std": 20938.183929360268,
+    "max": 85631.5625,
+    "min": 29839.75
+  },
+  "sonnet_occult_multi_repli_collab_placement": {
+    "mean": 61184.0,
+    "var": 1362414146.125,
+    "std": 35882.25913474617,
+    "max": 116292.875,
+    "min": 24475.375
+  },
+  "sonnet_spectral_even_placement": {
+    "mean": 61184.0,
+    "var": 1048645556.5,
+    "std": 30918.66890355524,
+    "max": 105028.9375,
+    "min": 24792.1875
+  },
+  "sonnet_spectral_even_multi_placement": {
+    "mean": 61184.0,
+    "var": 1115967437.0,
+    "std": 31309.870917549015,
+    "max": 104258.375,
+    "min": 20635.75
+  },
+  "sonnet_spectral_even_multi_repli_act_placement": {
+    "mean": 61184.0,
+    "var": 454379623.84375,
+    "std": 20809.694725199886,
+    "max": 83987.0625,
+    "min": 30034.8125
+  },
+  "sonnet_spectral_even_multi_repli_collab_placement": {
+    "mean": 61184.0,
+    "var": 972599586.9375,
+    "std": 29073.456148965495,
+    "max": 102251.625,
+    "min": 24327.125
+  },
+  "sonnet_spectral_uneven_placement": {
+    "mean": 61184.0,
+    "var": 1652975727.90625,
+    "std": 38759.442507503074,
+    "max": 118571.5,
+    "min": 18506.5625
+  },
+  "sonnet_spectral_uneven_multi_placement": {
+    "mean": 61184.0,
+    "var": 2338653828.75,
+    "std": 44751.531255107424,
+    "max": 133442.375,
+    "min": 19194.3125
+  },
+  "sonnet_spectral_uneven_multi_repli_act_placement": {
+    "mean": 61184.0,
+    "var": 1023665301.0625,
+    "std": 30583.631576941858,
+    "max": 107137.0625,
+    "min": 28369.0625
+  },
+  "sonnet_spectral_uneven_multi_repli_collab_placement": {
+    "mean": 61184.0,
+    "var": 2087700533.4375,
+    "std": 42131.583511613964,
+    "max": 128113.1875,
+    "min": 19625.25
+  }
+}
