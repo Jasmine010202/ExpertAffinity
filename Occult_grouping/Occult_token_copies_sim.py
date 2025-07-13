@@ -269,10 +269,12 @@ if __name__ == "__main__":
     prompt_nums = [512] # 8, 16, 32, 64, 128, 256, 512, 1024
     top_k = 8 
 
-    fig_dir = f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation_Collaboration/figs"    # Duplicate/    Activation_Collaboration/   Activation/
+    num_replicated_experts = 4
+
+    fig_dir = f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation/re{num_replicated_experts}/figs"    # Duplicate/    Activation_Collaboration/   Activation/
     os.makedirs(fig_dir, exist_ok=True)
 
-    result_dir = f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation_Collaboration/data" # Activation_Collaboration/   Activation/
+    result_dir = f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation/re{num_replicated_experts}/data" # Activation_Collaboration/   Activation/
     os.makedirs(result_dir, exist_ok=True)
 
 
@@ -295,15 +297,15 @@ if __name__ == "__main__":
         sonnet_spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
 
         ####duplicate
-        act_replicated_experts_list = extract_replicated_experts(num_layers, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
-        sonnet_occult_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
-        sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
-        sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
+        act_replicated_experts_list = extract_replicated_experts(num_layers, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}_replicated_experts.json")
+        sonnet_occult_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}.json")
+        sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re{num_replicated_experts}.json")
+        sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_of_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re{num_replicated_experts}.json")
 
-        collab_replicated_experts_list = extract_replicated_experts(num_layers, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
-        sonnet_occult_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
-        sonnet_spectral_even_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
-        sonnet_spectral_uneven_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
+        # collab_replicated_experts_list = extract_replicated_experts(num_layers, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
+        # sonnet_occult_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
+        # sonnet_spectral_even_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
+        # sonnet_spectral_uneven_multi_repli_collab = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
        
         
         ###############################################Calculate_Num_of_Token_Copies##################################################
@@ -324,9 +326,9 @@ if __name__ == "__main__":
         sonnet_spectral_uneven_multi_repli_act_copies = duplicate_calculate_num_of_token_copies(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_act, act_replicated_experts_list)
         
         # Collaboration
-        sonnet_occult_multi_repli_collab_copies = duplicate_calculate_num_of_token_copies(sonnet_routing_trace, sonnet_occult_multi_repli_collab, collab_replicated_experts_list)
-        sonnet_spectral_even_multi_repli_collab_copies = duplicate_calculate_num_of_token_copies(sonnet_routing_trace, sonnet_spectral_even_multi_repli_collab, collab_replicated_experts_list)
-        sonnet_spectral_uneven_multi_repli_collab_copies = duplicate_calculate_num_of_token_copies(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_collab, collab_replicated_experts_list)
+        # sonnet_occult_multi_repli_collab_copies = duplicate_calculate_num_of_token_copies(sonnet_routing_trace, sonnet_occult_multi_repli_collab, collab_replicated_experts_list)
+        # sonnet_spectral_even_multi_repli_collab_copies = duplicate_calculate_num_of_token_copies(sonnet_routing_trace, sonnet_spectral_even_multi_repli_collab, collab_replicated_experts_list)
+        # sonnet_spectral_uneven_multi_repli_collab_copies = duplicate_calculate_num_of_token_copies(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_collab, collab_replicated_experts_list)
    
 
         # GSM8K_vanilla_copies = calculate_num_of_token_copies(GSM8K_routing_trace, vanilla_placement)
@@ -356,9 +358,9 @@ if __name__ == "__main__":
         num_of_token_copies["sonnet"]["sonnet_spectral_even_multi_repli_act_placement"] = sonnet_spectral_even_multi_repli_act_copies
         num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_act_placement"] = sonnet_spectral_uneven_multi_repli_act_copies
 
-        num_of_token_copies["sonnet"]["sonnet_occult_multi_repli_collab_placement"] = sonnet_occult_multi_repli_collab_copies
-        num_of_token_copies["sonnet"]["sonnet_spectral_even_multi_repli_collab_placement"] = sonnet_spectral_even_multi_repli_collab_copies
-        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_collab_placement"] = sonnet_spectral_uneven_multi_repli_collab_copies
+        # num_of_token_copies["sonnet"]["sonnet_occult_multi_repli_collab_placement"] = sonnet_occult_multi_repli_collab_copies
+        # num_of_token_copies["sonnet"]["sonnet_spectral_even_multi_repli_collab_placement"] = sonnet_spectral_even_multi_repli_collab_copies
+        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_collab_placement"] = sonnet_spectral_uneven_multi_repli_collab_copies
 
         
         # num_of_token_copies["sonnet"]["GSM8K_occult_placement"] = sonnet_G_occult_copies
@@ -376,7 +378,7 @@ if __name__ == "__main__":
         # num_of_token_copies["conala"]["GSM8K_occult_placement"] = conala_G_occult_copies
         # num_of_token_copies["conala"]["conala_occult_placement"] = conala_c_occult_copies
 
-        filename = os.path.join(result_dir, f"num_of_token_copies_duplicate_multi_activation_collaboration.json")
+        filename = os.path.join(result_dir, f"num_of_token_copies_duplicate_multi_activation.json")
         with open (filename, "w") as f:
             json.dump(num_of_token_copies ,f,indent=2)
 
@@ -389,34 +391,38 @@ if __name__ == "__main__":
                              "sonnet_occult_placement",
                              "sonnet_occult_multi_placement", 
                              "sonnet_occult_multi_repli_act_placement",
-                             "sonnet_occult_multi_repli_collab_placement",
+                            #  "sonnet_occult_multi_repli_collab_placement",
                              "sonnet_spectral_even_placement",
                              "sonnet_spectral_even_multi_placement", 
                              "sonnet_spectral_even_multi_repli_act_placement", 
-                             "sonnet_spectral_even_multi_repli_collab_placement",
+                            #  "sonnet_spectral_even_multi_repli_collab_placement",
                              "sonnet_spectral_uneven_placement",
                              "sonnet_spectral_uneven_multi_placement", 
                              "sonnet_spectral_uneven_multi_repli_act_placement",
-                             "sonnet_spectral_uneven_multi_repli_collab_placement"
+                            #  "sonnet_spectral_uneven_multi_repli_collab_placement"
                              ]
         labels = ["Vanilla", 
                   "Occult",
                   "Occult_Multi", 
                   "Occult_Multi_Repli_Act", 
-                  "Occult_Multi_Repli_Collab", 
+                #   "Occult_Multi_Repli_Collab", 
                   "Spectral_Even",
                   "Spectral_Even_Multi", 
                   "Spectral_Even_Multi_Repli_Act", 
-                  "Spectral_Even_Multi_Repli_Collab", 
+                #   "Spectral_Even_Multi_Repli_Collab", 
                   "Spectral_Uneven",
                   "Spectral_Uneven_Multi", 
                   "Spectral_Uneven_Multi_Repli_Act",
-                  "Spectral_Uneven_Multi_Repli_Collab"
+                #   "Spectral_Uneven_Multi_Repli_Collab"
                   ]
 
-        fig_path = os.path.join(fig_dir,f"num_of_token_copies_compare_duplicate_multi_original_activation_collaboration_2.svg")
-        plot_num_of_copies_compare(num_of_token_copies, placement_schemes, labels, 36, fig_path)    # 3-10  4-12   5-14   7-20 16   10-24   13-36
+        fig_path = os.path.join(fig_dir,f"num_of_token_copies_compare_duplicate_multi_original_activation_2.svg")
+        plot_num_of_copies_compare(num_of_token_copies, placement_schemes, labels, 24, fig_path)    # 3-10  4-12   5-14   7-20 16   10-24   13-36
 
-        fig_3_path = os.path.join(fig_dir,f"num_of_token_copies_compare_duplicate_multi_original_activation_collaboration_3.svg")
-        plot_num_of_copies_compare_3(num_of_token_copies, placement_schemes, labels, 38, fig_3_path)    # 3-12  4-14   5-16   7-22 18  10-26   13-38
+        fig_3_path = os.path.join(fig_dir,f"num_of_token_copies_compare_duplicate_multi_original_activation_3.svg")
+        plot_num_of_copies_compare_3(num_of_token_copies, placement_schemes, labels, 26, fig_3_path)    # 3-12  4-14   5-16   7-22 18  10-26   13-38
        
+
+
+
+        #####复制不同的专家数

@@ -17,15 +17,14 @@ num_layers = 16
 num_of_experts_per_layer = 64
 
 method = "spectral" # occult spectral
-even_groups = False
-
+even_groups = True
 # 节点数、GPU数
 num_of_nodes = 2
 num_of_gpus_per_node = 2
 num_of_gpus = num_of_nodes * num_of_gpus_per_node
 
 enable_replicated = True
-num_replicated_experts = 4 
+num_replicated_experts = 4
 replicated_type = "Activation"      # Collaboration Activation
 
 collaboration_dir = f"./Occult_test/expert_collaboration"
@@ -125,10 +124,10 @@ if __name__ == "__main__":
     # 路由
     # 生成放置方案，用used_for_occult
     # 
-    routing_trace = np.load(f"./Occult_test/expert_trace/used_for_occult/by_prompt/{model_name}_sonnet_top{top_k}/decode_routing_trace_{num_of_prompts}.npy")
+    routing_trace = np.load(f"/data/shared_workspace/hanyu/Occult_test/expert_trace/used_for_occult/by_prompt/{model_name}_sonnet_top{top_k}/decode_routing_trace_{num_of_prompts}.npy")
     
     # 各层协作矩阵
-    # experts_collaboration_matrix = generate_collaboration_matrix(routing_data)
+    # experts_collaboration_matrix = generate_collaboration_matrix(routing_trace)
     experts_collaboration_matrix = np.load(f"./Occult_test/expert_collaboration/{model_name}_Expert_Collaboration_{input_name}_{num_of_prompts}.npy")
     
     experts_collaboration_matrix = torch.from_numpy(experts_collaboration_matrix)
@@ -211,24 +210,24 @@ if __name__ == "__main__":
 
     
     
-    # prefix = f"{model_name}_{input_name}_{num_of_prompts}"
-    # even_prefix = (
-    #     "_even" if method == "spectral" and even_groups else
-    #     "_uneven" if method == "spectral" and not even_groups else
-    #     ""
-    # )
-    # suffix = f"_re{num_replicated_experts}" if enable_replicated else ""
+    prefix = f"{model_name}_{input_name}_{num_of_prompts}"
+    even_prefix = (
+        "_even" if method == "spectral" and even_groups else
+        "_uneven" if method == "spectral" and not even_groups else
+        ""
+    )
+    suffix = f"_re{num_replicated_experts}" if enable_replicated else ""
 
-    # placement_file_name = f"{prefix}{even_prefix}_nodes{num_of_nodes}_gpus{num_of_nodes*num_of_gpus_per_node}{suffix}.json"
-    # placement_file_path = os.path.join(placement_dir, placement_file_name)
-    # with open(placement_file_path,"w") as f1:
-    #     json.dump(all_layers_placement, f1, indent=2)
+    placement_file_name = f"{prefix}{even_prefix}_nodes{num_of_nodes}_gpus{num_of_nodes*num_of_gpus_per_node}{suffix}.json"
+    placement_file_path = os.path.join(placement_dir, placement_file_name)
+    with open(placement_file_path,"w") as f1:
+        json.dump(all_layers_placement, f1, indent=2)
 
-    # if enable_replicated:
-    #     replicated_experts_file_name = f"{prefix}{even_prefix}_nodes{num_of_nodes}_gpus{num_of_nodes*num_of_gpus_per_node}{suffix}_replicated_experts.json"
-    #     replicated_file_path = os.path.join(placement_dir, replicated_experts_file_name)
-    #     with open(replicated_file_path,"w") as f2:
-    #         json.dump(all_layers_replicated_experts, f2, indent=2)
+    if enable_replicated:
+        replicated_experts_file_name = f"{prefix}{even_prefix}_nodes{num_of_nodes}_gpus{num_of_nodes*num_of_gpus_per_node}{suffix}_replicated_experts.json"
+        replicated_file_path = os.path.join(placement_dir, replicated_experts_file_name)
+        with open(replicated_file_path,"w") as f2:
+            json.dump(all_layers_replicated_experts, f2, indent=2)
 
    
     
