@@ -547,11 +547,11 @@ def plot_avg_load_stats_line(stats_all_layers_avg_scheme, placement_schemes, lab
 
     # 标注每个点数值
     for i, val in enumerate(std_vals):
-        plt.text(i, val * 1.02, f"{val:.0f}", ha='center', fontsize=8)
+        plt.text(i, val + 5000, f"{val:.0f}", ha='center', fontsize=8)
     for i, val in enumerate(max_vals):
-        plt.text(i, val * 1.02, f"{val:.0f}", ha='center', fontsize=8)
+        plt.text(i, val + 5000, f"{val:.0f}", ha='center', fontsize=8)
     for i, val in enumerate(min_vals):
-        plt.text(i, val * 0.98, f"{val:.0f}", ha='center', fontsize=8)
+        plt.text(i, val + 3000, f"{val:.0f}", ha='center', fontsize=8)
 
     plt.xticks(x, labels, rotation=45, ha='right')
     plt.ylabel(f"Avg. Std of {type} Loads & Avg. Max / Min {type} Loads")
@@ -594,13 +594,13 @@ def plot_avg_load_stats_line_gpu_node(stats_all_layers_avg_scheme, placement_sch
 
     # 标注每个点数值
     for i in range(len(x)):
-        plt.text(i, gpu_std_vals[i] * 1.02, f"{gpu_std_vals[i]:.2f}", ha='center', fontsize=8)
-        plt.text(i, node_std_vals[i] * 1.02, f"{node_std_vals[i]:.2f}", ha='center', fontsize=8)
+        plt.text(i, gpu_std_vals[i] + 5000, f"{gpu_std_vals[i]:.2f}", ha='center', fontsize=8)
+        plt.text(i, node_std_vals[i] + 5000, f"{node_std_vals[i]:.2f}", ha='center', fontsize=8)
 
-        plt.text(i, gpu_max_vals[i] * 1.02, f"{gpu_max_vals[i]:.0f}", ha='center', fontsize=8)
-        plt.text(i, gpu_min_vals[i] * 1.02, f"{gpu_min_vals[i]:.0f}", ha='center', fontsize=8)
-        plt.text(i, node_max_vals[i] * 1.02, f"{node_max_vals[i]:.2f}", ha='center', fontsize=8)
-        plt.text(i, node_min_vals[i] * 1.02, f"{node_min_vals[i]:.2f}", ha='center', fontsize=8)
+        plt.text(i, gpu_max_vals[i] + 5000, f"{gpu_max_vals[i]:.0f}", ha='center', fontsize=8)
+        plt.text(i, gpu_min_vals[i] + 5000, f"{gpu_min_vals[i]:.0f}", ha='center', fontsize=8)
+        plt.text(i, node_max_vals[i] + 5000, f"{node_max_vals[i]:.2f}", ha='center', fontsize=8)
+        plt.text(i, node_min_vals[i] + 5000, f"{node_min_vals[i]:.2f}", ha='center', fontsize=8)
 
 
     plt.xticks(x, labels, rotation=45, ha='right')
@@ -762,6 +762,8 @@ def plot_combined_copies_and_load_stats_gpu_node_sum(num_of_token_copies, stats_
     x = np.arange(len(placement_schemes))
     width = 0.35
 
+    offset_line = 3000
+
     inter_gpu_values = [num_of_token_copies[dataset[0]][p]["num_inter_gpu"] for p in placement_schemes]
     inter_node_values = [num_of_token_copies[dataset[0]][p]["num_inter_node"] for p in placement_schemes]
 
@@ -772,13 +774,19 @@ def plot_combined_copies_and_load_stats_gpu_node_sum(num_of_token_copies, stats_
     node_std_vals_sum = [stats_of_token_loads_sum[p]["node"]["std"] for p in placement_schemes]
 
 
-    fig, ax1 = plt.subplots(figsize=(fig_width, 8))
+    fig, ax1 = plt.subplots(figsize=(fig_width, 9))
     # colors = ["#7fcdbb", "#41b6c4", "#225ea8", "#1d91c0", "#1d6fc0"]
-    colors = ["#a6d9c7", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#1d6fc0"]
+    colors = ["#3c72b0", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#1d6fc0"]
 
     # ===== 左轴：柱状图（通信开销） =====
     bar1 = ax1.bar(x - width/2, inter_gpu_values, width, label="Inter-GPU Copies", color=colors[1])
     bar2 = ax1.bar(x + width/2, inter_node_values, width, label="Inter-Node Copies", color=colors[2])
+
+    ax1.plot(x, gpu_std_vals_sum, marker='^', linestyle='-', color=colors[0], linewidth=2, label="Total GPU Load Std")
+    ax1.plot(x, node_std_vals_sum, marker='*', linestyle='--', color=colors[3], linewidth=2, label="Total Node Load Std")
+
+    ax1.set_ylim(0, max(inter_gpu_values + inter_node_values + gpu_std_vals_sum + node_std_vals_sum) * 1.1)
+
     ax1.set_ylabel("Num of Token Copies")
     ax1.tick_params(axis='y')
 
@@ -788,25 +796,30 @@ def plot_combined_copies_and_load_stats_gpu_node_sum(num_of_token_copies, stats_
         ax1.text(x[i] - width/2, inter_gpu_values[i] + offset, str(inter_gpu_values[i]), ha='center', fontsize=8)
         ax1.text(x[i] + width/2, inter_node_values[i] + offset, str(inter_node_values[i]), ha='center', fontsize=8)
 
+        ax1.text(i, gpu_std_vals_sum[i] - offset_line, f"{gpu_std_vals_sum[i]:.2f}", ha='center', va='top', fontsize=8)
+        ax1.text(i, node_std_vals_sum[i] + offset_line, f"{node_std_vals_sum[i]:.2f}", ha='center', va='bottom', fontsize=8)
+
     # ===== 右轴：折线图（负载统计） =====
     ax2 = ax1.twinx()
-    # ax2.plot(x, gpu_std_vals_avg, marker='o', linestyle='-', color=colors[0], linewidth=2, label="Avg. GPU load Std")
-    # ax2.plot(x, node_std_vals_avg, marker='s', linestyle='-', color=colors[2], linewidth=2, label="Avg. Node load Std")
-    ax2.plot(x, gpu_std_vals_sum, marker='^', linestyle='--', color=colors[3], linewidth=2, label="Total GPU Load Std")
-    ax2.plot(x, node_std_vals_sum, marker='*', linestyle='--', color=colors[4], linewidth=2, label="Total Node Load Std")
+    ax2.plot(x, gpu_std_vals_avg, marker='o', linestyle='-', color=colors[4], linewidth=2, label="Avg. GPU load Std")
+    ax2.plot(x, node_std_vals_avg, marker='s', linestyle='--', color=colors[5], linewidth=2, label="Avg. Node load Std")
+    # ax2.plot(x, gpu_std_vals_sum, marker='^', linestyle='-', color=colors[3], linewidth=2, label="Total GPU Load Std")
+    # ax2.plot(x, node_std_vals_sum, marker='*', linestyle='-', color=colors[4], linewidth=2, label="Total Node Load Std")
+    
 
     ax2.set_ylabel(f"GPU / Node Load Std")
     ax2.tick_params(axis='y')
 
-    ax2.set_ylim(0, max(gpu_std_vals_avg + gpu_std_vals_sum + node_std_vals_avg + node_std_vals_sum) * 1.1)
+    # ax2.set_ylim(0, max(gpu_std_vals_avg + gpu_std_vals_sum + node_std_vals_avg + node_std_vals_sum) * 1.1)
+    ax2.set_ylim(0, max(gpu_std_vals_avg + node_std_vals_avg) * 6)      #1.1
 
-    offset_line = 3000
+    
     # 标注折线图点值
     for i in range(len(x)):
-        # ax2.text(i, gpu_std_vals_avg[i] + offset_line, f"{gpu_std_vals_avg[i]:.2f}", ha='center', va='bottom', fontsize=8)
-        # ax2.text(i, node_std_vals_avg[i] + offset_line, f"{node_std_vals_avg[i]:.2f}", ha='center', va='bottom', fontsize=8)
-        ax2.text(i, gpu_std_vals_sum[i] + offset_line, f"{gpu_std_vals_sum[i]:.2f}", ha='center', va='bottom', fontsize=8)
-        ax2.text(i, node_std_vals_sum[i] + offset_line, f"{node_std_vals_sum[i]:.2f}", ha='center', va='bottom', fontsize=8)
+        ax2.text(i, gpu_std_vals_avg[i] - offset_line, f"{gpu_std_vals_avg[i]:.2f}", ha='center', va='top', fontsize=8)
+        ax2.text(i, node_std_vals_avg[i] + offset_line, f"{node_std_vals_avg[i]:.2f}", ha='center', va='bottom', fontsize=8)
+        # ax2.text(i, gpu_std_vals_sum[i] + offset_line, f"{gpu_std_vals_sum[i]:.2f}", ha='center', va='bottom', fontsize=8)
+        # ax2.text(i, node_std_vals_sum[i] + offset_line, f"{node_std_vals_sum[i]:.2f}", ha='center', va='bottom', fontsize=8)
         
     # ===== 合并图例 =====
     lines_labels = [ax.get_legend_handles_labels() for ax in [ax1, ax2]]
@@ -913,7 +926,7 @@ if __name__ == "__main__":
 
 
     for num in prompt_nums:
-        # # 路由
+        # 路由
         sonnet_routing_trace = extract_routing_trace(f"./Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
 
         # 专家激活次数 -> 计算负载（token个数）
@@ -1023,7 +1036,7 @@ if __name__ == "__main__":
             json.dump(num_of_token_loads, f, indent=2)
         
 
-        ######################################################## 统计数据计算 ########################################################
+        # ######################################################## 统计数据计算 ########################################################
 
         #每层每个GPU的负载情况及每层均值
         # with open("Calculation_Load/sonnet/OLMoE_top8/per_layer/data/num_of_token_loads_original_multi_duplicate_activation_collaboration.json", "r") as f:
@@ -1042,12 +1055,12 @@ if __name__ == "__main__":
         with open (filename, "w") as f:
             json.dump(stats_all_layers_avg_scheme, f, indent=2)
 
-        # with open("Calculation_Load/sonnet/OLMoE_top8/total/data/num_of_token_loads_original_multi_duplicate_activation_collaboration.json", "r") as f:
-        #     num_of_token_loads = json.load(f)
+        with open("Calculation_Load/sonnet/OLMoE_top8/total/data/num_of_token_loads_original_multi_duplicate_activation_collaboration.json", "r") as f:
+            num_of_token_loads_sum = json.load(f)
 
         # 每个GPU各层负载总和
         stats_of_token_loads_sum = {}
-        for scheme, token_loads in num_of_token_loads["sonnet"].items():
+        for scheme, token_loads in num_of_token_loads_sum["sonnet"].items():
             stats_of_token_loads_sum[scheme] = calculate_load_stats_sum(token_loads)
 
         filename = os.path.join(result_dir, f"stats_of_token_loads_sum.json")
@@ -1092,7 +1105,7 @@ if __name__ == "__main__":
         
         # fig_dir_path = os.makedirs(f"{fig_dir}/load_stats_per_layer/node", exist_ok=True)
 
-        # 每个方案一张各层里各个GPU\节点负载的方差
+        # # 每个方案一张各层里各个GPU\节点负载的方差
         plot_per_scheme_layerwise_bar_line(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/gpu","GPU")
         plot_per_scheme_layerwise_bar_line(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/node","Node")
         plot_per_scheme_layerwise_bar_line_gpu_node(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/gpu_node")
@@ -1102,7 +1115,7 @@ if __name__ == "__main__":
         plot_avg_load_stats_line(stats_all_layers_avg_scheme,  placement_schemes, labels, f"{fig_dir}/load_stats_per_layer/node/stats","Node")
         plot_avg_load_stats_line_gpu_node(stats_all_layers_avg_scheme,  placement_schemes, labels, f"{fig_dir}/load_stats_per_layer/gpu_node/stats")
 
-        # 和通信量合并一张图
+        # # 和通信量合并一张图
         with open(f"Token_Copies_Compare_sim/Duplicate/sonnet/OLMoE_top8/Activation_Collaboration/re4/data/num_of_token_copies_duplicate_multi_original_activation_collaboration.json",'r') as f:
             num_of_token_copies = json.load(f)
 
@@ -1118,13 +1131,13 @@ if __name__ == "__main__":
         plot_combined_copies_and_load_stats_gpu_node(num_of_token_copies, stats_all_layers_avg_scheme,
                                         placement_schemes, labels, 28, fig_path)    
 
-        # 各个方案 每个GPU各层负载总和、每层负载统计数据均值、通信量对比总图
+        # # 各个方案 每个GPU各层负载总和、每层负载统计数据均值、通信量对比总图
         # with open(f"Calculation_Load/sonnet/OLMoE_top8/per_layer/data/stats_of_token_loads_sum.json",'r') as f:
         #     stats_of_token_loads_sum = json.load(f)
 
-        fig_path = os.path.join(f"{fig_dir}/load_stats_per_layer/gpu_node/stats",f"communication_computing_sum_13.svg")
+        fig_path = os.path.join(f"{fig_dir}/load_stats_per_layer/gpu_node/stats",f"communication_computing_sum_13_4_lines.svg")
         plot_combined_copies_and_load_stats_gpu_node_sum(num_of_token_copies, stats_of_token_loads_sum, stats_all_layers_avg_scheme,
-                                        placement_schemes, labels, 28, fig_path)     
+                                        placement_schemes, labels, 30, fig_path)     
 
         # std做成柱状，不好看
         # fig_path = os.path.join(fig_dir,f"communication_computing_10_bar3.svg")
