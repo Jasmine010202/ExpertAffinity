@@ -918,12 +918,12 @@ if __name__ == "__main__":
     prompt_nums = [512] # 8, 16, 32, 64, 128, 256, 512, 1024
     top_k = 8 
 
-    num_replicated_experts = 4
+    num_replicated_experts = 20
 
-    fig_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/per_layer/figs"   
+    fig_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/re{num_replicated_experts}/per_layer/figs"   
     os.makedirs(fig_dir, exist_ok=True)
 
-    result_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/per_layer/data" 
+    result_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/re{num_replicated_experts}/per_layer/data" 
     os.makedirs(result_dir, exist_ok=True)
 
 
@@ -946,15 +946,15 @@ if __name__ == "__main__":
         sonnet_spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
 
         ####duplicate
-        act_replicated_experts_list = extract_replicated_experts(num_layers, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
-        sonnet_occult_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
-        sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
-        sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
+        act_replicated_experts_list = extract_replicated_experts(num_layers, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}_replicated_experts.json")
+        sonnet_occult_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}.json")
+        sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re{num_replicated_experts}.json")
+        sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re{num_replicated_experts}.json")
 
-        collab_replicated_experts_list = extract_replicated_experts(num_layers, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4_replicated_experts.json")
-        sonnet_occult_multi_repli_collab = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re4.json")
-        sonnet_spectral_even_multi_repli_collab = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_even_nodes2_gpus4_re4.json")
-        sonnet_spectral_uneven_multi_repli_collab = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_uneven_nodes2_gpus4_re4.json")
+        # collab_replicated_experts_list = extract_replicated_experts(num_layers, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}_replicated_experts.json")
+        # sonnet_occult_multi_repli_collab = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}.json")
+        # sonnet_spectral_even_multi_repli_collab = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_even_nodes2_gpus4_re{num_replicated_experts}.json")
+        # sonnet_spectral_uneven_multi_repli_collab = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Collaboration/OLMoE_sonnet_512_uneven_nodes2_gpus4_re{num_replicated_experts}.json")
 
 
         # ###############################################整体负载加和##################################################
@@ -994,7 +994,7 @@ if __name__ == "__main__":
         #duplicate Activation
         sonnet_occult_multi_repli_act_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_occult_multi_repli_act, True, act_replicated_experts_list)
         #duplicate Collaboration
-        sonnet_occult_multi_repli_collab_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_occult_multi_repli_collab, True, collab_replicated_experts_list)
+        # sonnet_occult_multi_repli_collab_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_occult_multi_repli_collab, True, collab_replicated_experts_list)
         
         # Spectral Even
         sonnet_spectral_even_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_even_placement)
@@ -1002,7 +1002,7 @@ if __name__ == "__main__":
         #duplicate Activation
         sonnet_spectral_even_multi_repli_act_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_even_multi_repli_act, True, act_replicated_experts_list)
         #duplicate Collaboration
-        sonnet_spectral_even_multi_repli_collab_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_even_multi_repli_collab, True, collab_replicated_experts_list)
+        # sonnet_spectral_even_multi_repli_collab_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_even_multi_repli_collab, True, collab_replicated_experts_list)
 
         # Spectral Uneven
         sonnet_spectral_uneven_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_uneven_placement)
@@ -1010,7 +1010,7 @@ if __name__ == "__main__":
         #duplicate Activation
         sonnet_spectral_uneven_multi_repli_act_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_act, True, act_replicated_experts_list)
         #duplicate Collaboration
-        sonnet_spectral_uneven_multi_repli_collab_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_collab, True, collab_replicated_experts_list)
+        # sonnet_spectral_uneven_multi_repli_collab_loads = compute_claculation_load_per_layer(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_collab, True, collab_replicated_experts_list)
 
         num_of_token_loads = {}
         num_of_token_loads["sonnet"] = {}
@@ -1020,17 +1020,17 @@ if __name__ == "__main__":
         num_of_token_loads["sonnet"]["sonnet_occult_placement"] = sonnet_s_occult_loads
         num_of_token_loads["sonnet"]["sonnet_occult_multi_placement"] = sonnet_occult_multi_loads
         num_of_token_loads["sonnet"]["sonnet_occult_multi_repli_act_placement"] = sonnet_occult_multi_repli_act_loads
-        num_of_token_loads["sonnet"]["sonnet_occult_multi_repli_collab_placement"] = sonnet_occult_multi_repli_collab_loads
+        # num_of_token_loads["sonnet"]["sonnet_occult_multi_repli_collab_placement"] = sonnet_occult_multi_repli_collab_loads
         
         num_of_token_loads["sonnet"]["sonnet_spectral_even_placement"] = sonnet_spectral_even_loads
         num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_placement"] = sonnet_spectral_even_multi_loads
         num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_repli_act_placement"] = sonnet_spectral_even_multi_repli_act_loads
-        num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_repli_collab_placement"] = sonnet_spectral_even_multi_repli_collab_loads
+        # num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_repli_collab_placement"] = sonnet_spectral_even_multi_repli_collab_loads
 
         num_of_token_loads["sonnet"]["sonnet_spectral_uneven_placement"] = sonnet_spectral_uneven_loads
         num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_placement"] = sonnet_spectral_uneven_multi_loads
         num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_act_placement"] = sonnet_spectral_uneven_multi_repli_act_loads
-        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_collab_placement"] = sonnet_spectral_uneven_multi_repli_collab_loads
+        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_collab_placement"] = sonnet_spectral_uneven_multi_repli_collab_loads
 
 
         filename = os.path.join(result_dir, f"num_of_token_loads_original_multi_duplicate_activation_collaboration.json")
@@ -1057,17 +1057,17 @@ if __name__ == "__main__":
         with open (filename, "w") as f:
             json.dump(stats_all_layers_avg_scheme, f, indent=2)
 
-        with open("Calculation_Load/sonnet/OLMoE_top8/total/data/num_of_token_loads_original_multi_duplicate_activation_collaboration.json", "r") as f:
-            num_of_token_loads_sum = json.load(f)
+        # # 每个GPU各层负载总和
+        # with open("Calculation_Load/sonnet/OLMoE_top8/total/data/num_of_token_loads_original_multi_duplicate_activation_collaboration.json", "r") as f:
+        #     num_of_token_loads_sum = json.load(f)
 
-        # 每个GPU各层负载总和
-        stats_of_token_loads_sum = {}
-        for scheme, token_loads in num_of_token_loads_sum["sonnet"].items():
-            stats_of_token_loads_sum[scheme] = calculate_load_stats_sum(token_loads)
+        # stats_of_token_loads_sum = {}
+        # for scheme, token_loads in num_of_token_loads_sum["sonnet"].items():
+        #     stats_of_token_loads_sum[scheme] = calculate_load_stats_sum(token_loads)
 
-        filename = os.path.join(result_dir, f"stats_of_token_loads_sum.json")
-        with open (filename, "w") as f:
-            json.dump(stats_of_token_loads_sum, f, indent=2)
+        # filename = os.path.join(result_dir, f"stats_of_token_loads_sum.json")
+        # with open (filename, "w") as f:
+        #     json.dump(stats_of_token_loads_sum, f, indent=2)
 
         ######################################################## 画图 ########################################################
         # with open("Calculation_Load/sonnet/OLMoE_top8/per_layer/data/stats_of_token_loads_per_layer.json", "r") as f:
@@ -1080,34 +1080,38 @@ if __name__ == "__main__":
                              "sonnet_occult_placement",
                              "sonnet_occult_multi_placement", 
                              "sonnet_occult_multi_repli_act_placement",
-                             "sonnet_occult_multi_repli_collab_placement",
+                            #  "sonnet_occult_multi_repli_collab_placement",
                              "sonnet_spectral_even_placement",
                              "sonnet_spectral_even_multi_placement", 
                              "sonnet_spectral_even_multi_repli_act_placement", 
-                             "sonnet_spectral_even_multi_repli_collab_placement",
+                            #  "sonnet_spectral_even_multi_repli_collab_placement",
                              "sonnet_spectral_uneven_placement",
                              "sonnet_spectral_uneven_multi_placement", 
                              "sonnet_spectral_uneven_multi_repli_act_placement",
-                             "sonnet_spectral_uneven_multi_repli_collab_placement"
+                            #  "sonnet_spectral_uneven_multi_repli_collab_placement"
                              ]
         labels = ["Vanilla", 
                   "Occult",
                   "Occult_Multi", 
                   "Occult_Multi_Repli_Act", 
-                  "Occult_Multi_Repli_Collab", 
+                #   "Occult_Multi_Repli_Collab", 
                   "Spectral_Even",
                   "Spectral_Even_Multi", 
                   "Spectral_Even_Multi_Repli_Act", 
-                  "Spectral_Even_Multi_Repli_Collab", 
+                #   "Spectral_Even_Multi_Repli_Collab", 
                   "Spectral_Uneven",
                   "Spectral_Uneven_Multi", 
                   "Spectral_Uneven_Multi_Repli_Act",
-                  "Spectral_Uneven_Multi_Repli_Collab"
+                #   "Spectral_Uneven_Multi_Repli_Collab"
                   ]
         
         # fig_dir_path = os.makedirs(f"{fig_dir}/load_stats_per_layer/node", exist_ok=True)
 
         # # 每个方案一张各层里各个GPU\节点负载的方差
+        os.makedirs(f"{fig_dir}/load_stats_per_layer/gpu/stats", exist_ok=True)
+        os.makedirs(f"{fig_dir}/load_stats_per_layer/node/stats", exist_ok=True)
+        os.makedirs(f"{fig_dir}/load_stats_per_layer/gpu_node/stats", exist_ok=True)
+
         plot_per_scheme_layerwise_bar_line(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/gpu","GPU")
         plot_per_scheme_layerwise_bar_line(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/node","Node")
         plot_per_scheme_layerwise_bar_line_gpu_node(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/gpu_node")
@@ -1137,9 +1141,9 @@ if __name__ == "__main__":
         # with open(f"Calculation_Load/sonnet/OLMoE_top8/per_layer/data/stats_of_token_loads_sum.json",'r') as f:
         #     stats_of_token_loads_sum = json.load(f)
 
-        fig_path = os.path.join(f"{fig_dir}/load_stats_per_layer/gpu_node/stats",f"communication_computing_sum_13_4_lines.svg")
-        plot_combined_copies_and_load_stats_gpu_node_sum(num_of_token_copies, stats_of_token_loads_sum, stats_all_layers_avg_scheme,
-                                        placement_schemes, labels, 30, fig_path)     
+        # fig_path = os.path.join(f"{fig_dir}/load_stats_per_layer/gpu_node/stats",f"communication_computing_sum_13_4_lines.svg")
+        # plot_combined_copies_and_load_stats_gpu_node_sum(num_of_token_copies, stats_of_token_loads_sum, stats_all_layers_avg_scheme,
+        #                                 placement_schemes, labels, 30, fig_path)     
 
         # std做成柱状，不好看
         # fig_path = os.path.join(fig_dir,f"communication_computing_10_bar3.svg")

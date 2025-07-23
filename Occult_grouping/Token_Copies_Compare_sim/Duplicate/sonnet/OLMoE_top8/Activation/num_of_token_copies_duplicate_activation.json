@@ -75,7 +75,7 @@
       "num_inter_gpu": 210046,
       "num_inter_node": 418363
     },
-    "sonnet_spectral_uneven_multi_repli_act_placement": {
+    "sonnet_spectral_uneven_multi_repli_act_20": {
       "num_intra_gpu": 487964,
       "num_inter_gpu": 191623,
       "num_inter_node": 381776
