@@ -918,6 +918,8 @@ if __name__ == "__main__":
     prompt_nums = [512] # 8, 16, 32, 64, 128, 256, 512, 1024
     top_k = 8 
 
+    num_replicated_experts = 4
+
     fig_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/per_layer/figs"   
     os.makedirs(fig_dir, exist_ok=True)
 

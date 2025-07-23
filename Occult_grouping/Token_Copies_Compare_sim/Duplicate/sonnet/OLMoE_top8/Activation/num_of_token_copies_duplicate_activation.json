@@ -1,0 +1,84 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 448186,
+      "num_inter_node": 895842
+    },
+    "sonnet_occult_multi_repli_act_4": {
+      "num_intra_gpu": 472698,
+      "num_inter_gpu": 292959,
+      "num_inter_node": 582573
+    },
+    "sonnet_occult_multi_repli_act_8": {
+      "num_intra_gpu": 484181,
+      "num_inter_gpu": 282453,
+      "num_inter_node": 563165
+    },
+    "sonnet_occult_multi_repli_act_12": {
+      "num_intra_gpu": 487611,
+      "num_inter_gpu": 259644,
+      "num_inter_node": 521371
+    },
+    "sonnet_occult_multi_repli_act_16": {
+      "num_intra_gpu": 488105,
+      "num_inter_gpu": 244958,
+      "num_inter_node": 488221
+    },
+    "sonnet_occult_multi_repli_act_20": {
+      "num_intra_gpu": 488414,
+      "num_inter_gpu": 215906,
+      "num_inter_node": 429283
+    },
+    "sonnet_spectral_even_multi_repli_act_4": {
+      "num_intra_gpu": 469151,
+      "num_inter_gpu": 279360,
+      "num_inter_node": 559663
+    },
+    "sonnet_spectral_even_multi_repli_act_8": {
+      "num_intra_gpu": 483038,
+      "num_inter_gpu": 264182,
+      "num_inter_node": 529245
+    },
+    "sonnet_spectral_even_multi_repli_act_12": {
+      "num_intra_gpu": 487114,
+      "num_inter_gpu": 247127,
+      "num_inter_node": 492726
+    },
+    "sonnet_spectral_even_multi_repli_act_16": {
+      "num_intra_gpu": 487517,
+      "num_inter_gpu": 232084,
+      "num_inter_node": 462977
+    },
+    "sonnet_spectral_even_multi_repli_act_20": {
+      "num_intra_gpu": 488164,
+      "num_inter_gpu": 207970,
+      "num_inter_node": 416541
+    },
+    "sonnet_spectral_uneven_multi_repli_act_4": {
+      "num_intra_gpu": 464754,
+      "num_inter_gpu": 242916,
+      "num_inter_node": 490616
+    },
+    "sonnet_spectral_uneven_multi_repli_act_8": {
+      "num_intra_gpu": 479130,
+      "num_inter_gpu": 231303,
+      "num_inter_node": 466074
+    },
+    "sonnet_spectral_uneven_multi_repli_act_12": {
+      "num_intra_gpu": 486093,
+      "num_inter_gpu": 222652,
+      "num_inter_node": 444955
+    },
+    "sonnet_spectral_uneven_multi_repli_act_16": {
+      "num_intra_gpu": 487130,
+      "num_inter_gpu": 210046,
+      "num_inter_node": 418363
+    },
+    "sonnet_spectral_uneven_multi_repli_act_placement": {
+      "num_intra_gpu": 487964,
+      "num_inter_gpu": 191623,
+      "num_inter_node": 381776
+    }
+  }
+}

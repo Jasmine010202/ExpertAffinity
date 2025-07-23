@@ -206,7 +206,7 @@ if __name__ == "__main__":
         
             all_layers_placement[f"{layer_id}"] = experts_group_list
 
-        break
+        # break
 
     
     

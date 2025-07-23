@@ -378,7 +378,7 @@ if __name__ == "__main__":
         # num_of_token_copies["conala"]["GSM8K_occult_placement"] = conala_G_occult_copies
         # num_of_token_copies["conala"]["conala_occult_placement"] = conala_c_occult_copies
 
-        filename = os.path.join(result_dir, f"num_of_token_copies_duplicate_multi_activation.json")
+        filename = os.path.join(result_dir, f"num_of_token_copies_duplicate_multi_original_activation.json")
         with open (filename, "w") as f:
             json.dump(num_of_token_copies ,f,indent=2)
 

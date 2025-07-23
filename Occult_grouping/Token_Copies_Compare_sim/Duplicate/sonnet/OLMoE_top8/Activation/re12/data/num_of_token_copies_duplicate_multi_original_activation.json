@@ -36,19 +36,19 @@
       "num_inter_node": 542801
     },
     "sonnet_occult_multi_repli_act_placement": {
-      "num_intra_gpu": 484181,
-      "num_inter_gpu": 282453,
-      "num_inter_node": 563165
+      "num_intra_gpu": 487611,
+      "num_inter_gpu": 259644,
+      "num_inter_node": 521371
     },
     "sonnet_spectral_even_multi_repli_act_placement": {
-      "num_intra_gpu": 483038,
-      "num_inter_gpu": 264182,
-      "num_inter_node": 529245
+      "num_intra_gpu": 487114,
+      "num_inter_gpu": 247127,
+      "num_inter_node": 492726
     },
     "sonnet_spectral_uneven_multi_repli_act_placement": {
-      "num_intra_gpu": 479130,
-      "num_inter_gpu": 231303,
-      "num_inter_node": 466074
+      "num_intra_gpu": 486093,
+      "num_inter_gpu": 222652,
+      "num_inter_node": 444955
     }
   }
 }
