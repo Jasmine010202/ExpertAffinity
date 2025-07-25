@@ -717,28 +717,28 @@ def plot_combined_copies_and_load_stats_gpu_node(num_of_token_copies, stats_all_
     # ===== 右轴：折线图（负载统计） =====
     ax2 = ax1.twinx()
     ax2.plot(x, gpu_std_vals, marker='o', linestyle='-', color=colors[2], linewidth=2, label="Avg. GPU load Std")
-    ax2.plot(x, gpu_max_vals, marker='^', linestyle='--', color=colors[3], linewidth=2, label="Avg. GPU load Max")
-    ax2.plot(x, gpu_min_vals, marker='s', linestyle='--', color=colors[4], linewidth=2, label="Avg. GPU load Min")
+    # ax2.plot(x, gpu_max_vals, marker='^', linestyle='--', color=colors[3], linewidth=2, label="Avg. GPU load Max")
+    # ax2.plot(x, gpu_min_vals, marker='s', linestyle='--', color=colors[4], linewidth=2, label="Avg. GPU load Min")
 
-    ax2.plot(x, node_std_vals, marker='*', linestyle='-', color=colors[2], linewidth=2, label="Avg. Node load Std")
-    ax2.plot(x, node_max_vals, marker='+', linestyle='--', color=colors[3], linewidth=2, label="Avg. Node load Max")
-    ax2.plot(x, node_min_vals, marker='x', linestyle='--', color=colors[4], linewidth=2, label="Avg. Node load Min")
+    ax2.plot(x, node_std_vals, marker='s', linestyle='--', color=colors[4], linewidth=2, label="Avg. Node load Std")
+    # ax2.plot(x, node_max_vals, marker='+', linestyle='--', color=colors[3], linewidth=2, label="Avg. Node load Max")
+    # ax2.plot(x, node_min_vals, marker='x', linestyle='--', color=colors[4], linewidth=2, label="Avg. Node load Min")
 
     ax2.set_ylabel(f"GPU / Node Load (Avg. Std / Max / Min)")
     ax2.tick_params(axis='y')
 
     ax2.set_ylim(0, max(gpu_std_vals + gpu_max_vals + node_std_vals + node_max_vals) * 1.1)
 
-    offset_line = 3000
+    offset_line = 2000
     # 标注折线图点值
     for i in range(len(x)):
-        ax2.text(i, gpu_std_vals[i] + offset_line, f"{gpu_std_vals[i]:.2f}", ha='center', va='bottom', fontsize=8)
-        ax2.text(i, gpu_max_vals[i] + offset_line, f"{gpu_max_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
-        ax2.text(i, gpu_min_vals[i] + offset_line, f"{gpu_min_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
+        ax2.text(i, gpu_std_vals[i] - offset_line, f"{gpu_std_vals[i]:.2f}", ha='center', va='top', fontsize=8)
+        # ax2.text(i, gpu_max_vals[i] + offset_line, f"{gpu_max_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
+        # ax2.text(i, gpu_min_vals[i] + offset_line, f"{gpu_min_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
 
         ax2.text(i, node_std_vals[i] + offset_line, f"{node_std_vals[i]:.2f}", ha='center', va='bottom', fontsize=8)
-        ax2.text(i, node_max_vals[i] + offset_line, f"{node_max_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
-        ax2.text(i, node_min_vals[i] + offset_line, f"{node_min_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
+        # ax2.text(i, node_max_vals[i] + offset_line, f"{node_max_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
+        # ax2.text(i, node_min_vals[i] + offset_line, f"{node_min_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
     
     # ===== 合并图例 =====
     lines_labels = [ax.get_legend_handles_labels() for ax in [ax1, ax2]]
@@ -920,10 +920,16 @@ if __name__ == "__main__":
 
     num_replicated_experts = 20
 
-    fig_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/re{num_replicated_experts}/per_layer/figs"   
+    # fig_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/re{num_replicated_experts}/per_layer/figs"   
+    # os.makedirs(fig_dir, exist_ok=True)
+
+    # result_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/re{num_replicated_experts}/per_layer/data" 
+    # os.makedirs(result_dir, exist_ok=True)
+
+    fig_dir = f"Calculation_Load/spectral_semi_even/sonnet/{model_name}_top{top_k}/figs/even_Node_semi_even_GPU/stats"   
     os.makedirs(fig_dir, exist_ok=True)
 
-    result_dir = f"Calculation_Load/sonnet/{model_name}_top{top_k}/re{num_replicated_experts}/per_layer/data" 
+    result_dir = f"Calculation_Load/spectral_semi_even/sonnet/{model_name}_top{top_k}/data/even_Node_semi_even_GPU" 
     os.makedirs(result_dir, exist_ok=True)
 
 
@@ -935,6 +941,8 @@ if __name__ == "__main__":
         # experts_activations = experts_activations_count(sonnet_routing_trace)
         # experts_activations = np.load("./Occult_test/expert_activation/traffic_test_by_prompt/OLMoE_top8_sonnet_512.npy")
 
+        # 各方案负载分层对比
+        '''
         ###############################################Placement##################################################
         vanilla_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
 
@@ -1150,6 +1158,7 @@ if __name__ == "__main__":
         # plot_combined_copies_and_load_stats_bar_line(num_of_token_copies, stats_all_layers_avg_scheme,
         #                                 placement_schemes, labels, 26, fig_path)
 
+        '''
 
         # 整体负载加和
         '''
@@ -1195,4 +1204,168 @@ if __name__ == "__main__":
 
         # fig_path = os.path.join(fig_dir,f"Load_Standar_Deviation_Spectral_uneven.svg")
         # plot_load_std_line(num_of_token_loads, [placement_schemes[0]]+placement_schemes[9:13], [labels[0]]+labels[9:13], fig_path)
+
         '''
+
+        # semi_even方案负载情况对比
+        ###############################################Placement##################################################
+        vanilla_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
+
+        # # Original
+        # dir_path = f"./Occult_test/expert_placement/spectral"
+        # prefix = f"OLMoE_sonnet_spectral_semi_even_placement_512"
+        # spectral_even_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_sonnet_spectral_even_placement_512.json")
+        # spectral_uneven_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_sonnet_spectral_uneven_placement_512.json")
+
+        # Multi
+        dir_path = f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs"
+        prefix = f"even_Node_semi_even_GPU/OLMoE_spectral_semi_even_sonnet_512_nodes2_gpus4"
+        spectral_even_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
+        spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
+        
+        spectral_semi_even_1_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.1.json")
+        spectral_semi_even_2_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.2.json")
+        spectral_semi_even_25_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.25.json")
+        spectral_semi_even_3_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.3.json")
+        spectral_semi_even_4_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.4.json")
+        spectral_semi_even_5_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.5.json")
+        spectral_semi_even_6_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.6.json")
+        spectral_semi_even_7_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.7.json")
+        spectral_semi_even_75_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.75.json")
+        spectral_semi_even_8_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.8.json")
+        spectral_semi_even_9_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.9.json")
+        spectral_semi_even_10_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate1.json")
+        
+
+        ###############################################每层负载情况##################################################
+        vanilla_loads = compute_claculation_load_per_layer(sonnet_routing_trace, vanilla_placement)
+
+        # spectral_even_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_even_placement)
+        spectral_even_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_even_multi_placement)
+        spectral_semi_even_1_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_1_placement)
+        spectral_semi_even_2_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_2_placement)
+        spectral_semi_even_25_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_25_placement)
+        spectral_semi_even_3_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_3_placement)
+        spectral_semi_even_4_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_4_placement)
+        spectral_semi_even_5_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_5_placement)
+        spectral_semi_even_6_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_6_placement)
+        spectral_semi_even_7_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_7_placement)
+        spectral_semi_even_75_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_75_placement)
+        spectral_semi_even_8_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_8_placement)
+        spectral_semi_even_9_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_9_placement)
+        spectral_semi_even_10_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_semi_even_10_placement)
+        spectral_uneven_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_uneven_multi_placement)
+        # spectral_uneven_loads = compute_claculation_load_per_layer(sonnet_routing_trace, spectral_uneven_placement)
+
+        ###############################################File##################################################
+        num_of_token_loads = {}
+        num_of_token_loads["sonnet"] = {}
+        num_of_token_loads["sonnet"]["vanilla_placement"] = vanilla_loads
+        num_of_token_loads["sonnet"]["spectral_even_placement"] = spectral_even_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.1_placement"] = spectral_semi_even_1_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.2_placement"] = spectral_semi_even_2_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.25_placement"] = spectral_semi_even_25_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.3_placement"] = spectral_semi_even_3_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.4_placement"] = spectral_semi_even_4_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.5_placement"] = spectral_semi_even_5_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.6_placement"] = spectral_semi_even_6_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.7_placement"] = spectral_semi_even_7_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.75_placement"] = spectral_semi_even_75_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.8_placement"] = spectral_semi_even_8_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_0.9_placement"] = spectral_semi_even_9_loads
+        num_of_token_loads["sonnet"]["spectral_semi_even_1_placement"] = spectral_semi_even_10_loads
+        num_of_token_loads["sonnet"]["spectral_uneven_placement"] = spectral_uneven_loads
+
+
+        filename = os.path.join(result_dir, f"num_of_token_loads_spectral_even_Node_semi_even_GPU.json")
+        with open (filename, "w") as f:
+            json.dump(num_of_token_loads, f, indent=2)
+        
+
+        # ######################################################## 统计数据计算 ########################################################
+
+        #每层每个GPU的负载情况及每层均值
+        # with open("Calculation_Load/sonnet/OLMoE_top8/per_layer/data/num_of_token_loads_original_multi_duplicate_activation_collaboration.json", "r") as f:
+        #     num_of_token_loads = json.load(f)
+
+        stats_per_layer_scheme = {}
+        stats_all_layers_avg_scheme = {}
+        for scheme, token_loads in num_of_token_loads["sonnet"].items():
+            stats_per_layer_scheme[scheme], stats_all_layers_avg_scheme[scheme] = calculate_load_stats_per_layer(token_loads)
+
+        filename = os.path.join(result_dir, f"stats_of_token_loads_per_layer_even_Node_semi_even_GPU.json")
+        with open (filename, "w") as f:
+            json.dump(stats_per_layer_scheme, f, indent=2)
+
+        filename = os.path.join(result_dir, f"stats_of_token_loads_all_layers_avg_even_Node_semi_even_GPU.json")
+        with open (filename, "w") as f:
+            json.dump(stats_all_layers_avg_scheme, f, indent=2)
+
+
+        ######################################################## 画图 ########################################################
+        # with open("Calculation_Load/spectral_semi_even/sonnet/OLMoE_top8/data/semi_even_node1_gpu4/stats_of_token_loads_all_layers_avg_node1_gpu4.json", "r") as f:
+        #     stats_all_layers_avg_scheme = json.load(f)
+
+        placement_schemes = ["vanilla_placement", 
+                             "spectral_even_placement",
+                             "spectral_semi_even_0.1_placement",
+                             "spectral_semi_even_0.2_placement",
+                             "spectral_semi_even_0.25_placement",
+                             "spectral_semi_even_0.3_placement",
+                             "spectral_semi_even_0.4_placement",
+                             "spectral_semi_even_0.5_placement",
+                             "spectral_semi_even_0.6_placement",
+                             "spectral_semi_even_0.7_placement",
+                             "spectral_semi_even_0.75_placement",
+                             "spectral_semi_even_0.8_placement",
+                             "spectral_semi_even_0.9_placement",
+                             "spectral_semi_even_1_placement",
+                             "spectral_uneven_placement"
+                             ]
+        labels = ["Vanilla", 
+                  "Spectral_Even",
+                  "Spectral_Semi_Even_0.1",
+                  "Spectral_Semi_Even_0.2",
+                  "Spectral_Semi_Even_0.25",
+                  "Spectral_Semi_Even_0.3",
+                  "Spectral_Semi_Even_0.4",
+                  "Spectral_Semi_Even_0.5",
+                  "Spectral_Semi_Even_0.6",
+                  "Spectral_Semi_Even_0.7",
+                  "Spectral_Semi_Even_0.75",
+                  "Spectral_Semi_Even_0.8",
+                  "Spectral_Semi_Even_0.9",
+                  "Spectral_Semi_Even_1",
+                  "Spectral_Uneven",
+                  ]
+
+        # # 每个方案一张各层里各个GPU\节点负载的方差
+        # os.makedirs(f"{fig_dir}/load_stats_per_layer/gpu/stats", exist_ok=True)
+        # os.makedirs(f"{fig_dir}/load_stats_per_layer/node/stats", exist_ok=True)
+        # os.makedirs(f"{fig_dir}/load_stats_per_layer/gpu_node/stats", exist_ok=True)
+
+        # plot_per_scheme_layerwise_bar_line(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/gpu","GPU")
+        # plot_per_scheme_layerwise_bar_line(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/node","Node")
+        # plot_per_scheme_layerwise_bar_line_gpu_node(stats_per_layer_scheme, labels, f"{fig_dir}/load_stats_per_layer/gpu_node")
+
+        # # 各层统计数据的均值对比
+        # plot_avg_load_stats_line(stats_all_layers_avg_scheme,  placement_schemes, labels, f"{fig_dir}/load_stats_per_layer/gpu/stats","GPU")
+        # plot_avg_load_stats_line(stats_all_layers_avg_scheme,  placement_schemes, labels, f"{fig_dir}/load_stats_per_layer/node/stats","Node")
+        # plot_avg_load_stats_line_gpu_node(stats_all_layers_avg_scheme,  placement_schemes, labels, f"{fig_dir}/load_stats_per_layer/gpu_node/stats")
+
+        # # 和通信量合并一张图
+        with open(f"Token_Copies_Compare_sim/spectral_semi_even/sonnet/OLMoE_top8/data/num_of_token_copies_spectral_multi_even_Node_semi_even_GPU.json",'r') as f:
+            num_of_token_copies = json.load(f)
+
+
+        fig_path = os.path.join(f"{fig_dir}",f"communication_computing_gpu.svg")
+        plot_combined_copies_and_load_stats(num_of_token_copies, stats_all_layers_avg_scheme,
+                                        placement_schemes, labels, 40, fig_path, "GPU") 
+        
+        fig_path = os.path.join(f"{fig_dir}",f"communication_computing_node.svg")
+        plot_combined_copies_and_load_stats(num_of_token_copies, stats_all_layers_avg_scheme,
+                                        placement_schemes, labels, 40, fig_path, "Node")                # 13-34 10-28 16-46
+        
+        fig_path = os.path.join(f"{fig_dir}",f"communication_computing_gpu_node.svg")
+        plot_combined_copies_and_load_stats_gpu_node(num_of_token_copies, stats_all_layers_avg_scheme,
+                                        placement_schemes, labels, 40, fig_path)    

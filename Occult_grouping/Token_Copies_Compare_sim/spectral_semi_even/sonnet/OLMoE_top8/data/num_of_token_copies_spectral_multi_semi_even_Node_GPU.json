@@ -1,0 +1,79 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 448186,
+      "num_inter_node": 895842
+    },
+    "spectral_even_placement": {
+      "num_intra_gpu": 316042,
+      "num_inter_gpu": 315630,
+      "num_inter_node": 631675
+    },
+    "spectral_semi_even_0.1_placement": {
+      "num_intra_gpu": 305214,
+      "num_inter_gpu": 305240,
+      "num_inter_node": 610086
+    },
+    "spectral_semi_even_0.2_placement": {
+      "num_intra_gpu": 290480,
+      "num_inter_gpu": 291805,
+      "num_inter_node": 581606
+    },
+    "spectral_semi_even_0.25_placement": {
+      "num_intra_gpu": 285081,
+      "num_inter_gpu": 284173,
+      "num_inter_node": 568562
+    },
+    "spectral_semi_even_0.3_placement": {
+      "num_intra_gpu": 280775,
+      "num_inter_gpu": 280022,
+      "num_inter_node": 560772
+    },
+    "spectral_semi_even_0.4_placement": {
+      "num_intra_gpu": 273845,
+      "num_inter_gpu": 274236,
+      "num_inter_node": 547990
+    },
+    "spectral_semi_even_0.5_placement": {
+      "num_intra_gpu": 271358,
+      "num_inter_gpu": 272772,
+      "num_inter_node": 544537
+    },
+    "spectral_semi_even_0.6_placement": {
+      "num_intra_gpu": 271013,
+      "num_inter_gpu": 268626,
+      "num_inter_node": 539751
+    },
+    "spectral_semi_even_0.7_placement": {
+      "num_intra_gpu": 272418,
+      "num_inter_gpu": 270536,
+      "num_inter_node": 543134
+    },
+    "spectral_semi_even_0.75_placement": {
+      "num_intra_gpu": 274428,
+      "num_inter_gpu": 272568,
+      "num_inter_node": 546955
+    },
+    "spectral_semi_even_0.8_placement": {
+      "num_intra_gpu": 273788,
+      "num_inter_gpu": 272084,
+      "num_inter_node": 545833
+    },
+    "spectral_semi_even_0.9_placement": {
+      "num_intra_gpu": 272273,
+      "num_inter_gpu": 270421,
+      "num_inter_node": 542801
+    },
+    "spectral_semi_even_1_placement": {
+      "num_intra_gpu": 272273,
+      "num_inter_gpu": 270421,
+      "num_inter_node": 542801
+    },
+    "spectral_uneven_placement": {
+      "num_intra_gpu": 272273,
+      "num_inter_gpu": 270421,
+      "num_inter_node": 542801
+    }
+  }
+}

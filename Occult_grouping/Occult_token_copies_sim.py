@@ -9,7 +9,7 @@ from utils import extract_routing_trace, extract_expert_placement, extract_repli
 # 补全多机多卡模拟
 
 num_layers = 16
-num_of_experts_per_layer = 64
+num_experts_per_layer = 64
 gpu_node_mapping = np.array([0, 0, 1, 1]) # GPU 0和1映射到node 0；2和3映射到node 1
 
 
@@ -271,10 +271,13 @@ if __name__ == "__main__":
 
     num_replicated_experts = 4
 
-    fig_dir = f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation/re{num_replicated_experts}/figs"    # Duplicate/    Activation_Collaboration/   Activation/
+    # f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation/re{num_replicated_experts}/figs"
+    # f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation/re{num_replicated_experts}/data"
+
+    fig_dir = f"Token_Copies_Compare_sim/spectral_semi_even/sonnet/{model_name}_top{top_k}/figs"    # Duplicate/    Activation_Collaboration/   Activation/
     os.makedirs(fig_dir, exist_ok=True)
 
-    result_dir = f"Token_Copies_Compare_sim/Duplicate/sonnet/{model_name}_top{top_k}/Activation/re{num_replicated_experts}/data" # Activation_Collaboration/   Activation/
+    result_dir = f"Token_Copies_Compare_sim/spectral_semi_even/sonnet/{model_name}_top{top_k}/data" # Activation_Collaboration/   Activation/
     os.makedirs(result_dir, exist_ok=True)
 
 
@@ -283,7 +286,7 @@ if __name__ == "__main__":
         # GSM8K_routing_trace = extract_routing_trace(f"Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_GSM8K_top{top_k}/routing_trace_{num}.jsonl")
         # conala_routing_trace = extract_routing_trace(f"Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_conala_top{top_k}/routing_trace_{num}.jsonl")
 
-
+        '''
         ###############################################Placement##################################################
         vanilla_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
 
@@ -421,8 +424,132 @@ if __name__ == "__main__":
 
         fig_3_path = os.path.join(fig_dir,f"num_of_token_copies_compare_duplicate_multi_original_activation_3.svg")
         plot_num_of_copies_compare_3(num_of_token_copies, placement_schemes, labels, 26, fig_3_path)    # 3-12  4-14   5-16   7-22 18  10-26   13-38
-       
+        '''
 
 
+        # 半均衡谱聚类
+        ###############################################Placement##################################################
+        vanilla_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
 
-        #####复制不同的专家数
+        # Original
+        dir_path = f"./Occult_test/expert_placement/spectral"
+        prefix = f"OLMoE_sonnet_spectral_semi_even_placement_512"
+        spectral_even_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_sonnet_spectral_even_placement_512.json")
+        spectral_uneven_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_sonnet_spectral_uneven_placement_512.json")
+
+        # Multi
+        dir_path = f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs"
+        prefix = f"even_Node_semi_even_GPU/OLMoE_spectral_semi_even_sonnet_512_nodes2_gpus4"
+        spectral_even_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
+        spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
+        
+
+        spectral_semi_even_1_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.1.json")
+        spectral_semi_even_2_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.2.json")
+        spectral_semi_even_25_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.25.json")
+        spectral_semi_even_3_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.3.json")
+        spectral_semi_even_4_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.4.json")
+        spectral_semi_even_5_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.5.json")
+        spectral_semi_even_6_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.6.json")
+        spectral_semi_even_7_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.7.json")
+        spectral_semi_even_75_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.75.json")
+        spectral_semi_even_8_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.8.json")
+        spectral_semi_even_9_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate0.9.json")
+        spectral_semi_even_10_placement = extract_expert_placement(num_layers, num_experts_per_layer, f"{dir_path}/{prefix}_rate1.json")
+        # sonnet_spectral_even_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
+        # sonnet_spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_of_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
+      
+        ###############################################Calculate_Num_of_Token_Copies##################################################
+        vanilla_copies = calculate_num_of_token_copies(sonnet_routing_trace, vanilla_placement)
+
+        # spectral_even_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_even_placement)
+        spectral_even_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_even_multi_placement)
+        spectral_semi_even_1_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_1_placement)
+        spectral_semi_even_2_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_2_placement)
+        spectral_semi_even_25_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_25_placement)
+        spectral_semi_even_3_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_3_placement)
+        spectral_semi_even_4_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_4_placement)
+        spectral_semi_even_5_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_5_placement)
+        spectral_semi_even_6_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_6_placement)
+        spectral_semi_even_7_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_7_placement)
+        spectral_semi_even_75_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_75_placement)
+        spectral_semi_even_8_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_8_placement)
+        spectral_semi_even_9_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_9_placement)
+        spectral_semi_even_10_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_semi_even_10_placement)
+        spectral_uneven_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_uneven_multi_placement)
+        # spectral_uneven_copies = calculate_num_of_token_copies(sonnet_routing_trace, spectral_uneven_placement)
+
+
+        ###############################################File##################################################
+        num_of_token_copies = {}
+        num_of_token_copies["sonnet"] = {}
+        num_of_token_copies["sonnet"]["vanilla_placement"] = vanilla_copies
+        num_of_token_copies["sonnet"]["spectral_even_placement"] = spectral_even_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.1_placement"] = spectral_semi_even_1_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.2_placement"] = spectral_semi_even_2_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.25_placement"] = spectral_semi_even_25_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.3_placement"] = spectral_semi_even_3_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.4_placement"] = spectral_semi_even_4_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.5_placement"] = spectral_semi_even_5_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.6_placement"] = spectral_semi_even_6_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.7_placement"] = spectral_semi_even_7_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.75_placement"] = spectral_semi_even_75_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.8_placement"] = spectral_semi_even_8_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_0.9_placement"] = spectral_semi_even_9_copies
+        num_of_token_copies["sonnet"]["spectral_semi_even_1_placement"] = spectral_semi_even_10_copies
+        num_of_token_copies["sonnet"]["spectral_uneven_placement"] = spectral_uneven_copies
+
+        # num_of_token_copies["sonnet"]["spectral_even_multi_placement"] = sonnet_spectral_even_multi_copies
+        # num_of_token_copies["sonnet"]["spectral_uneven_multi_placement"] = sonnet_spectral_uneven_multi_copies
+
+        filename = os.path.join(result_dir, f"num_of_token_copies_spectral_multi_even_Node_semi_even_GPU.json")
+        with open (filename, "w") as f:
+            json.dump(num_of_token_copies ,f,indent=2)
+
+         
+        # with open(f"Token_Copies_Compare_sim/Duplicate/sonnet/OLMoE_top8/Activation_Collaboration/data/num_of_token_copies_duplicate_multi_original_activation_collaboration.json",'r') as f:
+        #     num_of_token_copies = json.load(f)
+
+        # with open(f"Token_Copies_Compare_sim/spectral_semi_even/sonnet/OLMoE_top8/data/num_of_token_copies_spectral_semi_even_node1_gpu4.json",'r') as f:
+        #     num_of_token_copies = json.load(f)
+
+
+        placement_schemes = ["vanilla_placement", 
+                             "spectral_even_placement",
+                             "spectral_semi_even_0.1_placement",
+                             "spectral_semi_even_0.2_placement",
+                             "spectral_semi_even_0.25_placement",
+                             "spectral_semi_even_0.3_placement",
+                             "spectral_semi_even_0.4_placement",
+                             "spectral_semi_even_0.5_placement",
+                             "spectral_semi_even_0.6_placement",
+                             "spectral_semi_even_0.7_placement",
+                             "spectral_semi_even_0.75_placement",
+                             "spectral_semi_even_0.8_placement",
+                             "spectral_semi_even_0.9_placement",
+                             "spectral_semi_even_1_placement",
+                             "spectral_uneven_placement"
+                             ]
+        labels = ["Vanilla", 
+                  "Spectral_Even",
+                  "Spectral_Semi_Even_0.1",
+                  "Spectral_Semi_Even_0.2",
+                  "Spectral_Semi_Even_0.25",
+                  "Spectral_Semi_Even_0.3",
+                  "Spectral_Semi_Even_0.4",
+                  "Spectral_Semi_Even_0.5",
+                  "Spectral_Semi_Even_0.6",
+                  "Spectral_Semi_Even_0.7",
+                  "Spectral_Semi_Even_0.75",
+                  "Spectral_Semi_Even_0.8",
+                  "Spectral_Semi_Even_0.9",
+                  "Spectral_Semi_Even_1",
+                  "Spectral_Uneven",
+                  ]
+
+        fig_path = os.path.join(fig_dir,f"num_of_token_copies_spectral_multi_even_Node_semi_even_GPU_2.svg")
+        plot_num_of_copies_compare(num_of_token_copies, placement_schemes, labels, 36, fig_path)    # 3-10  4-12   5-14   7-20 16   10-24   13-36
+
+        fig_3_path = os.path.join(fig_dir,f"num_of_token_copies_spectral_multi_even_Node_semi_even_GPU_3.svg")
+        plot_num_of_copies_compare_3(num_of_token_copies, placement_schemes, labels, 38, fig_3_path)    # 3-12  4-14   5-16   7-22 18  10-26   13-38
+        

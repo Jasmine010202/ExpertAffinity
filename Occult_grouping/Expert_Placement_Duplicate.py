@@ -5,7 +5,7 @@ import json
 import copy
 
 from Occult_grouping import group_experts_on_collaboration
-from Spectral_grouping_multi import spectral_cluster_on_collaboration_even, spectral_cluster_on_collaboration_uneven
+from Spectral_grouping_multi import spectral_cluster_on_collaboration_even, spectral_cluster_on_collaboration_uneven, spectral_cluster_on_collaboration_semi_even
 
 
 model_name = "OLMoE"#Switch_Transformer OLMoE
@@ -16,8 +16,13 @@ num_of_prompts = 512#
 num_layers = 16
 num_of_experts_per_layer = 64
 
+# 分组方案
 method = "spectral" # occult spectral
 even_groups = True
+enable_semi_even = True
+even_rate = 0.9  # 0 <= rate <= 1 rate = 0就是均衡方案
+
+
 # 节点数、GPU数
 num_of_nodes = 2
 num_of_gpus_per_node = 2
@@ -68,7 +73,10 @@ def grouping_multi_nodes_gpus(collab_matrix: torch.Tensor, experts_global_index_
         #print("spectral")
         collab_matrix = collab_matrix.numpy()   # spectral输入是numpy.array
         if even_groups:
-            node_groups = spectral_cluster_on_collaboration_even(collab_matrix, num_of_nodes)
+            if enable_semi_even:
+                node_groups = spectral_cluster_on_collaboration_semi_even(collab_matrix, num_of_nodes, even_rate)
+            else:
+                node_groups = spectral_cluster_on_collaboration_even(collab_matrix, num_of_nodes)
         else:
             node_groups = spectral_cluster_on_collaboration_uneven(collab_matrix, num_of_nodes)
         
@@ -84,7 +92,10 @@ def grouping_multi_nodes_gpus(collab_matrix: torch.Tensor, experts_global_index_
         else:
             #print("spectral")
             if even_groups:
-                gpu_groups_intra_node = spectral_cluster_on_collaboration_even(node_sub_collab_matrix, num_of_gpus_per_node)
+                if enable_semi_even:
+                    gpu_groups_intra_node = spectral_cluster_on_collaboration_semi_even(node_sub_collab_matrix, num_of_gpus_per_node, even_rate)
+                else:
+                    gpu_groups_intra_node = spectral_cluster_on_collaboration_even(node_sub_collab_matrix, num_of_gpus_per_node)
             else:
                 gpu_groups_intra_node = spectral_cluster_on_collaboration_uneven(node_sub_collab_matrix, num_of_gpus_per_node)
 
@@ -209,13 +220,23 @@ if __name__ == "__main__":
         # break
 
     
-    
     prefix = f"{model_name}_{input_name}_{num_of_prompts}"
-    even_prefix = (
-        "_even" if method == "spectral" and even_groups else
-        "_uneven" if method == "spectral" and not even_groups else
-        ""
-    )
+    # even_prefix = (
+    #     "_semi_even" if method == "spectral" and even_groups and enable_semi_even else
+    #     "_even" if method == "spectral" and even_groups else
+    #     "_uneven" if method == "spectral" and not even_groups else
+    #     ""
+    # )
+    if method == "spectral":
+        if even_groups and enable_semi_even:
+            even_prefix = "_semi_even"
+        elif even_groups:
+            even_prefix = "_even"
+        else:
+            even_prefix = "_uneven"
+    else:
+        even_prefix = ""
+
     suffix = f"_re{num_replicated_experts}" if enable_replicated else ""
 
     placement_file_name = f"{prefix}{even_prefix}_nodes{num_of_nodes}_gpus{num_of_nodes*num_of_gpus_per_node}{suffix}.json"
