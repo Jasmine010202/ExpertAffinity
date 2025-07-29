@@ -1,0 +1,34 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 448186,
+      "num_inter_node": 895842
+    },
+    "sonnet_spectral_even_multi_placement": {
+      "num_intra_gpu": 316042,
+      "num_inter_gpu": 315630,
+      "num_inter_node": 631675
+    },
+    "sonnet_spectral_uneven_multi_placement": {
+      "num_intra_gpu": 272273,
+      "num_inter_gpu": 270421,
+      "num_inter_node": 542801
+    },
+    "sonnet_spectral_even_multi_repli_act_placement": {
+      "num_intra_gpu": 469151,
+      "num_inter_gpu": 279360,
+      "num_inter_node": 559663
+    },
+    "sonnet_spectral_uneven_multi_repli_act_placement": {
+      "num_intra_gpu": 464754,
+      "num_inter_gpu": 242916,
+      "num_inter_node": 490616
+    },
+    "sonnet_spectral_uneven_multi_repli_group_placement": {
+      "num_intra_gpu": 259397,
+      "num_inter_gpu": 258001,
+      "num_inter_node": 518128
+    }
+  }
+}

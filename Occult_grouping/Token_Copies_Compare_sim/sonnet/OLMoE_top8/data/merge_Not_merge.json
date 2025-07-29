@@ -1,0 +1,29 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 448186,
+      "num_inter_node": 895842
+    },
+    "sonnet_occult_placement": {
+      "num_intra_gpu": 327605,
+      "num_inter_gpu": 326369,
+      "num_inter_node": 656497
+    },
+    "sonnet_occult_multi_placement": {
+      "num_intra_gpu": 334509,
+      "num_inter_gpu": 334818,
+      "num_inter_node": 668018
+    },
+    "sonnet_occult_placement_merge": {
+      "num_intra_gpu": 327605,
+      "num_inter_gpu": 326369,
+      "num_inter_node": 446333
+    },
+    "sonnet_occult_multi_placement_merge": {
+      "num_intra_gpu": 334509,
+      "num_inter_gpu": 334818,
+      "num_inter_node": 420462
+    }
+  }
+}

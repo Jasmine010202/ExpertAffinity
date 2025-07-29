@@ -3,6 +3,8 @@ import os
 import torch
 import json
 import copy
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from Occult_grouping import group_experts_on_collaboration
 from Spectral_grouping_multi import spectral_cluster_on_collaboration_even, spectral_cluster_on_collaboration_uneven, spectral_cluster_on_collaboration_semi_even
@@ -130,6 +132,53 @@ def experts_activations_count(routing_trace):
     return experts_activation_stats
 
 
+# 聚类后的层内亲和性图
+def plot_after_clustering(affinity_matrix, labels, layer_id, fig_dir):
+    filename = os.path.join(fig_dir, f"layer{layer_id}_affinity_after_cluster.png")
+
+    num_experts = len(labels)
+    
+    sorted_indices = np.argsort(labels) # 按聚类顺序重排id
+    # print(sorted_indices)
+    sorted_labels = labels[sorted_indices] # 聚类编号
+    # print(sorted_labels)
+    sorted_expert_ids = [str(i) for i in sorted_indices]    # 转str
+    # print(sorted_expert_ids)
+
+    reordered_matrix = affinity_matrix[sorted_indices][:, sorted_indices]   # 重排亲和矩阵
+    # print(reordered_matrix)
+
+    # 红色分界线
+    group_counts = [np.sum(sorted_labels == g) for g in sorted(set(labels))]
+    boundaries = np.cumsum(group_counts)
+
+    fig, ax = plt.subplots(figsize=(12,10))
+    #plt.figure(figsize=(12, 10))
+
+    sns.heatmap(reordered_matrix, annot=False, 
+        cmap="YlGnBu", linewidths=0.5, square=True, 
+        cbar_kws={"shrink": 0.5}, ax=ax)
+    
+    ax.set_xticks(np.arange(num_experts) + 0.5)
+    ax.set_yticks(np.arange(num_experts) + 0.5)
+    ax.set_xticklabels(sorted_expert_ids, rotation=90, fontsize=7)
+    ax.set_yticklabels(sorted_expert_ids, rotation=0, fontsize=7)
+
+    # 分界线
+    for b in boundaries[:-1]:
+        ax.axhline(b, color='red', linestyle='--', linewidth=1.2)
+        ax.axvline(b, color='red', linestyle='--', linewidth=1.2)
+
+    plt.title(f"Affinity Matrix (After cluster) — Layer {layer_id}")
+    plt.xlabel("Expert ID")
+    plt.ylabel("Expert ID")
+    
+    plt.subplots_adjust(left=0.15, right=0.95, top=0.92, bottom=0.15)
+    plt.savefig(filename, dpi=300, bbox_inches='tight')
+    plt.close()
+
+    print(f"Picture for layer_{layer_id} saved to : {filename}")
+
 
 if __name__ == "__main__":
     # 路由
@@ -249,6 +298,24 @@ if __name__ == "__main__":
         replicated_file_path = os.path.join(placement_dir, replicated_experts_file_name)
         with open(replicated_file_path,"w") as f2:
             json.dump(all_layers_replicated_experts, f2, indent=2)
+
+
+    # # 聚类后的亲和性图
+    # with open("Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json", "r") as f:
+    #     all_layers_placement = json.load(f)
+
+    # fig_dir = f"Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/collaboration_figs_after_clustering/spectral_uneven"
+    # os.makedirs(fig_dir, exist_ok=True)
+    
+    # for layer_id in range(len(experts_collaboration_matrix)):
+    #     labels = np.zeros(num_of_experts_per_layer, dtype=int)
+    #     layer_clusters = all_layers_placement[f"{layer_id}"]
+
+    #     for group_id, expert_list in enumerate(layer_clusters):
+    #         for expert_id in expert_list:
+    #             labels[expert_id] = int(group_id)
+        
+    #     plot_after_clustering(experts_collaboration_matrix[layer_id], labels, layer_id,fig_dir=fig_dir) 
 
    
     

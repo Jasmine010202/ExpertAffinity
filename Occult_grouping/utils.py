@@ -29,10 +29,27 @@ def prompt_to_gpu(prompt_id):
         return 3
 
 
-def extract_expert_placement(num_layers, num_experts_per_layer, file_path):
-    with open(file_path,'r') as f:
-        placement_dict = json.load(f)
+# def extract_expert_placement(num_layers, num_experts_per_layer, file_path):
+#     with open(file_path,'r') as f:
+#         placement_dict = json.load(f)
     
+#     # 转成np.array  [layers,experts]
+#     expert_placement = np.full((num_layers, num_experts_per_layer), -1, dtype=int)
+#     for layer_str, gpu_experts_lists in placement_dict.items():
+#         layer_id = int(layer_str)
+#         for gpu_id, expert_list in enumerate(gpu_experts_lists):
+#             for expert_id in expert_list:
+#                 expert_placement[layer_id, expert_id] = gpu_id
+
+#     return expert_placement
+
+def extract_expert_placement(num_layers, num_experts_per_layer, file_path = None, placement_dict = None):
+    if placement_dict is None and file_path is not None:
+        with open(file_path, 'r') as f:
+            placement_dict = json.load(f)
+    elif placement_dict is None and file_path is None:
+        raise ValueError("Either expert_placement_dict or file_path must be provided.")
+
     # 转成np.array  [layers,experts]
     expert_placement = np.full((num_layers, num_experts_per_layer), -1, dtype=int)
     for layer_str, gpu_experts_lists in placement_dict.items():
@@ -57,3 +74,36 @@ def extract_replicated_experts(num_layers, file_path):
     return replicated_experts_list
 
 
+
+# def convert_expert_placement_to_matrix(num_layers, num_experts_per_layer, expert_placement_dict):
+#     expert_placement = np.full((num_layers, num_experts_per_layer), -1, dtype=int)
+#     for layer_str, gpu_experts_lists in expert_placement_dict.items():
+#         layer_id = int(layer_str)
+#         for gpu_id, expert_list in enumerate(gpu_experts_lists):
+#             for expert_id in expert_list:
+#                 expert_placement[layer_id, expert_id] = gpu_id
+
+#     return expert_placement
+
+
+def extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, file_path = None, expert_placement_dict = None):
+    
+    if expert_placement_dict is None and file_path is not None:
+        with open(file_path,'r') as f:
+            expert_placement_dict = json.load(f)
+    elif expert_placement_dict is None and file_path is None:
+        raise ValueError("Either expert_placement_dict or file_path must be provided.")
+    
+    expert_placement = np.empty((num_layers, num_experts_per_layer), dtype = object)
+
+    for layer_id in range(num_layers):
+        for expert_id in range(num_experts_per_layer):
+            expert_placement[layer_id, expert_id] = []
+    
+    for layer_str, gpu_experts_lists in expert_placement_dict.items():
+        layer_id = int(layer_str)
+        for gpu_id, expert_list in enumerate(gpu_experts_lists):
+            for expert_id in expert_list:
+                expert_placement[layer_id, expert_id].append(gpu_id)
+
+    return expert_placement
