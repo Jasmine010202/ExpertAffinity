@@ -25,10 +25,15 @@
       "num_inter_gpu": 242916,
       "num_inter_node": 490616
     },
-    "sonnet_spectral_uneven_multi_repli_group_placement": {
-      "num_intra_gpu": 259397,
-      "num_inter_gpu": 258001,
-      "num_inter_node": 518128
+    "sonnet_spectral_uneven_multi_repli_group_weight_placement": {
+      "num_intra_gpu": 332013,
+      "num_inter_gpu": 330077,
+      "num_inter_node": 661647
+    },
+    "sonnet_spectral_uneven_multi_repli_group_topology_placement": {
+      "num_intra_gpu": 351602,
+      "num_inter_gpu": 339610,
+      "num_inter_node": 334302
     }
   }
 }

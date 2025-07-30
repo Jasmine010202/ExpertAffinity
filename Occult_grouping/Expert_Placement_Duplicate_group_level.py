@@ -241,27 +241,12 @@ if __name__ == "__main__":
     # print(gpus_load_per_layer_updated)
     # print(replication_info_per_layer)
     # 生成有副本的专家放置matrix
-    experts_placement_matrix_updated = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, None, placement_dict_after_replicated)
+    # experts_placement_matrix_updated = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, None, placement_dict_after_replicated)
 
     # 第四步，根据更新之后预估的GPU负载，计算路由轮询的权重
     polling_weights_replicated_experts = calculate_routing_polling_weights(gpus_load_per_layer_updated, replication_info_per_layer)
-    print(polling_weights_replicated_experts)
+    # print(polling_weights_replicated_experts)
     
-    '''
-    wrr_weights = calculate_wrr_weights(gpus_load_per_layer_updated, replication_info_per_layer)
-   
-
-    # --- 第五步：模拟实际路由，计算最终每层GPU负载 ---
-    print("\n--- Step 5: Simulating final GPU loads with WRR routing ---")
-    final_gpus_load_per_layer = compute_final_load_with_wrr_routing(
-        routing_trace,
-        experts_placement_matrix_initial, # 路由时仍然需要原始放置来确定未复制专家的GPU
-        replication_info_per_layer,
-        wrr_weights
-    )
-    print("Final GPU loads simulated.")
-
-    '''
 
     # 各项文件保存    
     prefix = f"{model_name}_{input_name}_{num_of_prompts}"
