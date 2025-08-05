@@ -1,0 +1,74 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 448186,
+      "num_inter_node": 895842
+    },
+    "sonnet_spectral_even_multi_placement": {
+      "num_intra_gpu": 316042,
+      "num_inter_gpu": 315630,
+      "num_inter_node": 631675
+    },
+    "sonnet_spectral_uneven_multi_placement": {
+      "num_intra_gpu": 272273,
+      "num_inter_gpu": 270421,
+      "num_inter_node": 542801
+    },
+    "sonnet_spectral_even_multi_repli_act_placement": {
+      "num_intra_gpu": 469151,
+      "num_inter_gpu": 279360,
+      "num_inter_node": 559663
+    },
+    "sonnet_spectral_uneven_multi_repli_act_placement": {
+      "num_intra_gpu": 464754,
+      "num_inter_gpu": 242916,
+      "num_inter_node": 490616
+    },
+    "sonnet_spectral_uneven_multi_repli_group_weight_placement": {
+      "num_intra_gpu": 331925,
+      "num_inter_gpu": 330095,
+      "num_inter_node": 661755
+    },
+    "sonnet_spectral_uneven_multi_repli_group_topology_placement": {
+      "num_intra_gpu": 351602,
+      "num_inter_gpu": 339610,
+      "num_inter_node": 334280
+    },
+    "sonnet_spectral_uneven_multi_repli_group_score_placement": {
+      "num_intra_gpu": 341052,
+      "num_inter_gpu": 335544,
+      "num_inter_node": 634967
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_weight_placement": {
+      "num_intra_gpu": 356659,
+      "num_inter_gpu": 355109,
+      "num_inter_node": 711842
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_topology_placement": {
+      "num_intra_gpu": 393219,
+      "num_inter_gpu": 283096,
+      "num_inter_node": 334308
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_score_placement": {
+      "num_intra_gpu": 372485,
+      "num_inter_gpu": 361029,
+      "num_inter_node": 672867
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement": {
+      "num_intra_gpu": 360714,
+      "num_inter_gpu": 359314,
+      "num_inter_node": 719768
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement": {
+      "num_intra_gpu": 398478,
+      "num_inter_gpu": 273535,
+      "num_inter_node": 341629
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_seg_score_placement": {
+      "num_intra_gpu": 378303,
+      "num_inter_gpu": 365862,
+      "num_inter_node": 677388
+    }
+  }
+}

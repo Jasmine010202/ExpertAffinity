@@ -180,6 +180,63 @@ def choose_gpu_for_replica_by_topology(token_gpu_id, token_node_id, replica_belo
     # 没有同GPU或者同节点的副本，就用权重随机轮询一个
     return choose_gpu_for_replica_by_polling_weight(polling_weights_for_replicated_group)
 
+'''
+def choose_gpu_for_replica_by_score(token_gpu_id, token_node_id, replica_belong_to_gpus, polling_weights_for_replicated_group):
+    # 效果不如Topology
+
+    # 优先本GPU的副本
+    if token_gpu_id in replica_belong_to_gpus :
+        return token_gpu_id
+        
+    # 同GPU没有，优先查找和token同节点的副本
+    local_node_replicas = []
+    for gpu_id in replica_belong_to_gpus:
+        if gpu_node_mapping[gpu_id] == token_node_id:
+            local_node_replicas.append(gpu_id) 
+
+    if local_node_replicas:
+        # 有同节点副本，选择预测负载最低的
+        local_node_weights = {gpu: polling_weights_for_replicated_group[str(gpu)] for gpu in local_node_replicas}
+        selected_gpu_idx = max(local_node_weights, key = local_node_weights.get)
+        return selected_gpu_idx
+    else:
+        # 完全没有本地副本
+        selected_gpu_idx = max(polling_weights_for_replicated_group, key = polling_weights_for_replicated_group.get)
+        return int(selected_gpu_idx)
+'''
+
+'''
+def choose_gpu_for_replica_by_score(token_gpu_id, token_node_id, replica_belong_to_gpus, polling_weights_for_replicated_group):
+
+    # 拓扑加权分数
+    topology_bonus = {}
+    for gpu_id in replica_belong_to_gpus:
+        if gpu_id == token_gpu_id:
+            topology_bonus[gpu_id] = 2.0  # 同GPU，最高加权
+        elif gpu_node_mapping[gpu_id] == token_node_id:
+            topology_bonus[gpu_id] = 1.5  # 同节点，中等加权
+        else:
+            topology_bonus[gpu_id] = 1.0  # 跨节点，无加权
+
+    scores = []
+    gpu_list = []
+
+    for gpu_id in replica_belong_to_gpus:
+        # 最终分数 = 历史预测负载权重 * 拓扑加权
+        polling_weight = polling_weights_for_replicated_group[str(gpu_id)]
+        final_score = polling_weight * topology_bonus[gpu_id] 
+
+        gpu_list.append(gpu_id)
+        scores.append(final_score)
+    
+    if sum(scores) == 0:
+        selected_gpu_idx = choose_gpu_for_replica_by_polling_weight(polling_weights_for_replicated_group)
+    else:
+        selected_gpu_idx = random.choices(gpu_list, weights=scores, k=1)[0]
+
+    return selected_gpu_idx
+'''
+
 
 def communication_traffic_calculation_load_analyze_group_level(
         routing_trace, 
@@ -261,6 +318,8 @@ def communication_traffic_calculation_load_analyze_group_level(
                             elif routing_policy == "topology":
                                 # 优先本地副本
                                 selected_gpu_id = choose_gpu_for_replica_by_topology(token_gpu_id, token_node_id, replica_belong_to_gpus, polling_weights_for_group)
+                            # elif routing_policy == "score":
+                            #     selected_gpu_id = choose_gpu_for_replica_by_score(token_gpu_id, token_node_id, replica_belong_to_gpus, polling_weights_for_group)
                             else:
                                 raise ValueError(f"Unknown Routing Policy: {routing_policy}")
                     else:
@@ -408,14 +467,14 @@ def plot_combined_copies_and_load_stats_gpu_node(num_of_token_copies, stats_all_
 
     ax2.set_ylim(0, max(gpu_std_vals + gpu_max_vals + node_std_vals + node_max_vals) * 1.1)
 
-    offset_line = 2000
+    offset_line = 1000
     # 标注折线图点值
     for i in range(len(x)):
         ax2.text(i, gpu_std_vals[i] + offset_line, f"{gpu_std_vals[i]:.2f}", ha='center', va='bottom', fontsize=8)
         # ax2.text(i, gpu_max_vals[i] + offset_line, f"{gpu_max_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
         # ax2.text(i, gpu_min_vals[i] + offset_line, f"{gpu_min_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
 
-        ax2.text(i, node_std_vals[i] + offset_line, f"{node_std_vals[i]:.2f}", ha='center', va='bottom', fontsize=8)
+        ax2.text(i, node_std_vals[i] - offset_line, f"{node_std_vals[i]:.2f}", ha='center', va='top', fontsize=8)
         # ax2.text(i, node_max_vals[i] + offset_line, f"{node_max_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
         # ax2.text(i, node_min_vals[i] + offset_line, f"{node_min_vals[i]:.0f}", ha='center', va='bottom',fontsize=8)
     
@@ -453,162 +512,276 @@ if __name__ == "__main__":
 
 
     for num in prompt_nums:
-        # sonnet_routing_trace = extract_routing_trace(f"./Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
+        sonnet_routing_trace = extract_routing_trace(f"./Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
        
-        # # # ###############################################Placement##################################################
-        # vanilla_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
-        # sonnet_spectral_even_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
-        # sonnet_spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
+        # # ###############################################Placement##################################################
+        vanilla_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
+        sonnet_spectral_even_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
+        sonnet_spectral_uneven_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_uneven_sonnet_512_nodes2_gpus4.json")
+        ####duplicate
+        # Activation
+        act_replicated_experts_list = extract_replicated_experts(num_layers, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}_replicated_experts.json")
+        sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re{num_replicated_experts}.json")
+        sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re{num_replicated_experts}.json")
+        
+        # group_level
+        sonnet_spectral_uneven_multi_repli_group_one_replica = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/One_Replica_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/One_Replica_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f1:
+            ssumrgor_replication_info = json.load(f1)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/One_Replica_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f2:
+            ssumrgor_polling_weights = json.load(f2)
+        
+        # group_level multi_replicas
+        # max/mean 2
+        sonnet_spectral_uneven_multi_repli_group_several_maxmean = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/max_load_mean_load/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/max_load_mean_load/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f3:
+            ssumrgsmean_replication_info = json.load(f3)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/max_load_mean_load/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f4:
+            ssumrgsmean_polling_weights = json.load(f4)
+
+        # Balanced Without Duplication
+        sonnet_spectral_uneven_multi_repli_group_several_BWD = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Balanced_Without_Duplication/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Balanced_Without_Duplication/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f5:
+            ssumrgsBWD_replication_info = json.load(f5)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Balanced_Without_Duplication/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f6:
+            ssumrgsBWD_polling_weights = json.load(f6)
+
+        # max/min
+        sonnet_spectral_uneven_multi_repli_group_several_maxmin = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/max_load_min_load/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/max_load_min_load/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f7:
+            ssumrgsmin_replication_info = json.load(f7)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/max_load_min_load/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f8:
+            ssumrgsmin_polling_weights = json.load(f8)
+
+        # round(skew_factor-1)
+        sonnet_spectral_uneven_multi_repli_group_several_round = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/round(skew_factor-1)/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/round(skew_factor-1)/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f9:
+            ssumrgsr_replication_info = json.load(f9)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/round(skew_factor-1)/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f10:
+            ssumrgsr_polling_weights = json.load(f10)
+
+        # segmented 
+        sonnet_spectral_uneven_multi_repli_group_several_segmented = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f11:
+            ssumrgss_replication_info = json.load(f11)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f12:
+            ssumrgss_polling_weights = json.load(f12)
+
+        # segmented_BWD 
+        sonnet_spectral_uneven_multi_repli_group_several_segmented_BWD = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented_BWD/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented_BWD/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f13:
+            ssumrgssBWD_replication_info = json.load(f13)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented_BWD/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f14:
+            ssumrgssBWD_polling_weights = json.load(f14)
+
+
+        # ###############################################Calculate_Num_of_Token_Copies & Loads##################################################
+        sonnet_vanilla_copies, sonnet_vanilla_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, vanilla_placement)
+        sonnet_spectral_even_multi_copies, sonnet_spectral_even_multi_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_even_multi_placement)
+        sonnet_spectral_uneven_multi_copies, sonnet_spectral_uneven_multi_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_uneven_multi_placement)
+        
         # ####duplicate
         # # Activation
-        # act_replicated_experts_list = extract_replicated_experts(num_layers, f"./Occult_test/expert_placement/occult/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_nodes2_gpus4_re{num_replicated_experts}_replicated_experts.json")
-        # sonnet_spectral_even_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_even_nodes2_gpus4_re{num_replicated_experts}.json")
-        # sonnet_spectral_uneven_multi_repli_act = extract_expert_placement(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/Duplicate/Activation/OLMoE_sonnet_512_uneven_nodes2_gpus4_re{num_replicated_experts}.json")
+        sonnet_spectral_even_multi_repli_act_copies, sonnet_spectral_even_multi_repli_act_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_even_multi_repli_act, act_replicated_experts_list)
+        sonnet_spectral_uneven_multi_repli_act_copies, sonnet_spectral_uneven_multi_repli_act_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_act, act_replicated_experts_list)
+        
         # # group_level
-        # sonnet_spectral_uneven_multi_repli_group = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/One_Replica_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/One_Replica_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f1:
-        #     ssumrg_replication_info = json.load(f1)
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/One_Replica_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f2:
-        #     ssumrg_polling_weights = json.load(f2)
-        # # # print(ssumrg_replication_info)
-        # # # print(ssumrg_polling_weights)
-        # # group_level multi_replicas
-        # sonnet_spectral_uneven_multi_repli_group_several = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f3:
-        #     ssumrgs_replication_info = json.load(f3)
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f4:
-        #     ssumrgs_polling_weights = json.load(f4)
 
-        # sonnet_spectral_uneven_multi_repli_group_several_BWD = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Balanced_Without_Duplication/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Balanced_Without_Duplication/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f5:
-        #     ssumrgsBWD_replication_info = json.load(f5)
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Balanced_Without_Duplication/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f6:
-        #     ssumrgsBWD_polling_weights = json.load(f6)
+        # 加权轮询
+        sonnet_spectral_uneven_multi_repli_group_one_replica_weight_copies, sonnet_spectral_uneven_multi_repli_group_one_replica_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_one_replica, ssumrgor_replication_info, ssumrgor_polling_weights, "weight", "One")
+        # 优先本地副本
+        sonnet_spectral_uneven_multi_repli_group_one_replica_topology_copies, sonnet_spectral_uneven_multi_repli_group_one_replica_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_one_replica, ssumrgor_replication_info, ssumrgor_polling_weights, "topology","One")
+        # # 乘积分数
+        # sonnet_spectral_uneven_multi_repli_group_score_copies, sonnet_spectral_uneven_multi_repli_group_score_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_one_replica, ssumrgor_replication_info, ssumrgor_polling_weights, "score","One")
 
-
-        # # ###############################################Calculate_Num_of_Token_Copies & Loads##################################################
-        # sonnet_vanilla_copies, sonnet_vanilla_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, vanilla_placement)
-        # sonnet_spectral_even_multi_copies, sonnet_spectral_even_multi_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_even_multi_placement)
-        # sonnet_spectral_uneven_multi_copies, sonnet_spectral_uneven_multi_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_uneven_multi_placement)
+        # group_level multi replicas
+        # max/mean
+        # 加权轮询
+        sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_maxmean, ssumrgsmean_replication_info, ssumrgsmean_polling_weights, "weight", "Multi")
+        # 优先本地副本
+        sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_maxmean, ssumrgsmean_replication_info, ssumrgsmean_polling_weights, "topology","Multi")
+        # # 乘积分数
+        # sonnet_spectral_uneven_multi_repli_group_several_score_copies, sonnet_spectral_uneven_multi_repli_group_several_score_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_maxmean, ssumrgsmean_replication_info, ssumrgsmean_polling_weights, "score","Multi")
         
-        # # ####duplicate
-        # # # Activation
-        # sonnet_spectral_even_multi_repli_act_copies, sonnet_spectral_even_multi_repli_act_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_even_multi_repli_act, act_replicated_experts_list)
-        # sonnet_spectral_uneven_multi_repli_act_copies, sonnet_spectral_uneven_multi_repli_act_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_act, act_replicated_experts_list)
-        
-        # # # group_level
-        # # 加权轮询
-        # sonnet_spectral_uneven_multi_repli_group_weight_copies, sonnet_spectral_uneven_multi_repli_group_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group, ssumrg_replication_info, ssumrg_polling_weights, "weight", "One")
-        # # 优先本地副本
-        # sonnet_spectral_uneven_multi_repli_group_topology_copies, sonnet_spectral_uneven_multi_repli_group_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group, ssumrg_replication_info, ssumrg_polling_weights, "topology","One")
-
-        # # group_level multi replicas
-        # # 加权轮询
-        # sonnet_spectral_uneven_multi_repli_group_several_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several, ssumrgs_replication_info, ssumrgs_polling_weights, "weight", "Multi")
-        # # 优先本地副本
-        # sonnet_spectral_uneven_multi_repli_group_several_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several, ssumrgs_replication_info, ssumrgs_polling_weights, "topology","Multi")
-
         # # Balanced Without Duplication
         # # 加权轮询
-        # sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_BWD, ssumrgsBWD_replication_info, ssumrgsBWD_polling_weights, "weight", "Multi")
+        sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_BWD, ssumrgsBWD_replication_info, ssumrgsBWD_polling_weights, "weight", "Multi")
         # # 优先本地副本
-        # sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_BWD, ssumrgsBWD_replication_info, ssumrgsBWD_polling_weights, "topology","Multi")
+        sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_BWD, ssumrgsBWD_replication_info, ssumrgsBWD_polling_weights, "topology","Multi")
+
+        # max、min
+        # 加权轮询
+        sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_maxmin, ssumrgsmin_replication_info, ssumrgsmin_polling_weights, "weight", "Multi")
+        # 优先本地副本
+        sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_maxmin, ssumrgsmin_replication_info, ssumrgsmin_polling_weights, "topology","Multi")
+       
+        # round
+        # 加权轮询
+        sonnet_spectral_uneven_multi_repli_group_several_round_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_round_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_round, ssumrgsr_replication_info, ssumrgsr_polling_weights, "weight", "Multi")
+        # 优先本地副本
+        sonnet_spectral_uneven_multi_repli_group_several_round_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_round_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_round, ssumrgsr_replication_info, ssumrgsr_polling_weights, "topology","Multi")
+       
+        # segmented
+        # 加权轮询
+        sonnet_spectral_uneven_multi_repli_group_several_seg_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_seg_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_segmented, ssumrgss_replication_info, ssumrgss_polling_weights, "weight", "Multi")
+        # 优先本地副本
+        sonnet_spectral_uneven_multi_repli_group_several_seg_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_seg_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_segmented, ssumrgss_replication_info, ssumrgss_polling_weights, "topology","Multi")
+       
+        # segmented
+        # 加权轮询
+        sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_segmented_BWD, ssumrgssBWD_replication_info, ssumrgssBWD_polling_weights, "weight", "Multi")
+        # 优先本地副本
+        sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_segmented_BWD, ssumrgssBWD_replication_info, ssumrgssBWD_polling_weights, "topology","Multi")
+       
+
+        # ###############################################File##################################################
+        num_of_token_copies = {}
+        num_of_token_copies["sonnet"] = {}
+        num_of_token_copies["sonnet"]["vanilla_placement"] = sonnet_vanilla_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_even_multi_placement"] = sonnet_spectral_even_multi_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_placement"] = sonnet_spectral_uneven_multi_copies
+        ####duplicate
+        #  Activation
+        num_of_token_copies["sonnet"]["sonnet_spectral_even_multi_repli_act_placement"] = sonnet_spectral_even_multi_repli_act_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_act_placement"] = sonnet_spectral_uneven_multi_repli_act_copies
+        # group_level one replica
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_one_replica_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_one_replica_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_one_replica_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_one_replica_topology_copies
+
+        # multi replicas
+        # max/mean
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_copies
+
+        # Balanced without duplication
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_copies
+
+        # max/mean
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_copies
+
+        #round
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_round_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_round_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_round_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_round_topology_copies
+
+        # segmented
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_topology_copies
+
+        # segmented_BWD
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_copies
+
+        copies_filename = os.path.join(result_dir, f"num_of_token_copies_spectral_multi_repli_act_group.json")
+        with open (copies_filename, "w") as copies_file:
+            json.dump(num_of_token_copies ,copies_file,indent=2)
+
+        num_of_token_loads = {}
+        num_of_token_loads["sonnet"] = {}
+        num_of_token_loads["sonnet"]["vanilla_placement"] = sonnet_vanilla_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_placement"] = sonnet_spectral_even_multi_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_placement"] = sonnet_spectral_uneven_multi_loads
+        ####duplicate
+        #  Activation
+        num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_repli_act_placement"] = sonnet_spectral_even_multi_repli_act_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_act_placement"] = sonnet_spectral_uneven_multi_repli_act_loads
+        # group_level one replica
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_one_replica_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_one_replica_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_one_replica_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_one_replica_topology_loads
+
+        # multi replicas
+        # max/mean
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_loads
+
+        # Balanced without duplication
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_loads
+
+        # max/mean
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_loads
+
+        #round
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_round_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_round_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_round_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_round_topology_loads
+
+        # segmented
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_topology_loads
+
+        # segmented
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_loads
 
 
-        # # ###############################################File##################################################
-        # num_of_token_copies = {}
-        # num_of_token_copies["sonnet"] = {}
-        # num_of_token_copies["sonnet"]["vanilla_placement"] = sonnet_vanilla_copies
-        # num_of_token_copies["sonnet"]["sonnet_spectral_even_multi_placement"] = sonnet_spectral_even_multi_copies
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_placement"] = sonnet_spectral_uneven_multi_copies
-        # ####duplicate
-        # #  Activation
-        # num_of_token_copies["sonnet"]["sonnet_spectral_even_multi_repli_act_placement"] = sonnet_spectral_even_multi_repli_act_copies
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_act_placement"] = sonnet_spectral_uneven_multi_repli_act_copies
-        # # group_level
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_weight_copies
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_topology_copies
-        # # multi replicas
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_weight_copies
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_topology_copies
-        # # Balanced without duplication
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_copies
-        # num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_copies
-
-
-        # copies_filename = os.path.join(result_dir, f"num_of_token_copies_spectral_multi_repli_act_group.json")
-        # with open (copies_filename, "w") as copies_file:
-        #     json.dump(num_of_token_copies ,copies_file,indent=2)
-
-        # num_of_token_loads = {}
-        # num_of_token_loads["sonnet"] = {}
-        # num_of_token_loads["sonnet"]["vanilla_placement"] = sonnet_vanilla_loads
-        # num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_placement"] = sonnet_spectral_even_multi_loads
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_placement"] = sonnet_spectral_uneven_multi_loads
-        # ####duplicate
-        # #  Activation
-        # num_of_token_loads["sonnet"]["sonnet_spectral_even_multi_repli_act_placement"] = sonnet_spectral_even_multi_repli_act_loads
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_act_placement"] = sonnet_spectral_uneven_multi_repli_act_loads
-        # # group_level
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_weight_loads
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_topology_loads
-        # # multi replicas
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_weight_loads
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_topology_loads
-        # # Balanced without duplication
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_loads
-        # num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_loads
-
-        # loads_filename = os.path.join(result_dir, f"num_of_token_loads_spectral_multi_repli_act_group.json")
-        # with open (loads_filename, "w") as loads_file:
-        #     json.dump(num_of_token_loads, loads_file, indent=2)
+        loads_filename = os.path.join(result_dir, f"num_of_token_loads_spectral_multi_repli_act_group.json")
+        with open (loads_filename, "w") as loads_file:
+            json.dump(num_of_token_loads, loads_file, indent=2)
         
-        # # ######################################################## 负载统计数据计算 ########################################################
+        ######################################################## 负载统计数据计算 ########################################################
 
-        # stats_per_layer_scheme = {}
-        # stats_all_layers_avg_scheme = {}
-        # for scheme, token_loads in num_of_token_loads["sonnet"].items():
-        #     stats_per_layer_scheme[scheme], stats_all_layers_avg_scheme[scheme] = calculate_load_stats_per_layer(token_loads)
+        stats_per_layer_scheme = {}
+        stats_all_layers_avg_scheme = {}
+        for scheme, token_loads in num_of_token_loads["sonnet"].items():
+            stats_per_layer_scheme[scheme], stats_all_layers_avg_scheme[scheme] = calculate_load_stats_per_layer(token_loads)
 
-        # load_stats_per_layer_filename = os.path.join(result_dir, f"stats_of_token_loads_per_layer.json")
-        # with open (load_stats_per_layer_filename, "w") as f3:
-        #     json.dump(stats_per_layer_scheme, f3, indent=2)
+        load_stats_per_layer_filename = os.path.join(result_dir, f"stats_of_token_loads_per_layer.json")
+        with open (load_stats_per_layer_filename, "w") as f3:
+            json.dump(stats_per_layer_scheme, f3, indent=2)
 
-        # load_stats_avg_filename = os.path.join(result_dir, f"stats_of_token_loads_all_layers_avg.json")
-        # with open (load_stats_avg_filename, "w") as f4:
-        #     json.dump(stats_all_layers_avg_scheme, f4, indent=2)
+        load_stats_avg_filename = os.path.join(result_dir, f"stats_of_token_loads_all_layers_avg.json")
+        with open (load_stats_avg_filename, "w") as f4:
+            json.dump(stats_all_layers_avg_scheme, f4, indent=2)
 
         # ####################################################### 画图 ########################################################
-        file_path_prefix = "./Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_OLMoE_top8/data"
-        with open(f"{file_path_prefix}/num_of_token_copies_spectral_multi_repli_act_group.json", "r") as f1:
-            num_of_token_copies = json.load(f1)
+        # file_path_prefix = "./Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_OLMoE_top8/data"
+        # with open(f"{file_path_prefix}/num_of_token_copies_spectral_multi_repli_act_group.json", "r") as f1:
+        #     num_of_token_copies = json.load(f1)
 
-        with open(f"{file_path_prefix}/stats_of_token_loads_all_layers_avg.json", "r") as f2:
-            stats_all_layers_avg_scheme = json.load(f2)
+        # with open(f"{file_path_prefix}/stats_of_token_loads_all_layers_avg.json", "r") as f2:
+        #     stats_all_layers_avg_scheme = json.load(f2)
         
         placement_schemes = ["vanilla_placement", 
                             #  "sonnet_spectral_even_multi_placement", 
-                             "sonnet_spectral_even_multi_repli_act_placement", 
+                            #  "sonnet_spectral_even_multi_repli_act_placement", 
                              "sonnet_spectral_uneven_multi_placement", 
                              "sonnet_spectral_uneven_multi_repli_act_placement",
-                            #  "sonnet_spectral_uneven_multi_repli_group_weight_placement",
-                             "sonnet_spectral_uneven_multi_repli_group_topology_placement",
-                            #  "sonnet_spectral_uneven_multi_repli_group_several_weight_placement",
-                             "sonnet_spectral_uneven_multi_repli_group_several_topology_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_one_replica_weight_placement",
+                             "sonnet_spectral_uneven_multi_repli_group_one_replica_topology_placement",
                             #  "sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_placement",
-                             "sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_placement"
+                             "sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_placement",
+                             "sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_round_weight_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_round_topology_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_placement",
+                             "sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement",
+                             "sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement"
                              ]
         labels = ["Vanilla", 
                 #   "Even_Multi", 
-                  "Even_Multi_Act", 
+                #   "Even_Multi_Act", 
                   "Uneven_Multi", 
                   "Uneven_Multi_Act",
-                #   "Uneven_Multi_Group_Weight",
-                  "Uneven_Multi_Group_Topology",
-                #   "Uneven_Multi_Group_Several_Weight",
-                  "Uneven_Multi_Group_Several_Topology",
-                #   "Uneven_Multi_Group_Several_BWD_Weight",
-                  "Uneven_Multi_Group_Several_BWD_Topology"
+                #   "One_Weight",
+                  "One_Topology",
+                #   "Several_One/Two_BWD_Weight",
+                  "Several_One/Two_BWD_Topology",
+                #   "Several_One/Two_Weight",
+                  "Several_One/Two_Topology",
+                #   "Several_maxmin_Weight",
+                #   "Several_maxmin_Topology",
+                #   "Several_round_Weight",
+                #   "Several_round_Topology",
+                #   "Several_SEG_BWD_Weight",
+                  "Several_SEG_BWD_Topology",
+                #   "Several_SEG_Weight",
+                  "Several_SEG_Topology",
                   ]
         
         fig_path = os.path.join(fig_dir,f"communication_computing_compare.svg")

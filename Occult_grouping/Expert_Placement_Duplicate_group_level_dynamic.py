@@ -33,7 +33,7 @@ even_groups = False
 collaboration_dir = f"./Occult_test/expert_collaboration"
 os.makedirs(collaboration_dir, exist_ok=True)
 
-placement_dir = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group"
+placement_dir = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented"
 os.makedirs(placement_dir, exist_ok=True)
 
 
@@ -107,22 +107,21 @@ def compute_gpu_claculation_load_per_layer(routing_trace, expert_placement):
 
     return gpus_token_load_per_layer
 
-
+'''
 def replicate_heavy_experts_group(gpus_loads_per_layer_initial, all_layers_placement_dict_initial):
     replicated_placement_dict = copy.deepcopy(all_layers_placement_dict_initial)
 
     update_gpu_loads = copy.deepcopy(gpus_loads_per_layer_initial)
-
-    '''
-    Format: {layer_id: 
-                    {"replicated_group": list_of_expert_ids, 
-                     "original_gpu": int, 
-                     "replica_gpu": [int, ...],
-                     "num_replicas": int}}
-    '''
+    
+    # Format: {layer_id: 
+    #                 {"replicated_group": list_of_expert_ids, 
+    #                  "original_gpu": int, 
+    #                  "replica_gpu": [int, ...],
+    #                  "num_replicas": int}}
     
     replication_info_per_layer = {} 
 
+    epsilon = 1e-6 # 避免除零错误
 
     for layer_id in range(num_layers):
         gpu_loads = gpus_loads_per_layer_initial[layer_id]   #当前层GPU负载
@@ -136,15 +135,19 @@ def replicate_heavy_experts_group(gpus_loads_per_layer_initial, all_layers_place
         else:
             skew_factor = max_load / mean_load
 
+        # #############################方案1：max_load / mean_load ，相对均衡的层不复制 ##############################
+        # 偏斜程度<1.5,偏斜不大，可以不复制
         # num_replicas = 0
         # if skew_factor > 2:
         #     num_replicas = min(2, num_gpus // 2)
         # elif 1.5 <= skew_factor <= 2:
         #     num_replicas = 1
         # else: 
-        #     replication_info_per_layer[layer_id] = None     # 偏斜程度<1.5,偏斜不大，可以不复制
+        #     replication_info_per_layer[layer_id] = None     
         #     continue 
 
+        # #############################方案2：max_load / mean_load ，所有层最大负载的组至少一个副本 ##############################
+        # 每层被复制的专家组至少一个副本，最多两个副本
         num_replicas = 1
         if skew_factor > 2:
             num_replicas = min(2, num_gpus // 2)
@@ -188,6 +191,154 @@ def replicate_heavy_experts_group(gpus_loads_per_layer_initial, all_layers_place
         # 目标GPU，在原有专家组负载的基础上加上分摊的负载
         for light_gpu_idx in light_gpu_list:
             update_gpu_loads[layer_id][light_gpu_idx] += load_per_instance
+
+    return replicated_placement_dict, update_gpu_loads, replication_info_per_layer
+'''
+
+
+def replicate_heavy_experts_group(gpus_loads_per_layer_initial, all_layers_placement_dict_initial):
+    replicated_placement_dict = copy.deepcopy(all_layers_placement_dict_initial)
+
+    update_gpu_loads = copy.deepcopy(gpus_loads_per_layer_initial)
+
+    '''
+    Format: {layer_id: 
+                    {"replicated_group": list_of_expert_ids, 
+                     "original_gpu": int, 
+                     "replica_gpu": [int, ...],
+                     "num_replicas": int}}
+    '''
+    
+    replication_info_per_layer = {} 
+
+    # epsilon = 1e-6 # 避免除零错误
+
+    for layer_id in range(num_layers):
+        gpu_loads = gpus_loads_per_layer_initial[layer_id]   #当前层GPU负载
+
+        # # 根据计算负载的不均衡程度，决定复制数量 
+        # ############################# [计算负载偏斜系数 =  max_load / mean_load] #############################
+        max_load = np.max(gpu_loads)
+        mean_load = np.mean(gpu_loads)      
+
+        if mean_load == 0:
+            skew_factor = 0     # 
+        else:
+            skew_factor = max_load / mean_load
+        
+        # ############################# 方案1：相对均衡的层不复制 Balanced_Without_Duplication##############################
+        # num_replicas = 0
+        # if skew_factor > 2:
+        #     num_replicas = min(2, num_gpus // 2)
+        # elif 1.5 <= skew_factor <= 2:
+        #     num_replicas = 1
+        # else: 
+        #     replication_info_per_layer[layer_id] = None     # 偏斜程度<1.5,偏斜不大，可以不复制
+        #     continue 
+
+        # ############################# 方案2：所有层最大负载的组至少一个副本,至多两个副本 max_load_mean_load ##############################
+        # 每层被复制的专家组至少一个副本，最多两个副本
+        # num_replicas = 1
+        # if skew_factor > 2:
+        #     num_replicas = min(2, num_gpus // 2)
+        # print(skew_factor)
+
+        ############################# 方案3：让副本数随着skew_factor连续变化 round(skew_factor-1) ##############################
+        # if skew_factor > 1.0:
+        #     num_replicas_raw = round(skew_factor - 1)
+        # else:
+        #     # 每层被复制的专家组至少一个副本
+        #     num_replicas_raw = 1
+
+        # # max_replicas = num_gpus // 2    # 副本数上限：总GPU数目的一半
+        # max_replicas = num_gpus -1     # 副本数上限：总GPU数目-1
+        # num_replicas = int(min(max_replicas, max(1, num_replicas_raw)))
+
+        ############################# 方案4：分段式 segmented##############################
+        # num_replicas = 0
+        # if skew_factor > 3:
+        #     num_replicas = min(3, num_gpus - 1)
+        # elif 2 < skew_factor <= 3:
+        #     num_replicas = min(2, num_gpus - 1)  
+        # elif 1.5 <= skew_factor <= 2:
+        #     num_replicas = 1
+        # else:
+        #     replication_info_per_layer[layer_id] = None     # 偏斜程度<1.5,偏斜不大，可以不复制
+        #     continue
+
+        # 所有层都复制
+        num_replicas = 1
+        if skew_factor > 3:
+            num_replicas = min(3, num_gpus - 1)
+        elif 2 < skew_factor <= 3:
+            num_replicas = min(2, num_gpus - 1)  
+        else:
+            num_replicas = 1
+
+
+        '''
+        # max_load_min_load
+        # # ############################# [计算副本数 =  max_load / min_load] ##############################
+        # heavy_gpu_idx = np.argmax(gpu_loads) 
+        # light_gpu_idx = np.argmin(gpu_loads)
+
+        # most_heavy_load = gpu_loads[heavy_gpu_idx]
+        # most_light_load = gpu_loads[light_gpu_idx]
+
+        # # 如果最空闲的GPU负载和最繁忙的GPU负载相同，则不进行复制
+        # if most_heavy_load == most_light_load:
+        #     replication_info_per_layer[layer_id] = None
+        #     continue
+
+        # # 动态计算副本数
+        # num_replicas_raw = np.ceil(most_heavy_load / (most_light_load + epsilon)) - 1   # -1 ：原先那份
+
+        # # 限制副本数范围：
+        # max_num_replicas = num_gpus // 2    # 副本数上限：总GPU数目的一半
+        # num_replicas = int(min(max_num_replicas, max(1, num_replicas_raw)))
+        '''
+        
+        # print("layer_id", layer_id)
+        # print("num_replicas", num_replicas)
+
+        # 找到负载最大的GPU对应的专家组
+        heavy_gpu_idx = np.argmax(gpu_loads) 
+        heavy_group = all_layers_placement_dict_initial[str(layer_id)][heavy_gpu_idx]
+
+        # 负载从小到大的 num_replicas 个GPU作为负载目标
+        sorted_gpu_indices = np.argsort(gpu_loads)
+        # light_gpu_list = []
+        # light_gpu_list = sorted_gpu_indices[:num_replicas].tolist()
+        heavy_gpu_pos = np.where(sorted_gpu_indices == heavy_gpu_idx)[0][0]
+        other_gpus_indices = np.delete(sorted_gpu_indices, heavy_gpu_pos)
+        light_gpu_list = other_gpus_indices[:num_replicas].tolist()
+
+        # 如果没有找到合适的目标GPU，可能:GPU数量不够或负载都差不多
+        if not light_gpu_list:
+            replication_info_per_layer[layer_id] = None 
+            continue  
+
+        # 记录复制信息
+        replication_info_per_layer[layer_id] = {
+            "replicated_group": heavy_group,
+            "original_gpu": int(heavy_gpu_idx),
+            "target_gpus": light_gpu_list,
+            "num_replicas": num_replicas
+        }
+
+        # 更新放置后的dict 
+        for gpu_idx in light_gpu_list:
+            replicated_placement_dict[str(layer_id)][gpu_idx].extend(heavy_group)
+
+        # 更新复制后GPU权重
+        num_total_instances = 1 + num_replicas
+        load_per_instance = gpu_loads[heavy_gpu_idx] // num_total_instances
+
+        # 原始GPU更新为分摊之后的一部分
+        update_gpu_loads[layer_id][heavy_gpu_idx] = load_per_instance
+        # 目标GPU，在原有专家组负载的基础上加上分摊的负载
+        for gpu_idx in light_gpu_list:
+            update_gpu_loads[layer_id][gpu_idx] += load_per_instance
 
     return replicated_placement_dict, update_gpu_loads, replication_info_per_layer
 

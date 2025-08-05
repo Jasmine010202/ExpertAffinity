@@ -1,0 +1,178 @@
+{
+  "vanilla_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 184778142.125,
+      "std": 12675.39526263043,
+      "max": 79570.4375,
+      "min": 46660.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 331447496.625,
+      "std": 14827.0,
+      "max": 137195.0,
+      "min": 107541.0
+    }
+  },
+  "sonnet_spectral_even_multi_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 1115967437.0,
+      "std": 31309.870917549015,
+      "max": 104258.375,
+      "min": 20635.75
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 1809439657.0625,
+      "std": 38025.4375,
+      "max": 160393.4375,
+      "min": 84342.5625
+    }
+  },
+  "sonnet_spectral_uneven_multi_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 2338653828.75,
+      "std": 44751.531255107424,
+      "max": 133442.375,
+      "min": 19194.3125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 3439403840.875,
+      "std": 53935.75,
+      "max": 176303.75,
+      "min": 68432.25
+    }
+  },
+  "sonnet_spectral_even_multi_repli_act_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 454379623.84375,
+      "std": 20809.694725199886,
+      "max": 83987.0625,
+      "min": 30034.8125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 663720487.1875,
+      "std": 22661.8125,
+      "max": 145029.8125,
+      "min": 99706.1875
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_act_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 1023665301.0625,
+      "std": 30583.631576941858,
+      "max": 107137.0625,
+      "min": 28369.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 1654686867.1875,
+      "std": 37772.4375,
+      "max": 160140.4375,
+      "min": 84595.5625
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 459723578.5625,
+      "std": 18700.02981920192,
+      "max": 80732.4375,
+      "min": 36334.5
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 101945279.1875,
+      "std": 8763.0625,
+      "max": 131131.0625,
+      "min": 113604.9375
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 526348948.125,
+      "std": 20680.340801480917,
+      "max": 87442.3125,
+      "min": 35216.5
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 225041703.0625,
+      "std": 13827.1875,
+      "max": 136195.1875,
+      "min": 108540.8125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 120427827.59375,
+      "std": 10040.532631882406,
+      "max": 71331.5,
+      "min": 46019.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 141717185.3125,
+      "std": 9968.1875,
+      "max": 132336.1875,
+      "min": 112399.8125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 279507184.5,
+      "std": 15556.746185408205,
+      "max": 82622.0,
+      "min": 41199.25
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 225041703.0625,
+      "std": 13827.1875,
+      "max": 136195.1875,
+      "min": 108540.8125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 122514108.09375,
+      "std": 9280.323558345828,
+      "max": 71080.4375,
+      "min": 47380.4375
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 101937326.4375,
+      "std": 8229.3125,
+      "max": 130597.3125,
+      "min": 114138.6875
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 238313930.0,
+      "std": 14186.772806726087,
+      "max": 79566.1875,
+      "min": 42554.3125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 196099645.5,
+      "std": 12952.25,
+      "max": 135320.25,
+      "min": 109415.75
+    }
+  }
+}

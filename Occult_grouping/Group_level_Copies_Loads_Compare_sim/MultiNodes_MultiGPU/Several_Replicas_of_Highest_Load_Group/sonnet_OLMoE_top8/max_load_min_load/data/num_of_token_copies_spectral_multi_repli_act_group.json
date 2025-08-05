@@ -1,0 +1,59 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 448186,
+      "num_inter_node": 895842
+    },
+    "sonnet_spectral_even_multi_placement": {
+      "num_intra_gpu": 316042,
+      "num_inter_gpu": 315630,
+      "num_inter_node": 631675
+    },
+    "sonnet_spectral_uneven_multi_placement": {
+      "num_intra_gpu": 272273,
+      "num_inter_gpu": 270421,
+      "num_inter_node": 542801
+    },
+    "sonnet_spectral_even_multi_repli_act_placement": {
+      "num_intra_gpu": 469151,
+      "num_inter_gpu": 279360,
+      "num_inter_node": 559663
+    },
+    "sonnet_spectral_uneven_multi_repli_act_placement": {
+      "num_intra_gpu": 464754,
+      "num_inter_gpu": 242916,
+      "num_inter_node": 490616
+    },
+    "sonnet_spectral_uneven_multi_repli_group_weight_placement": {
+      "num_intra_gpu": 331906,
+      "num_inter_gpu": 329961,
+      "num_inter_node": 662075
+    },
+    "sonnet_spectral_uneven_multi_repli_group_topology_placement": {
+      "num_intra_gpu": 351602,
+      "num_inter_gpu": 339610,
+      "num_inter_node": 334317
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_weight_placement": {
+      "num_intra_gpu": 356651,
+      "num_inter_gpu": 355348,
+      "num_inter_node": 711258
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_topology_placement": {
+      "num_intra_gpu": 393219,
+      "num_inter_gpu": 283096,
+      "num_inter_node": 334309
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_placement": {
+      "num_intra_gpu": 364312,
+      "num_inter_gpu": 364013,
+      "num_inter_node": 728007
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_placement": {
+      "num_intra_gpu": 412253,
+      "num_inter_gpu": 258870,
+      "num_inter_node": 318198
+    }
+  }
+}
