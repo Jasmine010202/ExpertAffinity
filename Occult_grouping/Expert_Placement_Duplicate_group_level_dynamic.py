@@ -5,6 +5,7 @@ import json
 import copy
 import matplotlib.pyplot as plt
 import seaborn as sns
+import math
 
 from Occult_grouping import group_experts_on_collaboration
 from Spectral_grouping_multi import spectral_cluster_on_collaboration_even, spectral_cluster_on_collaboration_uneven, spectral_cluster_on_collaboration_semi_even
@@ -33,7 +34,7 @@ even_groups = False
 collaboration_dir = f"./Occult_test/expert_collaboration"
 os.makedirs(collaboration_dir, exist_ok=True)
 
-placement_dir = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented"
+placement_dir = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/formula"
 os.makedirs(placement_dir, exist_ok=True)
 
 
@@ -266,15 +267,26 @@ def replicate_heavy_experts_group(gpus_loads_per_layer_initial, all_layers_place
         #     replication_info_per_layer[layer_id] = None     # 偏斜程度<1.5,偏斜不大，可以不复制
         #     continue
 
-        # 所有层都复制
-        num_replicas = 1
-        if skew_factor > 3:
-            num_replicas = min(3, num_gpus - 1)
-        elif 2 < skew_factor <= 3:
-            num_replicas = min(2, num_gpus - 1)  
-        else:
-            num_replicas = 1
+        # ############################# 方案5：分段式 segmented 所有层都复制##############################
+        # num_replicas = 1
+        # if skew_factor > 3:
+        #     num_replicas = min(3, num_gpus - 1)
+        # elif 2 < skew_factor <= 3:
+        #     num_replicas = min(2, num_gpus - 1)  
+        # else:
+        #     num_replicas = 1
 
+        # ############################# 方案6：分段式 segmented 所有层都复制 + 连续变化集合##############################
+        # # skew_factor < 2, num_replicas = 1
+        # # 2<= skew_factor < 3, num_replicas = 2
+        # # 3<= skew_factor < 4, num_replicas = 3
+        
+        # num_replicas_raw = math.ceil(skew_factor) - 1   # 1：原先实例 2 < skew_factor <= 3 num_replicas = 2
+        # num_replicas_raw = math.floor(skew_factor)
+        # 限制副本范围，至少1个，至多num_gpu-1个
+        num_replicas = min(max(1, math.floor(skew_factor)), num_gpus - 1)
+
+    
 
         '''
         # max_load_min_load

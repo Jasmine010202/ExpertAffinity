@@ -1,0 +1,338 @@
+{
+  "vanilla_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 184778142.125,
+      "std": 12675.39526263043,
+      "max": 79570.4375,
+      "min": 46660.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 331447496.625,
+      "std": 14827.0,
+      "max": 137195.0,
+      "min": 107541.0
+    }
+  },
+  "sonnet_spectral_even_multi_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 1115967437.0,
+      "std": 31309.870917549015,
+      "max": 104258.375,
+      "min": 20635.75
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 1809439657.0625,
+      "std": 38025.4375,
+      "max": 160393.4375,
+      "min": 84342.5625
+    }
+  },
+  "sonnet_spectral_uneven_multi_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 2338653828.75,
+      "std": 44751.531255107424,
+      "max": 133442.375,
+      "min": 19194.3125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 3439403840.875,
+      "std": 53935.75,
+      "max": 176303.75,
+      "min": 68432.25
+    }
+  },
+  "sonnet_spectral_even_multi_repli_act_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 454379623.84375,
+      "std": 20809.694725199886,
+      "max": 83987.0625,
+      "min": 30034.8125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 663720487.1875,
+      "std": 22661.8125,
+      "max": 145029.8125,
+      "min": 99706.1875
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_act_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 1023665301.0625,
+      "std": 30583.631576941858,
+      "max": 107137.0625,
+      "min": 28369.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 1654686867.1875,
+      "std": 37772.4375,
+      "max": 160140.4375,
+      "min": 84595.5625
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_one_replica_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 460008973.3125,
+      "std": 18713.930460411724,
+      "max": 80782.375,
+      "min": 36313.4375
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 104070409.75,
+      "std": 8869.5,
+      "max": 131237.5,
+      "min": 113498.5
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_one_replica_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 526336864.3125,
+      "std": 20679.838888410377,
+      "max": 87442.3125,
+      "min": 35218.625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 225041703.0625,
+      "std": 13827.1875,
+      "max": 136195.1875,
+      "min": 108540.8125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_maxmean_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 120292693.5,
+      "std": 10037.000079556472,
+      "max": 71211.375,
+      "min": 46022.875
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 143428458.25,
+      "std": 9981.375,
+      "max": 132349.375,
+      "min": 112386.625
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_maxmean_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 279508273.6875,
+      "std": 15556.7913163932,
+      "max": 82622.0,
+      "min": 41199.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 225041703.0625,
+      "std": 13827.1875,
+      "max": 136195.1875,
+      "min": 108540.8125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 153281317.3125,
+      "std": 10808.237378478476,
+      "max": 71431.1875,
+      "min": 44258.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 142554063.625,
+      "std": 10008.125,
+      "max": 132376.125,
+      "min": 112359.875
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_BWD_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 295910347.875,
+      "std": 15694.71715761849,
+      "max": 81914.9375,
+      "min": 40542.75
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 196099645.5,
+      "std": 12952.25,
+      "max": 135320.25,
+      "min": 109415.75
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_maxmin_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 107830754.75,
+      "std": 9558.061245733821,
+      "max": 70738.4375,
+      "min": 47584.5625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 188028523.875,
+      "std": 11277.25,
+      "max": 133645.25,
+      "min": 111090.75
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_maxmin_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 346337258.4375,
+      "std": 17335.03022792151,
+      "max": 82887.125,
+      "min": 37109.3125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 434841787.25,
+      "std": 16539.5,
+      "max": 138907.5,
+      "min": 105828.5
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_round_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 259625708.34375,
+      "std": 14760.265216411075,
+      "max": 75956.9375,
+      "min": 40037.1875
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 137359108.25,
+      "std": 10083.75,
+      "max": 132451.75,
+      "min": 112284.25
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_round_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 390299211.0,
+      "std": 18440.450009227192,
+      "max": 87382.0625,
+      "min": 38919.75
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 225041703.0625,
+      "std": 13827.1875,
+      "max": 136195.1875,
+      "min": 108540.8125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 89789588.125,
+      "std": 8527.848476128518,
+      "max": 70980.5625,
+      "min": 49132.375
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 103129032.3125,
+      "std": 8294.6875,
+      "max": 130662.6875,
+      "min": 114073.3125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 221846796.5,
+      "std": 14046.14644888432,
+      "max": 80273.25,
+      "min": 43222.0
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 225041703.0625,
+      "std": 13827.1875,
+      "max": 136195.1875,
+      "min": 108540.8125
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 122490117.96875,
+      "std": 9273.156264996589,
+      "max": 71047.625,
+      "min": 47386.75
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 103579837.5,
+      "std": 8279.25,
+      "max": 130647.25,
+      "min": 114088.75
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 238313930.0,
+      "std": 14186.772806726087,
+      "max": 79566.1875,
+      "min": 42554.3125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 196099645.5,
+      "std": 12952.25,
+      "max": 135320.25,
+      "min": 109415.75
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_formula_weight_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 89420084.09375,
+      "std": 8498.443308258124,
+      "max": 70887.5625,
+      "min": 49171.125
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 102426291.75,
+      "std": 8225.375,
+      "max": 130593.375,
+      "min": 114142.625
+    }
+  },
+  "sonnet_spectral_uneven_multi_repli_group_several_formula_topology_placement": {
+    "gpu": {
+      "mean": 61184.0,
+      "var": 221829634.25,
+      "std": 14045.432449926071,
+      "max": 80273.25,
+      "min": 43225.0625
+    },
+    "node": {
+      "mean": 122368.0,
+      "var": 225041703.0625,
+      "std": 13827.1875,
+      "max": 136195.1875,
+      "min": 108540.8125
+    }
+  }
+}

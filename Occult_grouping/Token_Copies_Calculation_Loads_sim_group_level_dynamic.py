@@ -504,10 +504,10 @@ if __name__ == "__main__":
 
     num_replicated_experts = 4
 
-    fig_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/figs"   
+    fig_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/formula/figs"   
     os.makedirs(fig_dir, exist_ok=True)
 
-    result_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/data" 
+    result_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/formula/data" 
     os.makedirs(result_dir, exist_ok=True)
 
 
@@ -574,6 +574,13 @@ if __name__ == "__main__":
         with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented_BWD/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f14:
             ssumrgssBWD_polling_weights = json.load(f14)
 
+        # formula
+        sonnet_spectral_uneven_multi_repli_group_several_formula = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/formula/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/formula/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f15:
+            ssumrgsf_replication_info = json.load(f15)
+        with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/formula/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f16:
+            ssumrgsf_polling_weights = json.load(f16)
+
 
         # ###############################################Calculate_Num_of_Token_Copies & Loads##################################################
         sonnet_vanilla_copies, sonnet_vanilla_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, vanilla_placement)
@@ -633,6 +640,12 @@ if __name__ == "__main__":
         # 优先本地副本
         sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_segmented_BWD, ssumrgssBWD_replication_info, ssumrgssBWD_polling_weights, "topology","Multi")
        
+        # formula
+        # 加权轮询
+        sonnet_spectral_uneven_multi_repli_group_several_formula_weight_copies, sonnet_spectral_uneven_multi_repli_group_several_formula_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_formula, ssumrgsf_replication_info, ssumrgsf_polling_weights, "weight", "Multi")
+        # 优先本地副本
+        sonnet_spectral_uneven_multi_repli_group_several_formula_topology_copies, sonnet_spectral_uneven_multi_repli_group_several_formula_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_uneven_multi_repli_group_several_formula, ssumrgsf_replication_info, ssumrgsf_polling_weights, "topology","Multi")
+       
 
         # ###############################################File##################################################
         num_of_token_copies = {}
@@ -669,9 +682,14 @@ if __name__ == "__main__":
         num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_weight_copies
         num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_topology_copies
 
-        # segmented_BWD
+        # # segmented_BWD
         num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_copies
         num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_copies
+
+        # # formula
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_formula_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_formula_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_formula_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_formula_topology_copies
+
 
         copies_filename = os.path.join(result_dir, f"num_of_token_copies_spectral_multi_repli_act_group.json")
         with open (copies_filename, "w") as copies_file:
@@ -711,16 +729,20 @@ if __name__ == "__main__":
         num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_weight_loads
         num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_topology_loads
 
-        # segmented
+        # # segmented BWD
         num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_loads
         num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_loads
+
+        # # formal
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_formula_weight_placement"] = sonnet_spectral_uneven_multi_repli_group_several_formula_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_uneven_multi_repli_group_several_formula_topology_placement"] = sonnet_spectral_uneven_multi_repli_group_several_formula_topology_loads
 
 
         loads_filename = os.path.join(result_dir, f"num_of_token_loads_spectral_multi_repli_act_group.json")
         with open (loads_filename, "w") as loads_file:
             json.dump(num_of_token_loads, loads_file, indent=2)
         
-        ######################################################## 负载统计数据计算 ########################################################
+        # ######################################################## 负载统计数据计算 ########################################################
 
         stats_per_layer_scheme = {}
         stats_all_layers_avg_scheme = {}
@@ -761,7 +783,9 @@ if __name__ == "__main__":
                             #  "sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_weight_placement",
                              "sonnet_spectral_uneven_multi_repli_group_several_seg_BWD_topology_placement",
                             #  "sonnet_spectral_uneven_multi_repli_group_several_seg_weight_placement",
-                             "sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement"
+                             "sonnet_spectral_uneven_multi_repli_group_several_seg_topology_placement",
+                            #  "sonnet_spectral_uneven_multi_repli_group_several_formula_weight_placement",
+                             "sonnet_spectral_uneven_multi_repli_group_several_formula_topology_placement"
                              ]
         labels = ["Vanilla", 
                 #   "Even_Multi", 
@@ -782,8 +806,10 @@ if __name__ == "__main__":
                   "Several_SEG_BWD_Topology",
                 #   "Several_SEG_Weight",
                   "Several_SEG_Topology",
+                #   "Several_Formula_Weight",
+                  "Several_Formula_Topology"
                   ]
         
         fig_path = os.path.join(fig_dir,f"communication_computing_compare.svg")
         plot_combined_copies_and_load_stats_gpu_node(num_of_token_copies, stats_all_layers_avg_scheme,
-                                        placement_schemes, labels, 24, fig_path)    
+                                        placement_schemes, labels, 26, fig_path)    
