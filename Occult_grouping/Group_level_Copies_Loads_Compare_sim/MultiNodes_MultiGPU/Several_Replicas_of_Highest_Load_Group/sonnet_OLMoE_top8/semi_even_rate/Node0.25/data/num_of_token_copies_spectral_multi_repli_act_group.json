@@ -1,0 +1,49 @@
+{
+  "sonnet": {
+    "vanilla_placement": {
+      "num_intra_gpu": 448034,
+      "num_inter_gpu": 448186,
+      "num_inter_node": 895842
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_formula_topology_placement": {
+      "num_intra_gpu": 404188,
+      "num_inter_gpu": 269219,
+      "num_inter_node": 334298
+    },
+    "sonnet_spectral_uneven_multi_repli_group_several_part_of_topology_placement": {
+      "num_intra_gpu": 399431,
+      "num_inter_gpu": 303840,
+      "num_inter_node": 492662
+    },
+    "gpu1_multi_part_of_topology_placement": {
+      "num_intra_gpu": 385728,
+      "num_inter_gpu": 347864,
+      "num_inter_node": 534146
+    },
+    "gpu2_multi_part_of_topology_placement": {
+      "num_intra_gpu": 385650,
+      "num_inter_gpu": 341061,
+      "num_inter_node": 523809
+    },
+    "gpu3_multi_part_of_topology_placement": {
+      "num_intra_gpu": 387958,
+      "num_inter_gpu": 336995,
+      "num_inter_node": 516032
+    },
+    "gpu4_multi_part_of_topology_placement": {
+      "num_intra_gpu": 387594,
+      "num_inter_gpu": 335056,
+      "num_inter_node": 510430
+    },
+    "gpu5_multi_part_of_topology_placement": {
+      "num_intra_gpu": 392615,
+      "num_inter_gpu": 327181,
+      "num_inter_node": 505821
+    },
+    "gpu6_multi_part_of_topology_placement": {
+      "num_intra_gpu": 397223,
+      "num_inter_gpu": 323005,
+      "num_inter_node": 499456
+    }
+  }
+}
