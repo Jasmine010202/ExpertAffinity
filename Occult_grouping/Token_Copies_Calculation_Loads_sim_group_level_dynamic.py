@@ -506,10 +506,10 @@ if __name__ == "__main__":
     
     # node_rate=0.1
 
-    fig_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/all/figs"   
+    fig_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/Node_Uneven_GPU_Semi/figs"   
     os.makedirs(fig_dir, exist_ok=True)
 
-    result_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/all/data" 
+    result_dir = f"Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_{model_name}_top{top_k}/Node_Uneven_GPU_Semi/data" 
     os.makedirs(result_dir, exist_ok=True)
 
 
@@ -517,7 +517,8 @@ if __name__ == "__main__":
         sonnet_routing_trace = extract_routing_trace(f"./Occult_test/expert_trace/traffic_test/by_prompt/{model_name}_sonnet_top{top_k}/routing_trace_{num}.jsonl")
        
         # 所有方案对比
-     
+
+        
         # # ###############################################Placement##################################################
         vanilla_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/OLMoE_vanilla_placement.json")
         sonnet_spectral_even_multi_placement = extract_expert_placement(num_layers, num_experts_per_layer, "./Occult_test/expert_placement/spectral/MultiNodes_MultiGPUs/OLMoE_spectral_even_sonnet_512_nodes2_gpus4.json")
@@ -607,11 +608,17 @@ if __name__ == "__main__":
             ssensgmrgspo_polling_weights = json.load(f22)
 
         # semi even Node0.1 GPU0.2
-        sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
-        with open(f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f23:
+        sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.2/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.2/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f23:
             node1_gpu2_replication_info = json.load(f23)
-        with open(f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f24:
+        with open(f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.2/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f24:
             node1_gpu2_polling_weights = json.load(f24)
+
+        sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f23:
+            node1_gpu25_replication_info = json.load(f23)
+        with open(f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node0.1/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f24:
+            node1_gpu25_polling_weights = json.load(f24)
 
         # ###############################################Calculate_Num_of_Token_Copies & Loads##################################################
         sonnet_vanilla_copies, sonnet_vanilla_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, vanilla_placement)
@@ -696,11 +703,15 @@ if __name__ == "__main__":
         sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_partof_topology_copies, sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_partof_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_part_of, ssensgmrgspo_replication_info, ssensgmrgspo_polling_weights, "topology","Multi")
 
         # node0.1 gpu 0.2
-        sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_weight_copies, sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_part_of, ssensgmrgspo_replication_info, ssensgmrgspo_polling_weights, "weight", "Multi")
+        sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_weight_copies, sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of, node1_gpu2_replication_info, node1_gpu2_polling_weights, "weight", "Multi")
         # 优先本地副本
-        sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_topology_copies, sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_part_of, ssensgmrgspo_replication_info, ssensgmrgspo_polling_weights, "topology","Multi")
+        sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_topology_copies, sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of, node1_gpu2_replication_info, node1_gpu2_polling_weights, "topology","Multi")
 
-        
+        # node0.1 gpu 0.25
+        sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_weight_copies, sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of, node1_gpu25_replication_info, node1_gpu25_polling_weights, "weight", "Multi")
+        # 优先本地副本
+        sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_topology_copies, sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of, node1_gpu25_replication_info, node1_gpu25_polling_weights, "topology","Multi")
+
 
         # ###############################################File##################################################
         num_of_token_copies = {}
@@ -760,6 +771,10 @@ if __name__ == "__main__":
         # semi_even node 0.1 gpu0.2
         num_of_token_copies["sonnet"]["sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_weight_placement"] = sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_weight_copies
         num_of_token_copies["sonnet"]["sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_topology_placement"] = sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_topology_copies
+
+        # semi_even node 0.1 gpu0.25
+        num_of_token_copies["sonnet"]["sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of_weight_placement"] = sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_weight_copies
+        num_of_token_copies["sonnet"]["sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of_topology_placement"] = sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_topology_copies
 
 
         copies_filename = os.path.join(result_dir, f"num_of_token_copies_spectral_multi_repli_act_group.json")
@@ -823,6 +838,9 @@ if __name__ == "__main__":
         num_of_token_loads["sonnet"]["sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_weight_placement"] = sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_weight_loads
         num_of_token_loads["sonnet"]["sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_topology_placement"] = sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_partof_topology_loads
 
+        num_of_token_loads["sonnet"]["sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of_weight_placement"] = sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_weight_loads
+        num_of_token_loads["sonnet"]["sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of_topology_placement"] = sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_partof_topology_loads
+
 
         loads_filename = os.path.join(result_dir, f"num_of_token_loads_spectral_multi_repli_act_group.json")
         with open (loads_filename, "w") as loads_file:
@@ -843,7 +861,7 @@ if __name__ == "__main__":
         with open (load_stats_avg_filename, "w") as f4:
             json.dump(stats_all_layers_avg_scheme, f4, indent=2)
 
-        # ####################################################### 画图 ########################################################
+        # # ####################################################### 画图 ########################################################
         # file_path_prefix = "./Group_level_Copies_Loads_Compare_sim/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/sonnet_OLMoE_top8/all/data"
         # with open(f"{file_path_prefix}/num_of_token_copies_spectral_multi_repli_act_group.json", "r") as f1:
         #     num_of_token_copies = json.load(f1)
@@ -855,7 +873,7 @@ if __name__ == "__main__":
                             #  "sonnet_spectral_even_multi_placement", 
                              "sonnet_spectral_even_multi_repli_act_placement", 
                              "sonnet_spectral_uneven_multi_placement", 
-                            #  "sonnet_spectral_uneven_multi_repli_act_placement",
+                             "sonnet_spectral_uneven_multi_repli_act_placement",
                             #  "sonnet_spectral_uneven_multi_repli_group_one_replica_weight_placement",
                              "sonnet_spectral_uneven_multi_repli_group_one_replica_topology_placement",
                             #  "sonnet_spectral_uneven_multi_repli_group_several_BWD_weight_placement",
@@ -876,10 +894,12 @@ if __name__ == "__main__":
                              "sonnet_spectral_uneven_multi_repli_group_several_part_of_topology_placement",
                             #  "sonnet_spectral_semi_even_node_gpu_multi_repli_group_several_part_of_weight_placement",
                             #  "sonnet_spectral_semi_even_node_gpu_multi_repli_group_several_part_of_topology_placement",
-                            # #  "sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_part_of_weight_placement",
+                            # # #  "sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_part_of_weight_placement",
                             #  "sonnet_spectral_even_node_semi_gpu_multi_repli_group_several_part_of_topology_placement",
-                            # #  "sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_weight_placement",
-                            #  "sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_topology_placement"
+                            # # #  "sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_weight_placement",
+                            #  "sonnet_spectral_semi_even_node1_gpu2_multi_repli_group_several_part_of_topology_placement",
+                            # # #  "sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of_weight_placement",
+                            #  "sonnet_spectral_semi_even_node1_gpu25_multi_repli_group_several_part_of_topology_placement",
                              ]
         
         
@@ -888,7 +908,7 @@ if __name__ == "__main__":
                 #   "Even_Multi", 
                   "Even_Multi_Act", 
                   "Uneven_Multi", 
-                #   "Uneven_Multi_Act",
+                  "Uneven_Multi_Act",
                 #   "One_Weight",
                   "One_Topology",
                 #   "Several_One/Two_BWD_Weight",
@@ -908,16 +928,18 @@ if __name__ == "__main__":
                 #   "Several_Part_Of_Weight",
                   "Several_Part_Of_Topology",
                 # #   "Semi_Even_Node_GPU_PartOf_Weight",
-                #   "Semi_Even_Node_GPU_PartOf_Topology",
-                # #   "Even_Node_Semi_GPU_PartOf_Weight",
-                #   "Even_Node_Semi_GPU_PartOf_Topology",
-                # #   "Semi_Node0.1_GPU0.2_PartOf_Weight",
-                #   "Semi_Node0.1_GPU0.2_PartOf_Topology"
+                #   "Node0.6_GPU0.6_PartOf_Topology",
+                # # #   "Even_Node_Semi_GPU_PartOf_Weight",
+                #   "Node0_GPU0.6_PartOf_Topology",
+                # # #   "Semi_Node0.1_GPU0.2_PartOf_Weight",
+                #   "Node0.1_GPU0.2_PartOf_Topology",
+                # # #   "Semi_Node0.1_GPU0.25_PartOf_Weight",
+                #   "Node0.1_GPU0.25_PartOf_Topology"
                   ]
         
         fig_path = os.path.join(fig_dir,f"communication_computing_compare_formula_PartOf.svg")
         plot_combined_copies_and_load_stats_gpu_node(num_of_token_copies, stats_all_layers_avg_scheme,
-                                        placement_schemes, labels, 24, fig_path)    
+                                        placement_schemes, labels, 28, fig_path)    
         
 
         '''
@@ -939,7 +961,7 @@ if __name__ == "__main__":
             ssumrgspo_polling_weights = json.load(f18)
 
         # semi_even rate 0.6 + part_of + semi_even_node_gpu
-        file_path = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_rate/node{node_rate}"
+        file_path = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Node_Uneven_GPU_Semi"
 
         gpu1_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.1/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
         with open(f"{file_path}/gpu0.1/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f19:
@@ -953,11 +975,11 @@ if __name__ == "__main__":
         with open(f"{file_path}/gpu0.2/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f2:
             gpu2_polling_weights = json.load(f2)
 
-        gpu25_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.6/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
-        with open(f"{file_path}/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f9:
-            gpu25_replication_info = json.load(f9)
-        with open(f"{file_path}/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f10:
-            gpu25_polling_weights = json.load(f10)
+        # gpu25_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        # with open(f"{file_path}/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f9:
+        #     gpu25_replication_info = json.load(f9)
+        # with open(f"{file_path}/gpu0.25/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f10:
+        #     gpu25_polling_weights = json.load(f10)
         
         gpu3_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.3/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
         with open(f"{file_path}/gpu0.3/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f3:
@@ -965,44 +987,48 @@ if __name__ == "__main__":
         with open(f"{file_path}/gpu0.3/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f4:
             gpu3_polling_weights = json.load(f4)
 
-        # gpu4_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.4/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
-        # with open(f"{file_path}/gpu0.4/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f5:
-        #     gpu4_replication_info = json.load(f5)
-        # with open(f"{file_path}/gpu0.4/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f6:
-        #     gpu4_polling_weights = json.load(f6)
+        gpu4_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.4/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"{file_path}/gpu0.4/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f5:
+            gpu4_replication_info = json.load(f5)
+        with open(f"{file_path}/gpu0.4/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f6:
+            gpu4_polling_weights = json.load(f6)
 
-        # gpu5_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.5/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
-        # with open(f"{file_path}/gpu0.5/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f7:
-        #     gpu5_replication_info = json.load(f7)
-        # with open(f"{file_path}/gpu0.5/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f8:
-        #     gpu5_polling_weights = json.load(f8)
+        gpu5_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.5/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"{file_path}/gpu0.5/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f7:
+            gpu5_replication_info = json.load(f7)
+        with open(f"{file_path}/gpu0.5/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f8:
+            gpu5_polling_weights = json.load(f8)
 
-        # gpu6_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.6/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
-        # with open(f"{file_path}/gpu0.6/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f9:
-        #     gpu6_replication_info = json.load(f9)
-        # with open(f"{file_path}/gpu0.6/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f10:
-        #     gpu6_polling_weights = json.load(f10)
+        gpu6_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.6/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"{file_path}/gpu0.6/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f9:
+            gpu6_replication_info = json.load(f9)
+        with open(f"{file_path}/gpu0.6/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f10:
+            gpu6_polling_weights = json.load(f10)
 
-        # semi_even rate 0.6 + part_of + even_node_semi_gpu
-        # node0_gpu6_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_0.6/even_node_semi_gpu/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_0.6/even_node_semi_gpu/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f21:
-        #     node0_gpu6_replication_info = json.load(f21)
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/semi_even_0.6/even_node_semi_gpu/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f22:
-        #     node0_gpu6_polling_weights = json.load(f22)
+        gpu7_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.7/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"{file_path}/gpu0.7/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f7:
+            gpu7_replication_info = json.load(f7)
+        with open(f"{file_path}/gpu0.7/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f8:
+            gpu7_polling_weights = json.load(f8)
 
-        # # segmented 
-        # sonnet_spectral_uneven_multi_repli_group_several_segmented = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f11:
-        #     ssumrgss_replication_info = json.load(f11)
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f12:
-        #     ssumrgss_polling_weights = json.load(f12)
+        gpu8_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.8/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"{file_path}/gpu0.8/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f9:
+            gpu8_replication_info = json.load(f9)
+        with open(f"{file_path}/gpu0.8/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f10:
+            gpu8_polling_weights = json.load(f10)
 
-        # # segmented_BWD 
-        # sonnet_spectral_uneven_multi_repli_group_several_segmented_BWD = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented_BWD/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated.json")
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented_BWD/OLMoE_sonnet_512_uneven_nodes2_gpus4_replicated_info.json","r") as f13:
-        #     ssumrgssBWD_replication_info = json.load(f13)
-        # with open("./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/segmented_BWD/OLMoE_sonnet_512_uneven_nodes2_gpus4_polling_weights.json","r") as f14:
-        #     ssumrgssBWD_polling_weights = json.load(f14)
+        gpu9_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu0.9/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"{file_path}/gpu0.9/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f7:
+            gpu9_replication_info = json.load(f7)
+        with open(f"{file_path}/gpu0.9/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f8:
+            gpu9_polling_weights = json.load(f8)
+
+        gpu10_multi_part_of = extract_expert_placement_multi_copies(num_layers, num_experts_per_layer, f"{file_path}/gpu1/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated.json")
+        with open(f"{file_path}/gpu1/OLMoE_sonnet_512_semi_even_nodes2_gpus4_replicated_info.json","r") as f9:
+            gpu10_replication_info = json.load(f9)
+        with open(f"{file_path}/gpu1/OLMoE_sonnet_512_semi_even_nodes2_gpus4_polling_weights.json","r") as f10:
+            gpu10_polling_weights = json.load(f10)
+
 
         # ###############################################Calculate_Num_of_Token_Copies & Loads##################################################
         sonnet_vanilla_copies, sonnet_vanilla_loads = communication_traffic_calculation_load_analyze(sonnet_routing_trace, vanilla_placement)
@@ -1031,7 +1057,7 @@ if __name__ == "__main__":
         # 优先本地副本
         node0_gpu2_topology_copies, node0_gpu2_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu2_multi_part_of, gpu2_replication_info, gpu2_polling_weights, "topology","Multi")
         
-        node0_gpu25_topology_copies, node0_gpu25_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu25_multi_part_of, gpu25_replication_info, gpu25_polling_weights, "topology","Multi")
+        # node0_gpu25_topology_copies, node0_gpu25_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu25_multi_part_of, gpu25_replication_info, gpu25_polling_weights, "topology","Multi")
         
          # 加权轮询
         # node2_gpu6_weight_copies, node2_gpu6_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, node2_gpu6_multi_part_of, node2_gpu6_replication_info, ssumrgsmean_polling_weights, "weight", "Multi")
@@ -1041,18 +1067,23 @@ if __name__ == "__main__":
         # # 加权轮询
         # node15_gpu6_weight_copies, node15_gpu6_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, node15_gpu6_multi_part_of, node15_gpu6_replication_info, node15_gpu6_polling_weights, "weight", "Multi")
         # # 优先本地副本
-        # node0_gpu4_topology_copies, node0_gpu4_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu4_multi_part_of, gpu4_replication_info, gpu4_polling_weights, "topology","Multi")
+        node0_gpu4_topology_copies, node0_gpu4_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu4_multi_part_of, gpu4_replication_info, gpu4_polling_weights, "topology","Multi")
 
         # # 加权轮询
         # # node1_gpu6_weight_copies, node1_gpu6_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, node1_gpu6_multi_part_of, node1_gpu6_replication_info, node1_gpu6_polling_weights, "weight", "Multi")
         # # 优先本地副本
-        # node0_gpu5_topology_copies, node0_gpu5_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu5_multi_part_of, gpu5_replication_info, gpu5_polling_weights, "topology","Multi")
+        node0_gpu5_topology_copies, node0_gpu5_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu5_multi_part_of, gpu5_replication_info, gpu5_polling_weights, "topology","Multi")
        
         # # 加权轮询
         # # node05_gpu6_weight_copies, node05_gpu6_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, node05_gpu6_multi_part_of, node05_gpu6_replication_info, node05_gpu6_polling_weights, "weight", "Multi")
         # # 优先本地副本
-        # node0_gpu6_topology_copies, node0_gpu6_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu25_multi_part_of, gpu25_replication_info, gpu25_polling_weights, "topology","Multi")
+        node0_gpu6_topology_copies, node0_gpu6_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu6_multi_part_of, gpu6_replication_info, gpu6_polling_weights, "topology","Multi")
        
+        node0_gpu7_topology_copies, node0_gpu7_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu7_multi_part_of, gpu7_replication_info, gpu7_polling_weights, "topology","Multi")
+        node0_gpu8_topology_copies, node0_gpu8_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu8_multi_part_of, gpu8_replication_info, gpu8_polling_weights, "topology","Multi")
+        node0_gpu9_topology_copies, node0_gpu9_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu9_multi_part_of, gpu9_replication_info, gpu9_polling_weights, "topology","Multi")
+        node0_gpu10_topology_copies, node0_gpu10_topology_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, gpu10_multi_part_of, gpu10_replication_info, gpu10_polling_weights, "topology","Multi")
+        
         # semi_even rate 0.6 + part_of + even_node_semi_gpu
         # 加权轮询
         # node0_gpu6_weight_copies, node0_gpu6_weight_loads = communication_traffic_calculation_load_analyze_group_level(sonnet_routing_trace, node0_gpu6_multi_part_of, node0_gpu6_replication_info, node0_gpu6_polling_weights, "weight", "Multi")
@@ -1092,19 +1123,24 @@ if __name__ == "__main__":
         # num_of_token_copies["sonnet"]["node25_gpu6_multi_part_of_weight_placement"] = node25_gpu6_weight_copies
         num_of_token_copies["sonnet"]["gpu2_multi_part_of_topology_placement"] = node0_gpu2_topology_copies
 
-        num_of_token_copies["sonnet"]["gpu25_multi_part_of_topology_placement"] = node0_gpu25_topology_copies
+        # num_of_token_copies["sonnet"]["gpu25_multi_part_of_topology_placement"] = node0_gpu25_topology_copies
 
         # num_of_token_copies["sonnet"]["node2_gpu6_multi_part_of_weight_placement"] = node2_gpu6_weight_copies
         num_of_token_copies["sonnet"]["gpu3_multi_part_of_topology_placement"] = node0_gpu3_topology_copies
 
         # # num_of_token_copies["sonnet"]["node15_gpu6_multi_part_of_weight_placement"] = node15_gpu6_weight_copies
-        # num_of_token_copies["sonnet"]["gpu4_multi_part_of_topology_placement"] = node0_gpu4_topology_copies
+        num_of_token_copies["sonnet"]["gpu4_multi_part_of_topology_placement"] = node0_gpu4_topology_copies
 
         # # num_of_token_copies["sonnet"]["node1_gpu6_multi_part_of_weight_placement"] = node1_gpu6_weight_copies
-        # num_of_token_copies["sonnet"]["gpu5_multi_part_of_topology_placement"] = node0_gpu5_topology_copies
+        num_of_token_copies["sonnet"]["gpu5_multi_part_of_topology_placement"] = node0_gpu5_topology_copies
 
         # # num_of_token_copies["sonnet"]["node05_gpu6_multi_part_of_weight_placement"] = node05_gpu6_weight_copies
-        # num_of_token_copies["sonnet"]["gpu6_multi_part_of_topology_placement"] = node0_gpu6_topology_copies
+        num_of_token_copies["sonnet"]["gpu6_multi_part_of_topology_placement"] = node0_gpu6_topology_copies
+
+        num_of_token_copies["sonnet"]["gpu7_multi_part_of_topology_placement"] = node0_gpu7_topology_copies
+        num_of_token_copies["sonnet"]["gpu8_multi_part_of_topology_placement"] = node0_gpu8_topology_copies
+        num_of_token_copies["sonnet"]["gpu9_multi_part_of_topology_placement"] = node0_gpu9_topology_copies
+        num_of_token_copies["sonnet"]["gpu10_multi_part_of_topology_placement"] = node0_gpu10_topology_copies
 
         # num_of_token_copies["sonnet"]["node0_gpu6_multi_part_of_weight_placement"] = node0_gpu6_weight_copies
         # num_of_token_copies["sonnet"]["node0_gpu6_multi_part_of_topology_placement"] = node0_gpu6_topology_copies
@@ -1132,22 +1168,27 @@ if __name__ == "__main__":
         # num_of_token_loads["sonnet"]["node25_gpu6_multi_part_of_weight_placement"] = node25_gpu6_weight_loads
         num_of_token_loads["sonnet"]["gpu2_multi_part_of_topology_placement"] = node0_gpu2_topology_loads
 
-        num_of_token_loads["sonnet"]["gpu25_multi_part_of_topology_placement"] = node0_gpu25_topology_loads
+        # num_of_token_loads["sonnet"]["gpu25_multi_part_of_topology_placement"] = node0_gpu25_topology_loads
 
         # num_of_token_loads["sonnet"]["node2_gpu6_multi_part_of_weight_placement"] = node2_gpu6_weight_loads
         num_of_token_loads["sonnet"]["gpu3_multi_part_of_topology_placement"] = node0_gpu3_topology_loads
 
         # # num_of_token_loads["sonnet"]["node15_gpu6_multi_part_of_weight_placement"] = node15_gpu6_weight_loads
-        # num_of_token_loads["sonnet"]["gpu4_multi_part_of_topology_placement"] = node0_gpu4_topology_loads
+        num_of_token_loads["sonnet"]["gpu4_multi_part_of_topology_placement"] = node0_gpu4_topology_loads
 
         # # num_of_token_loads["sonnet"]["node1_gpu6_multi_part_of_weight_placement"] = node1_gpu6_weight_loads
-        # num_of_token_loads["sonnet"]["gpu5_multi_part_of_topology_placement"] = node0_gpu5_topology_loads
+        num_of_token_loads["sonnet"]["gpu5_multi_part_of_topology_placement"] = node0_gpu5_topology_loads
 
-        # # num_of_token_loads["sonnet"]["node05_gpu6_multi_part_of_weight_placement"] = node05_gpu6_weight_loads
+        # # # num_of_token_loads["sonnet"]["node05_gpu6_multi_part_of_weight_placement"] = node05_gpu6_weight_loads
         # num_of_token_loads["sonnet"]["gpu6_multi_part_of_topology_placement"] = node0_gpu6_topology_loads
 
         # num_of_token_loads["sonnet"]["node0_gpu6_multi_part_of_weight_placement"] = node0_gpu6_weight_loads
-        # num_of_token_loads["sonnet"]["node0_gpu6_multi_part_of_topology_placement"] = node0_gpu6_topology_loads
+        num_of_token_loads["sonnet"]["gpu6_multi_part_of_topology_placement"] = node0_gpu6_topology_loads
+
+        num_of_token_loads["sonnet"]["gpu7_multi_part_of_topology_placement"] = node0_gpu7_topology_loads
+        num_of_token_loads["sonnet"]["gpu8_multi_part_of_topology_placement"] = node0_gpu8_topology_loads
+        num_of_token_loads["sonnet"]["gpu9_multi_part_of_topology_placement"] = node0_gpu9_topology_loads
+        num_of_token_loads["sonnet"]["gpu10_multi_part_of_topology_placement"] = node0_gpu10_topology_loads
 
 
         loads_filename = os.path.join(result_dir, f"num_of_token_loads_spectral_multi_repli_act_group.json")
@@ -1183,27 +1224,33 @@ if __name__ == "__main__":
                              "sonnet_spectral_uneven_multi_repli_group_several_part_of_topology_placement",
                              "gpu1_multi_part_of_topology_placement",
                              "gpu2_multi_part_of_topology_placement",
-                             "gpu25_multi_part_of_topology_placement",
                              "gpu3_multi_part_of_topology_placement",
-                            #  "gpu4_multi_part_of_topology_placement",
-                            #  "gpu5_multi_part_of_topology_placement",
-                            #  "gpu6_multi_part_of_topology_placement"
+                             "gpu4_multi_part_of_topology_placement",
+                             "gpu5_multi_part_of_topology_placement",
+                             "gpu6_multi_part_of_topology_placement",
+                             "gpu7_multi_part_of_topology_placement",
+                             "gpu8_multi_part_of_topology_placement",
+                             "gpu9_multi_part_of_topology_placement",
+                             "gpu10_multi_part_of_topology_placement"
                              ]
 
         
         labels = ["Vanilla", 
                   "Several_Formula",
                   "Several_Part_Of",
-                  f"Node{node_rate}_GPU0.1",
-                  f"Node{node_rate}_GPU0.2",
-                  f"Node{node_rate}_GPU0.25",
-                  f"Node{node_rate}_GPU0.3",
-                #   f"Node{node_rate}_GPU0.4",
-                #   f"Node{node_rate}_GPU0.5",
-                #   f"Node{node_rate}_GPU0.6"
+                  f"Node_Uneven_GPU_0.1",
+                  f"Node_Uneven_GPU_0.2",
+                  f"Node_Uneven_GPU_0.3",
+                  f"Node_Uneven_GPU_0.4",
+                  f"Node_Uneven_GPU_0.5",
+                  f"Node_Uneven_GPU_0.6",
+                  f"Node_Uneven_GPU_0.7",
+                  f"Node_Uneven_GPU_0.8",
+                  f"Node_Uneven_GPU_0.9",
+                  f"Node_Uneven_GPU_1",
                   ]
         
-        fig_path = os.path.join(fig_dir,f"communication_computing_compare_semi_even_node{node_rate}_0.25.svg")
+        fig_path = os.path.join(fig_dir,f"communication_computing_compare_uneven_node_semi_even_gpu.svg")
         plot_combined_copies_and_load_stats_gpu_node(num_of_token_copies, stats_all_layers_avg_scheme,
                                         placement_schemes, labels, 20, fig_path)    
         '''

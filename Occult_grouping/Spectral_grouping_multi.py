@@ -86,10 +86,18 @@ def spectral_cluster_on_collaboration_semi_even(experts_collaboration_matrix, nu
     num_experts = experts_collaboration_matrix.shape[0]
     expected_per_cluster = num_experts // num_clusters  # 每个GPU的专家数量的理想值（平均）
 
-    # 根据比例计算每组专家数目的上下界
-    delta = int(round(expected_per_cluster * even_rate))
-    min_per_cluster = expected_per_cluster - delta
-    max_per_cluster = expected_per_cluster + delta
+    # # 根据比例计算每组专家数目的上下界
+    # delta = int(round(expected_per_cluster * even_rate))
+    # min_per_cluster = expected_per_cluster - delta
+    # max_per_cluster = expected_per_cluster + delta
+
+    if even_rate == 0:
+        min_per_cluster = expected_per_cluster
+        max_per_cluster = expected_per_cluster
+    else:
+        delta = max(1, int(round(expected_per_cluster * even_rate)))
+        min_per_cluster = max(1, expected_per_cluster - delta)
+        max_per_cluster = expected_per_cluster + delta
 
     min_per_cluster = max(1, min_per_cluster)   # 避免rate>1出现负数或者有的组没有专家的问题
 
@@ -118,6 +126,9 @@ def spectral_cluster_on_collaboration_semi_even(experts_collaboration_matrix, nu
         else:
             final_cluster_list[cluster_id] = experts.copy()
 
+    # print("final_cluster_list", final_cluster_list)
+    # print("overflow_experts", overflow_experts)
+    
     #对于初次聚类多出来的专家找一个亲和性较高的聚类
     for expert in overflow_experts:
         best_cluster = None

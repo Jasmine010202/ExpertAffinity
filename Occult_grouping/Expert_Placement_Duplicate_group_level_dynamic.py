@@ -29,14 +29,14 @@ num_gpus = num_nodes * num_gpus_per_node
 method = "spectral" # occult spectral
 even_groups = False      # True:even、semi_even False:uneven
 enable_semi_even = False
-even_rate = 0.6
+even_rate = 0.1
 # gpu_node_mapping = np.array([0, 0, 1, 1]) 
 
 # 文件路径
 collaboration_dir = f"./Occult_test/expert_collaboration"
 os.makedirs(collaboration_dir, exist_ok=True)
 
-placement_dir = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/test"
+placement_dir = f"./Occult_test/expert_placement/Duplicate_Group_Level/MultiNodes_MultiGPU/Several_Replicas_of_Highest_Load_Group/Node_Uneven_GPU_Semi/GPU{even_rate}"
 os.makedirs(placement_dir, exist_ok=True)
 
 
@@ -77,6 +77,7 @@ def grouping_multi_nodes_gpus(collab_matrix: torch.Tensor, experts_global_index_
                 node_groups = spectral_cluster_on_collaboration_even(collab_matrix, num_nodes)
         else:
             node_groups = spectral_cluster_on_collaboration_uneven(collab_matrix, num_nodes)
+        # node_groups = spectral_cluster_on_collaboration_uneven(collab_matrix, num_nodes)
         
     for node_id, node_experts in enumerate(node_groups):
         node_experts_index_tensor = torch.tensor(node_experts, dtype=torch.long)
